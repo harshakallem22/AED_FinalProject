@@ -5,8 +5,10 @@
 package ui.Customer;
 
 import business.Enterprise.RestaurantEnterprise;
+import business.Item.FoodItem;
 import business.Network.Network;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -61,6 +63,11 @@ public class CustomerOrderJPanel extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        tblStores.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblStoresMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblStores);
 
         tblMenu.setModel(new javax.swing.table.DefaultTableModel(
@@ -101,6 +108,11 @@ public class CustomerOrderJPanel extends javax.swing.JPanel {
         });
 
         jButton1.setText("Add to Cart");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         quantitySpinner.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
 
@@ -166,6 +178,30 @@ public class CustomerOrderJPanel extends javax.swing.JPanel {
         }
         
     }//GEN-LAST:event_jRadioButton1ActionPerformed
+
+    private void tblStoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblStoresMouseClicked
+        // TODO add your handling code here:
+        int index = tblStores.getSelectedRow();
+        TableModel model = tblStores.getModel();
+        RestaurantEnterprise restaurant = (RestaurantEnterprise) model.getValueAt(index, 0);
+        
+        DefaultTableModel dtm = (DefaultTableModel) tblMenu.getModel();
+        dtm.setRowCount(0);
+      
+            for (FoodItem f : restaurant.getMenu().getMenu()) {
+                Object row[] = new Object[2];
+                row[0] = f;
+                row[1] = f.getPrice();
+                dtm.addRow(row);
+            }
+        
+        
+    }//GEN-LAST:event_tblStoresMouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
