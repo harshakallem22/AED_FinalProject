@@ -4,7 +4,10 @@
  */
 package business.Network;
 
+import business.Enterprise.Enterprise;
 import business.Enterprise.EnterpriseDirectory;
+import business.Enterprise.RestaurantEnterprise;
+import java.util.ArrayList;
 
 /**
  *
@@ -28,6 +31,16 @@ public class Network {
     public EnterpriseDirectory getEnterpriseDirectory() {
         return enterpriseDirectory;
     }
+    
+//    public ArrayList<RestaurantEnterprise> getRestaurantEnterprise(){
+//        ArrayList<RestaurantEnterprise> resList = new ArrayList<>();
+//        for(Enterprise e : enterpriseDirectory.getEnterpriseList()){
+//            if(e.getEnterpriseType().equals(Enterprise.EnterpriseType.Restaurant)){
+//                resList.add((RestaurantEnterprise) e);
+//            }
+//        }
+//        return resList;
+//    }
     
     @Override
     public String toString(){

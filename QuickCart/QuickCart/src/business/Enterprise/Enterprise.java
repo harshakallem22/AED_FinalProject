@@ -15,6 +15,10 @@ public abstract class Enterprise extends Organization{
     
     private EnterpriseType enterpriseType;
     private OrganizationDirectory organizationDirectory;
+    String name;
+    String phone;
+    String email;
+    String address;
 
     public OrganizationDirectory getOrganizationDirectory() {
         return organizationDirectory;
@@ -48,8 +52,12 @@ public abstract class Enterprise extends Organization{
         this.enterpriseType = enterpriseType;
     }
     
-    public Enterprise(String name,EnterpriseType type){
+    public Enterprise(String name, String address, String phone, String email, EnterpriseType type){
         super(name);
+        this.name = name;
+        this.address = address;
+        this.phone = phone;
+        this.email=email;
         this.enterpriseType=type;
         organizationDirectory=new OrganizationDirectory();
     }

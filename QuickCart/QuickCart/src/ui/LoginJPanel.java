@@ -106,6 +106,7 @@ public class LoginJPanel extends javax.swing.JPanel {
 
         Enterprise inEnterprise=null;
         Organization inOrganization=null;
+        Network net = null;
 
         if(userAccount==null){
             //Step 2: Go inside each network and check each enterprise
@@ -120,6 +121,7 @@ public class LoginJPanel extends javax.swing.JPanel {
                             if(userAccount!=null){
                                 inEnterprise=enterprise;
                                 inOrganization=organization;
+                                net = network;
                                 break;
                             }
                         }
@@ -127,13 +129,16 @@ public class LoginJPanel extends javax.swing.JPanel {
                     }
                     else{
                         inEnterprise=enterprise;
+                        net = network;
                         break;
                     }
                     if(inOrganization!=null){
+                        net = network;
                         break;
                     }
                 }
                 if(inEnterprise!=null){
+                    net = network;
                     break;
                 }
             }
@@ -147,7 +152,7 @@ public class LoginJPanel extends javax.swing.JPanel {
         else{
             System.out.println(userAccount.getRole());
             CardLayout layout=(CardLayout)workArea.getLayout();
-            workArea.add("workArea",userAccount.getRole().createWorkArea(workArea, userAccount, inOrganization, inEnterprise, system));
+            workArea.add("workArea",userAccount.getRole().createWorkArea(workArea, userAccount, inOrganization, inEnterprise, system, net));
             layout.next(workArea);
         }
     }//GEN-LAST:event_btnLoginActionPerformed

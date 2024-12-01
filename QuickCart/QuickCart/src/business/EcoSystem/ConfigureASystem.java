@@ -41,8 +41,10 @@ public class ConfigureASystem {
         Network network = system.createAndAddNetwork();
         network.setName("QuickCart");
         
-        RestaurantEnterprise res1 = (RestaurantEnterprise)network.getEnterpriseDirectory().createAndAddEnterprise("Vaanga", EnterpriseType.Restaurant);
+        RestaurantEnterprise res1 = (RestaurantEnterprise) network.getEnterpriseDirectory().createAndAddEnterprise("Vaanga", "","","", EnterpriseType.Restaurant);
+        //RestaurantEnterprise res1 = network.getEnterpriseDirectory().createRestaurant("Vaanga", "", "", "");
         Employee emp1 = res1.getEmployeeDirectory().createEmployee("manager1");
+        res1.getMenu().createFoodItem("Pannerr", 10.5);
         UserAccount ua = system.getUserAccountDirectory().createUserAccount("man1", "man1", new RestaurantManagerRole());
         return system;
     }

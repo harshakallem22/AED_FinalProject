@@ -5,6 +5,7 @@
 package ui.Customer;
 
 import business.EcoSystem.EcoSystem;
+import business.Network.Network;
 import business.Organization.Organization;
 import business.UserAccount.UserAccount;
 import java.awt.CardLayout;
@@ -23,12 +24,14 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
     UserAccount account;
     Organization organization;
     EcoSystem ecosystem;
-    public CustomerWorkAreaJPanel(JPanel workArea, UserAccount account, Organization organization, EcoSystem ecosystem) {
+    Network network;
+    public CustomerWorkAreaJPanel(JPanel workArea, UserAccount account, Organization organization, EcoSystem ecosystem, Network network) {
         initComponents();
         this.workArea = workArea;
         this.account = account;
         this.organization = organization;
         this.ecosystem = ecosystem;
+        this.network = ecosystem.getNetworkList().get(0);
     }
 
     /**
@@ -113,7 +116,7 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
 
     private void btnOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrderActionPerformed
         // TODO add your handling code here:
-        CustomerOrderJPanel cojp = new CustomerOrderJPanel();
+        CustomerOrderJPanel cojp = new CustomerOrderJPanel(network);
         upc.add(cojp);
         CardLayout layout = (CardLayout) upc.getLayout();
         layout.next(upc);

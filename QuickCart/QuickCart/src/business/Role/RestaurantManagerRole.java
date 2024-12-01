@@ -6,6 +6,7 @@ package business.Role;
 
 import business.EcoSystem.EcoSystem;
 import business.Enterprise.Enterprise;
+import business.Network.Network;
 import business.Organization.Organization;
 import business.UserAccount.UserAccount;
 import javax.swing.JPanel;
@@ -18,7 +19,7 @@ import ui.Restaurant.RestaurantManager.RestaurantManagerWorkArea;
 public class RestaurantManagerRole extends Role {
 
     @Override
-    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business) {
+    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business, Network network) {
         return new RestaurantManagerWorkArea(userProcessContainer, account, organization, business);
     }
 }

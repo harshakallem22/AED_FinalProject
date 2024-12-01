@@ -13,8 +13,8 @@ import java.util.ArrayList;
  */
 public class GroceryEnterprise extends Enterprise {
 
-    public GroceryEnterprise(String name) {
-        super(name, EnterpriseType.Grocery);
+    public GroceryEnterprise(String name, String address, String phone, String email) {
+        super(name, address, phone, email, EnterpriseType.Grocery);
     }
 
     @Override

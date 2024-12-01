@@ -13,6 +13,7 @@ import java.util.ArrayList;
  */
 public class EnterpriseDirectory {
     private ArrayList<Enterprise> enterpriseList;
+    private RestaurantDirectory restaurantDir;
    
 
     public ArrayList<Enterprise> getEnterpriseList() {
@@ -28,23 +29,23 @@ public class EnterpriseDirectory {
     }
     
     //Create enterprise
-    public Enterprise createAndAddEnterprise(String name, EnterpriseType type){
+    public Enterprise createAndAddEnterprise(String name, String phone, String address, String email, EnterpriseType type){
         Enterprise enterprise=null;
         if (null != type) switch (type) {
             case Restaurant:
-                enterprise = new RestaurantEnterprise(name);
-                enterpriseList.add(enterprise);
-                break;
+                restaurantDir = new RestaurantDirectory();
+                enterprise = restaurantDir.newRestaurant(name, phone, address, email);
+                return enterprise;
             case Grocery:
-                enterprise = new GroceryEnterprise(name);
+                enterprise = new GroceryEnterprise(name, phone, address, email);
                 enterpriseList.add(enterprise);
                 break;
             case Delivery:
-                enterprise = new DeliveryEnterprise(name);
+                enterprise = new DeliveryEnterprise(name, phone, address, email);
                 enterpriseList.add(enterprise);
                 break;
             case Analytics:
-                enterprise = new AnalyticsEnterprise(name);
+                enterprise = new AnalyticsEnterprise(name, phone, address, email);
                 enterpriseList.add(enterprise);
                 break;
             default:
@@ -52,4 +53,15 @@ public class EnterpriseDirectory {
         }
         return enterprise;
     }
+    
+    public RestaurantDirectory getRestaurants(){
+        return restaurantDir;
+    }
+    
+    public RestaurantEnterprise createRestaurant(String name, String phone, String address, String email){
+        restaurantDir = new RestaurantDirectory();
+                RestaurantEnterprise enterprise = restaurantDir.newRestaurant(name, phone, address, email);
+                return enterprise;
+    }
+    
 }
