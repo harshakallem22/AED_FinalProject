@@ -4,50 +4,41 @@
  */
 package business.UserAccount;
 
+import business.Customer.Cart;
 import business.Customer.Customer;
+import business.Role.Role;
 
 
 /**
  *
  * @author SAI SRIDHAR
  */
-public class CustomerAccount {
+public class CustomerAccount extends UserAccount{
     
-    private String username;
-    private String password;
     private Customer customer;
+    private Cart cart;
 
-    public CustomerAccount() {
-    }
-    
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
+    public CustomerAccount(String username, String password, Role role) {
+        super(username, password, role);
+        cart = new Cart();
     }
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
     }
 
-    public Customer getEmployee() {
+    public Customer getCustomer() {
         return customer;
+    }
+    
+    public Cart getCart(){
+        return cart;
     }
 
     
     @Override
     public String toString() {
-        return username;
+        return super.getUsername();
     }
     
     

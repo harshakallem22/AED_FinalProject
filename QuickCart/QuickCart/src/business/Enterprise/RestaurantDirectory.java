@@ -20,8 +20,8 @@ public class RestaurantDirectory {
     
     public RestaurantEnterprise newRestaurant(String name, String phone, String address, String email){
         RestaurantEnterprise re = new RestaurantEnterprise(name, phone, address, email);
-                restaurantList.add(re);
-                return re;
+        restaurantList.add(re);
+        return re;
     }
 
     public ArrayList<RestaurantEnterprise> getRestaurantList() {

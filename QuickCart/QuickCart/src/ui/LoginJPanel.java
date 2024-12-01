@@ -150,8 +150,10 @@ public class LoginJPanel extends javax.swing.JPanel {
         }
         
         else{
-            System.out.println(userAccount.getRole());
+            
             CardLayout layout=(CardLayout)workArea.getLayout();
+            system = ConfigureASystem.configure();
+            System.out.println(this.system);
             workArea.add("workArea",userAccount.getRole().createWorkArea(workArea, userAccount, inOrganization, inEnterprise, system, net));
             layout.next(workArea);
         }

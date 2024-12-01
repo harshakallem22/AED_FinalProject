@@ -7,6 +7,7 @@ package ui.Customer;
 import business.EcoSystem.EcoSystem;
 import business.Network.Network;
 import business.Organization.Organization;
+import business.UserAccount.CustomerAccount;
 import business.UserAccount.UserAccount;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
@@ -23,15 +24,17 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
     JPanel workArea;
     UserAccount account;
     Organization organization;
+    CustomerAccount ca;
     EcoSystem ecosystem;
     Network network;
     public CustomerWorkAreaJPanel(JPanel workArea, UserAccount account, Organization organization, EcoSystem ecosystem, Network network) {
         initComponents();
         this.workArea = workArea;
-        this.account = account;
+        this.account= account;
         this.organization = organization;
         this.ecosystem = ecosystem;
         this.network = ecosystem.getNetworkList().get(0);
+        ca = (CustomerAccount) account;
     }
 
     /**
@@ -63,6 +66,11 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
         btnProfile.setText("Profile");
 
         btnCart.setText("Cart");
+        btnCart.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCartActionPerformed(evt);
+            }
+        });
 
         btnLogout.setText("Logout");
 
@@ -94,7 +102,6 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
         );
 
         jSplitPane1.setTopComponent(jPanel1);
-        jPanel1.getAccessibleContext().setAccessibleParent(upc);
 
         upc.setLayout(new java.awt.CardLayout());
         jSplitPane1.setRightComponent(upc);
@@ -116,11 +123,21 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
 
     private void btnOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrderActionPerformed
         // TODO add your handling code here:
-        CustomerOrderJPanel cojp = new CustomerOrderJPanel(network);
+        System.out.println(ecosystem);
+        ca = (CustomerAccount) account;
+        CustomerOrderJPanel cojp = new CustomerOrderJPanel(network, ca);
         upc.add(cojp);
         CardLayout layout = (CardLayout) upc.getLayout();
         layout.next(upc);
     }//GEN-LAST:event_btnOrderActionPerformed
+
+    private void btnCartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCartActionPerformed
+        // TODO add your handling code here:
+        CustomerCart cc = new CustomerCart(ecosystem, workArea, ca, network);
+        workArea.add(cc);
+        CardLayout layout = (CardLayout) workArea.getLayout();
+        layout.next(workArea);
+    }//GEN-LAST:event_btnCartActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

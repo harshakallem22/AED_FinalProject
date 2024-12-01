@@ -18,13 +18,19 @@ public class CustomerAccountDirectory {
         customerList = new ArrayList<>();
     }
     
-     public CustomerAccount createCustomerAccount(String username, String password, Customer customer){
-        CustomerAccount customerAccount = new CustomerAccount();
-        customerAccount.setCustomer(customer);
-        customerAccount.setUsername(username);
-        customerAccount.setPassword(password);
-        customerList.add(customerAccount);
-        return customerAccount;
+//     public CustomerAccount createCustomerAccount(String username, String password, Customer customer){
+//        CustomerAccount customerAccount = new CustomerAccount();
+//        customerAccount.setCustomer(customer);
+//        customerAccount.setUsername(username);
+//        customerAccount.setPassword(password);
+//        customerList.add(customerAccount);
+//        return customerAccount;
+//    }
+
+    public ArrayList<CustomerAccount> getCustomerList() {
+        return customerList;
     }
+    
+    
     
 }

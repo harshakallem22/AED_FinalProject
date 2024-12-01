@@ -13,16 +13,17 @@ import business.WorkQueue.WorkQueue;
  *
  * @author SAI SRIDHAR
  */
-public class UserAccount {
+public abstract class UserAccount {
     
     private String username;
     private String password;
-    private Employee employee;
     private Role role;
-    private WorkQueue workQueue;
+    
 
-    public UserAccount() {
-        workQueue = new WorkQueue();
+    public UserAccount(String username, String password, Role role) {
+        this.username = username;
+        this.password = password;
+        this.role = role;
     }
     
     
@@ -47,24 +48,10 @@ public class UserAccount {
         return role;
     }
 
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
-    }
-
     public void setRole(Role role) {
         this.role = role;
     }
 
-    public Employee getEmployee() {
-        return employee;
-    }
-
-    public WorkQueue getWorkQueue() {
-        return workQueue;
-    }
-
-    
-    
     @Override
     public String toString() {
         return username;

@@ -15,14 +15,22 @@ import java.util.ArrayList;
  */
 public class UserAccountDirectory {
     
-    private ArrayList<UserAccount> userAccountList;
+    private ArrayList<EmployeeAccount> userAccountList;
+    private ArrayList<CustomerAccount> customerList;
+    private CustomerAccountDirectory cad;
 
     public UserAccountDirectory() {
         userAccountList = new ArrayList();
+        customerList = new ArrayList<>();
+        cad = new CustomerAccountDirectory();
     }
 
-    public ArrayList<UserAccount> getUserAccountList() {
+    public ArrayList<EmployeeAccount> getUserAccountList() {
         return userAccountList;
+    }
+    
+    public ArrayList<CustomerAccount> getCustomerList(){
+        return customerList;
     }
     
     public UserAccount authenticateUser(String username, String password){
@@ -30,16 +38,23 @@ public class UserAccountDirectory {
             if (ua.getUsername().equals(username) && ua.getPassword().equals(password)){
                 return ua;
             }
+        for(CustomerAccount ua : customerList)
+            if (ua.getUsername().equals(username) && ua.getPassword().equals(password)){
+                return ua;
+            }
         return null;
     }
     
-    public UserAccount createUserAccount(String username, String password, Role role){
-        UserAccount userAccount = new UserAccount();
-        userAccount.setUsername(username);
-        userAccount.setPassword(password);
-        //userAccount.setEmployee(employee);
-        userAccount.setRole(role);
+    public EmployeeAccount createUserAccount(String username, String password, Role role){
+        EmployeeAccount userAccount = new EmployeeAccount(username,password, role);
         userAccountList.add(userAccount);
+        return userAccount;
+    }
+    
+     public CustomerAccount createCustomerAccount(String username, String password, Role role){
+        CustomerAccount userAccount = new CustomerAccount(username,password, role);
+        customerList.add(userAccount);
+        cad.getCustomerList().add(userAccount);
         return userAccount;
     }
     

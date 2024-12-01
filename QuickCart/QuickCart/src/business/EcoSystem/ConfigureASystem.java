@@ -13,6 +13,8 @@ import business.Enterprise.RestaurantEnterprise;
 import business.Network.Network;
 import business.Role.CustomerRole;
 import business.Role.RestaurantManagerRole;
+import business.UserAccount.CustomerAccount;
+import business.UserAccount.EmployeeAccount;
 import business.UserAccount.UserAccount;
 
 /**
@@ -33,7 +35,7 @@ public class ConfigureASystem {
         Customer cus1 = system.getCustomerDirectory().createCustomer("Sridhar", "sridhar@gmail.com", "0987654321", "Boston");
         //Employee employee = system.getEmployeeDirectory().createEmployee("sysadmin");
         
-        UserAccount ua1 = system.getUserAccountDirectory().createUserAccount("sridhar", "1234", new CustomerRole());
+        CustomerAccount ua1 = system.getUserAccountDirectory().createCustomerAccount("sridhar", "1234", new CustomerRole());
         System.out.println(system.getUserAccountDirectory().getUserAccountList().size());
         //UserAccount ua = system.getUserAccountDirectory().createUserAccount("sysadmin", "sysadmin", employee, new SystemAdminRole());
         //UserAccount labManager = system.getUserAccountDirectory().createUserAccount("labManager", "sysadmin", employee, new LabManagerRole());
@@ -41,11 +43,18 @@ public class ConfigureASystem {
         Network network = system.createAndAddNetwork();
         network.setName("QuickCart");
         
-        RestaurantEnterprise res1 = (RestaurantEnterprise) network.getEnterpriseDirectory().createAndAddEnterprise("Vaanga", "","","", EnterpriseType.Restaurant);
+        RestaurantEnterprise res1 = network.getEnterpriseDirectory().createRestaurant("Vaanga", "","","");
         //RestaurantEnterprise res1 = network.getEnterpriseDirectory().createRestaurant("Vaanga", "", "", "");
         Employee emp1 = res1.getEmployeeDirectory().createEmployee("manager1");
         res1.getMenu().createFoodItem("Pannerr", 10.5);
-        UserAccount ua = system.getUserAccountDirectory().createUserAccount("man1", "man1", new RestaurantManagerRole());
+        
+        RestaurantEnterprise res2 = network.getEnterpriseDirectory().createRestaurant("uop", "","","");
+        //RestaurantEnterprise res1 = network.getEnterpriseDirectory().createRestaurant("Vaanga", "", "", "");
+        Employee emp2 = res2.getEmployeeDirectory().createEmployee("manager1");
+        res2.getMenu().createFoodItem("abc", 13);
+        EmployeeAccount ua = system.getUserAccountDirectory().createUserAccount("man1", "man1", new RestaurantManagerRole());
+        ua.setEmployee(emp2);
+        System.out.println("System is "+system);
         return system;
     }
 }

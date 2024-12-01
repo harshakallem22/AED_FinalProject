@@ -4,6 +4,14 @@
  */
 package ui.Customer;
 
+import business.Customer.ItemOrder;
+import business.EcoSystem.EcoSystem;
+import business.Network.Network;
+import business.UserAccount.CustomerAccount;
+import java.math.BigDecimal;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author SAI SRIDHAR
@@ -13,8 +21,18 @@ public class CustomerCart extends javax.swing.JPanel {
     /**
      * Creates new form CustomerCart
      */
-    public CustomerCart() {
+    private EcoSystem system;
+    private CustomerAccount account;
+    private Network net;
+    private JPanel container;
+    public CustomerCart(EcoSystem system, JPanel container, CustomerAccount account, Network net) {
         initComponents();
+        this.system = system;
+        this.container = container;
+        this.account = account;
+        this.net = net;
+        
+         populateTable();
     }
 
     /**
@@ -34,17 +52,17 @@ public class CustomerCart extends javax.swing.JPanel {
 
         tblCart.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Item", "Quantity", "Price", "Total Price"
+                "Item", "Quantity", "Price"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, true, false
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -93,7 +111,20 @@ public class CustomerCart extends javax.swing.JPanel {
                 .addGap(35, 35, 35))
         );
     }// </editor-fold>//GEN-END:initComponents
-
+    
+     public void populateTable() {
+        DefaultTableModel dtm = (DefaultTableModel) tblCart.getModel();
+        dtm.setRowCount(0);
+        for (ItemOrder order : account.getCart().getItemList()) {
+            System.out.println(order.getShopModel().getName());
+            Object row[] = new Object[3];
+            row[0] = order;
+            row[1] = order.getQuantity();
+            row[2] = order.getTotalPrice();
+            dtm.addRow(row);
+        }
+        BigDecimal bd = new BigDecimal(this.account.getCart().getTotalPrice());
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClear;

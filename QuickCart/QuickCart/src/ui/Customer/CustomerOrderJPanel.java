@@ -4,9 +4,15 @@
  */
 package ui.Customer;
 
+import business.Customer.FoodItemOrder;
+import business.Customer.ItemOrder;
+import business.Enterprise.Enterprise.EnterpriseType;
 import business.Enterprise.RestaurantEnterprise;
 import business.Item.FoodItem;
 import business.Network.Network;
+import business.UserAccount.CustomerAccount;
+import business.UserAccount.UserAccount;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
@@ -20,9 +26,13 @@ public class CustomerOrderJPanel extends javax.swing.JPanel {
      * Creates new form CustomerOrderJPanel
      */
     Network network;
-    public CustomerOrderJPanel(Network network) {
+    CustomerAccount account;
+    EnterpriseType type;
+    RestaurantEnterprise restaurant;
+    public CustomerOrderJPanel(Network network, CustomerAccount account) {
         initComponents();
         this.network = network;
+        this.account = account;
     }
 
     /**
@@ -165,10 +175,12 @@ public class CustomerOrderJPanel extends javax.swing.JPanel {
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
         // TODO add your handling code here:
         if(jRadioButton1.isSelected()){
+            type = EnterpriseType.Restaurant;
             DefaultTableModel dtm = (DefaultTableModel) tblStores.getModel();
             dtm.setRowCount(0);
             System.out.println(network);
-            System.out.println(network.getEnterpriseDirectory());
+            System.out.println(network.getEnterpriseDirectory().getRestaurants().getRestaurantList());
+            
             for (RestaurantEnterprise res : network.getEnterpriseDirectory().getRestaurants().getRestaurantList()) {
                 Object row[] = new Object[2];
                 row[0] = res;
@@ -183,7 +195,7 @@ public class CustomerOrderJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         int index = tblStores.getSelectedRow();
         TableModel model = tblStores.getModel();
-        RestaurantEnterprise restaurant = (RestaurantEnterprise) model.getValueAt(index, 0);
+        restaurant = (RestaurantEnterprise) model.getValueAt(index, 0);
         
         DefaultTableModel dtm = (DefaultTableModel) tblMenu.getModel();
         dtm.setRowCount(0);
@@ -200,7 +212,45 @@ public class CustomerOrderJPanel extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        
+        int selectedRow = tblMenu.getSelectedRow();
+
+        if (selectedRow >= 0) {
+            FoodItem item = (FoodItem) tblMenu.getValueAt(selectedRow, 0);
+            int quantity = (int) quantitySpinner.getValue();
+
+            ItemOrder line = null;
+            if (this.type.equals(EnterpriseType.Restaurant)) {
+                line = new FoodItemOrder(this.restaurant, item, quantity);
+            }
+//            if (this.type.equals(ShopType.Store)) {
+//                line = new ProductOrder(this.shop, item, quantity);
+//            }
+            if (!this.account.getCart().isCartEmpty()) {
+                for (ItemOrder or : this.account.getCart().getItemList()) {
+                    if (!or.getShopModel().equals(this.restaurant)) {
+                        int choice = JOptionPane.showConfirmDialog(null, "You alreay have dashes from other restaurant in shopping cart. \n"
+                                + "Adding this dash will remove all previous dashes in shopping cart.\n" + "Do you want to continue?",
+                                "Restaurant Conflicts", JOptionPane.YES_NO_OPTION);
+                        if (choice == JOptionPane.YES_OPTION) {
+                            this.account.getCart().clearCart();
+                            break;
+                        } else {
+                            return;
+                        }
+                    }
+                    if (or.getShopModel().equals(this.restaurant) && or.getItem().equals(item)) {
+                        line.setQuantity(or.getQuantity() + quantity);
+                        this.account.getCart().getItemList().remove(or);
+                        break;
+                    }
+                }
+            }
+            this.account.getCart().addToCart(line);
+
+            JOptionPane.showMessageDialog(null, "Dash has been successfully added to Shopping Cart");
+        } else {
+            JOptionPane.showMessageDialog(null, "Please select a dash.");
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
 

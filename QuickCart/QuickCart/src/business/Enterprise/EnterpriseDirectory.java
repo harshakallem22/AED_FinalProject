@@ -26,6 +26,7 @@ public class EnterpriseDirectory {
     
     public EnterpriseDirectory(){
         enterpriseList=new ArrayList<Enterprise>();
+        restaurantDir = new RestaurantDirectory();
     }
     
     //Create enterprise
@@ -59,9 +60,8 @@ public class EnterpriseDirectory {
     }
     
     public RestaurantEnterprise createRestaurant(String name, String phone, String address, String email){
-        restaurantDir = new RestaurantDirectory();
-                RestaurantEnterprise enterprise = restaurantDir.newRestaurant(name, phone, address, email);
-                return enterprise;
+        RestaurantEnterprise enterprise = restaurantDir.newRestaurant(name, phone, address, email);
+        return enterprise;
     }
     
 }

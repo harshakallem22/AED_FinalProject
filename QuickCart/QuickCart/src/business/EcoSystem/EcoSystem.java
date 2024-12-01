@@ -4,6 +4,8 @@ import business.Customer.CustomerDirectory;
 import business.Network.Network;
 import business.Organization.Organization;
 import business.Role.Role;
+import business.UserAccount.CustomerAccount;
+import business.UserAccount.CustomerAccountDirectory;
 import java.util.ArrayList;
 
 /*
@@ -19,6 +21,7 @@ public class EcoSystem extends Organization{
     private static EcoSystem business;
     private ArrayList<Network> networkList;
     private CustomerDirectory customerDirectory;
+    private CustomerAccountDirectory cad;
     
     public static EcoSystem getInstance(){
         if(business==null){
@@ -65,6 +68,10 @@ public class EcoSystem extends Organization{
 
     public CustomerDirectory getCustomerDirectory() {
         return customerDirectory;
+    }
+
+    public CustomerAccountDirectory getCad() {
+        return cad;
     }
     
     
