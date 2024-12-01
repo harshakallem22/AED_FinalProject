@@ -4,6 +4,10 @@
  */
 package ui;
 
+import business.DBConn.DatabaseConnection;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import ui.Customer.CustomerWorkAreaJPanel;
 
 /**
@@ -15,10 +19,11 @@ public class MainJFrame extends javax.swing.JFrame {
     /**
      * Creates new form MainJFrame
      */
-    public MainJFrame() {
+    public MainJFrame() throws SQLException {
         initComponents();
         LoginJPanel loginJPanel = new LoginJPanel();
         loginJPanel.setVisible(true);
+        DatabaseConnection.getConnection();
     }
 
     /**
@@ -76,7 +81,11 @@ public class MainJFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MainJFrame().setVisible(true);
+                try {
+                    new MainJFrame().setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(MainJFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }

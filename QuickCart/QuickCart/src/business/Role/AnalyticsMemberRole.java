@@ -18,7 +18,8 @@ public class AnalyticsMemberRole extends Role {
 
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business) {
-        return new AnalyticsMemberWorkAreaJPanel(userProcessContainer, account, organization, business);
+        //return new AnalyticsMemberWorkAreaJPanel(userProcessContainer, account, organization, business);
+        return null;
     }
 
     
