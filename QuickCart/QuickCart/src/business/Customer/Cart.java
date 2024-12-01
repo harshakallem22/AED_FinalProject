@@ -21,19 +21,16 @@ public class Cart {
     public Cart() {
         this.itemList = new ArrayList<>();
         BigDecimal bd = new BigDecimal(getTotalPrice());
+        this.totalPrice = 0;
         this.totalPrice = bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
-    }
-    
-    public ArrayList<ItemOrder> getItemList() {
-        return this.itemList;
     }
 
     public double getTotalPrice() {
-        totalPrice = 0;
+        double total = 0;
         for (ItemOrder d : itemList) {
-            totalPrice = totalPrice + d.getTotalPrice();
+            total = totalPrice + d.getTotalPrice();
         }
-        return totalPrice;
+        return total;
     }
     
     public void addToCart(ItemOrder order) {
@@ -43,8 +40,21 @@ public class Cart {
     public boolean isCartEmpty() {
         return itemList.isEmpty();
     }
+
     
-    public void clearCart(){
+    public ArrayList<ItemOrder> getItemList() {
+    if (this.itemList == null) {
         this.itemList = new ArrayList<>();
     }
+    return this.itemList;
+}
+
+public void clearCart() {
+    if (this.itemList != null) {
+        this.itemList.clear();
+    } else {
+        this.itemList = new ArrayList<>();
+    }
+}
+
 }

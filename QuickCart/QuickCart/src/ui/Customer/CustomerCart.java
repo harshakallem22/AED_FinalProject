@@ -8,6 +8,7 @@ import business.Customer.ItemOrder;
 import business.EcoSystem.EcoSystem;
 import business.Network.Network;
 import business.UserAccount.CustomerAccount;
+import java.awt.CardLayout;
 import java.math.BigDecimal;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -74,7 +75,12 @@ public class CustomerCart extends javax.swing.JPanel {
         lblTitle.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
         lblTitle.setText("Shopping Cart");
 
-        btnPlaceOrder.setText("Place Order");
+        btnPlaceOrder.setText("Checkout");
+        btnPlaceOrder.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPlaceOrderActionPerformed(evt);
+            }
+        });
 
         btnClear.setText("Clear Cart");
 
@@ -111,6 +117,14 @@ public class CustomerCart extends javax.swing.JPanel {
                 .addGap(35, 35, 35))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnPlaceOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlaceOrderActionPerformed
+        // TODO add your handling code here:
+        PlaceOrderJPanel panel = new PlaceOrderJPanel(this.system, this.container, this.account, account.getCart().getItemList().get(0).getShopModel(), net);
+        this.container.add(panel);
+        CardLayout layout = (CardLayout) this.container.getLayout();
+        layout.next(this.container);
+    }//GEN-LAST:event_btnPlaceOrderActionPerformed
     
      public void populateTable() {
         DefaultTableModel dtm = (DefaultTableModel) tblCart.getModel();

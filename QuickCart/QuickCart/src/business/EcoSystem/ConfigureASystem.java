@@ -11,7 +11,10 @@ import business.Enterprise.Enterprise.EnterpriseType;
 import static business.Enterprise.Enterprise.EnterpriseType.Restaurant;
 import business.Enterprise.RestaurantEnterprise;
 import business.Network.Network;
+import business.Organization.Organization;
+import business.Organization.RestaurantManagerOrganization;
 import business.Role.CustomerRole;
+import business.Role.RestaurantCookRole;
 import business.Role.RestaurantManagerRole;
 import business.UserAccount.CustomerAccount;
 import business.UserAccount.EmployeeAccount;
@@ -54,7 +57,11 @@ public class ConfigureASystem {
         res2.getMenu().createFoodItem("abc", 13);
         EmployeeAccount ua = system.getUserAccountDirectory().createUserAccount("man1", "man1", new RestaurantManagerRole());
         ua.setEmployee(emp2);
-        System.out.println("System is "+system);
+        
+        Employee uopcook = res2.getEmployeeDirectory().createEmployee("cook");
+        EmployeeAccount uopEa = system.getUserAccountDirectory().createUserAccount("cook", "cook", new RestaurantCookRole());
+        uopEa.setEmployee(uopcook);
+
         return system;
     }
 }

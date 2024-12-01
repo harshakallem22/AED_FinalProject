@@ -108,8 +108,11 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnPlaceOrder">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Place Order"/>
+        <Property name="text" type="java.lang.String" value="Checkout"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPlaceOrderActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnClear">
       <Properties>

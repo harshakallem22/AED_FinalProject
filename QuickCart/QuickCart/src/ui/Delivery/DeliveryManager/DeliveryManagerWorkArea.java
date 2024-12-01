@@ -2,33 +2,23 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package ui.Restaurant.RestaurantManager;
+package ui.Delivery.DeliveryManager;
 
-import business.EcoSystem.EcoSystem;
-import business.Organization.Organization;
-import business.UserAccount.UserAccount;
+import ui.Grocery.GroceryManager.*;
+import ui.Restaurant.RestaurantManager.*;
 import java.awt.CardLayout;
-import javax.swing.JPanel;
 
 /**
  *
  * @author SAI SRIDHAR
  */
-public class RestaurantManagerWorkArea extends javax.swing.JPanel {
+public class DeliveryManagerWorkArea extends javax.swing.JPanel {
 
     /**
      * Creates new form RestaurantManagerWorkArea
      */
-    JPanel workArea;
-    UserAccount account;
-    Organization organization;
-    EcoSystem ecosystem;
-    public RestaurantManagerWorkArea(JPanel workArea, UserAccount account, Organization organization, EcoSystem ecosystem) {
+    public DeliveryManagerWorkArea() {
         initComponents();
-        this.workArea = workArea;
-        this.account = account;
-        this.organization = organization;
-        this.ecosystem = ecosystem;
     }
 
     /**
@@ -42,18 +32,18 @@ public class RestaurantManagerWorkArea extends javax.swing.JPanel {
 
         jSplitPane1 = new javax.swing.JSplitPane();
         jPanel1 = new javax.swing.JPanel();
-        btnOrders = new javax.swing.JButton();
+        btnDeliveries = new javax.swing.JButton();
         btnEmployees = new javax.swing.JButton();
         btnProfile = new javax.swing.JButton();
         btnLogout = new javax.swing.JButton();
-        upc = new javax.swing.JPanel();
+        workArea = new javax.swing.JPanel();
 
         jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
 
-        btnOrders.setText("Manage Orders");
-        btnOrders.addActionListener(new java.awt.event.ActionListener() {
+        btnDeliveries.setText("Manage Deliveries");
+        btnDeliveries.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnOrdersActionPerformed(evt);
+                btnDeliveriesActionPerformed(evt);
             }
         });
 
@@ -74,7 +64,7 @@ public class RestaurantManagerWorkArea extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(299, 299, 299)
-                .addComponent(btnOrders)
+                .addComponent(btnDeliveries)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnEmployees)
                 .addGap(12, 12, 12)
@@ -88,7 +78,7 @@ public class RestaurantManagerWorkArea extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(40, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnOrders)
+                    .addComponent(btnDeliveries)
                     .addComponent(btnEmployees)
                     .addComponent(btnProfile)
                     .addComponent(btnLogout))
@@ -97,8 +87,8 @@ public class RestaurantManagerWorkArea extends javax.swing.JPanel {
 
         jSplitPane1.setTopComponent(jPanel1);
 
-        upc.setLayout(new java.awt.CardLayout());
-        jSplitPane1.setRightComponent(upc);
+        workArea.setLayout(new java.awt.CardLayout());
+        jSplitPane1.setRightComponent(workArea);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -112,30 +102,24 @@ public class RestaurantManagerWorkArea extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnOrdersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrdersActionPerformed
+    private void btnDeliveriesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeliveriesActionPerformed
         // TODO add your handling code here:
-        ManageOrderJPanel mojp = new ManageOrderJPanel();
-        workArea.add(mojp);
-        CardLayout layout = (CardLayout) mojp.getLayout();
-        layout.next(workArea);
-    }//GEN-LAST:event_btnOrdersActionPerformed
+       
+    }//GEN-LAST:event_btnDeliveriesActionPerformed
 
     private void btnEmployeesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmployeesActionPerformed
         // TODO add your handling code here:
-        ManageEmployeesJPanel mejp = new ManageEmployeesJPanel();
-        workArea.add(mejp);
-        CardLayout layout = (CardLayout) mejp.getLayout();
-        layout.next(workArea);
+        
     }//GEN-LAST:event_btnEmployeesActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnDeliveries;
     private javax.swing.JButton btnEmployees;
     private javax.swing.JButton btnLogout;
-    private javax.swing.JButton btnOrders;
     private javax.swing.JButton btnProfile;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSplitPane jSplitPane1;
-    private javax.swing.JPanel upc;
+    private javax.swing.JPanel workArea;
     // End of variables declaration//GEN-END:variables
 }

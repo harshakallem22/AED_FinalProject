@@ -11,6 +11,7 @@ import business.UserAccount.CustomerAccount;
 import business.UserAccount.UserAccount;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
+import ui.LoginJPanel;
 
 /**
  *
@@ -73,6 +74,11 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
         });
 
         btnLogout.setText("Logout");
+        btnLogout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogoutActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -133,11 +139,22 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
 
     private void btnCartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCartActionPerformed
         // TODO add your handling code here:
-        CustomerCart cc = new CustomerCart(ecosystem, workArea, ca, network);
-        workArea.add(cc);
-        CardLayout layout = (CardLayout) workArea.getLayout();
-        layout.next(workArea);
+       CartJFrame frame = new CartJFrame(this.ecosystem, ca, network);
+        frame.setSize(500, 620);
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
     }//GEN-LAST:event_btnCartActionPerformed
+
+    private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
+        // TODO add your handling code here:
+         this.workArea.removeAll(); // Clear the current work area
+    
+    LoginJPanel loginPanel = new LoginJPanel(this.workArea);
+    this.workArea.add("LoginJPanel", loginPanel);
+    
+    CardLayout layout = (CardLayout) this.workArea.getLayout();
+    layout.next(this.workArea);
+    }//GEN-LAST:event_btnLogoutActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

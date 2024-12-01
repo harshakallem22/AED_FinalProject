@@ -4,7 +4,18 @@
  */
 package ui.Restaurant.RestaurantEmployees;
 
+import business.EcoSystem.EcoSystem;
+import business.Enterprise.Enterprise;
+import business.Enterprise.RestaurantEnterprise;
+import business.Organization.Organization;
+import business.UserAccount.EmployeeAccount;
+import business.UserAccount.UserAccount;
+import business.WorkQueue.OrderRequest;
+import business.WorkQueue.WorkRequest;
 import java.awt.CardLayout;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+import ui.LoginJPanel;
 
 /**
  *
@@ -15,9 +26,37 @@ public class RestaurantEmployeeWorkArea extends javax.swing.JPanel {
     /**
      * Creates new form RestaurantEmployeeWorkArea
      */
-    public RestaurantEmployeeWorkArea() {
+    EmployeeAccount ea;
+    Organization organization;
+    EcoSystem ecosystem;
+    JPanel workarea;
+    RestaurantEnterprise enterprise;
+    public RestaurantEmployeeWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, EcoSystem business, Enterprise enterprise) {
         initComponents();
+        this.ea = (EmployeeAccount)account;
+        this.workarea = userProcessContainer;
+        this.organization = organization;
+        this.ecosystem = business;
+        this.enterprise = (RestaurantEnterprise) enterprise;
+        populateTable();
     }
+    
+    private void populateTable() {
+    DefaultTableModel dtm = (DefaultTableModel) workRequestJTable.getModel();
+    dtm.setRowCount(0);
+    System.out.println("WorkRequest List size: " + ea.getWorkQueue().getWorkRequestList().size());
+    for (WorkRequest wr : enterprise.getWorkQueue().getWorkRequestList()) {
+        if(wr.getStatus().equals("Assigned to Employee") || wr.getStatus().equals("In Progress")){
+            OrderRequest or = (OrderRequest) wr;
+            Object row[] = new Object[3];
+            row[0] = or;
+            row[1] = or.getItems(); 
+            row[2] = or.getStatus();
+            dtm.addRow(row);
+        }
+        
+    }
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -33,6 +72,7 @@ public class RestaurantEmployeeWorkArea extends javax.swing.JPanel {
         assignJButton = new javax.swing.JButton();
         btnFinishOrder = new javax.swing.JButton();
         refreshJButton = new javax.swing.JButton();
+        btnLogout = new javax.swing.JButton();
 
         workRequestJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -86,6 +126,13 @@ public class RestaurantEmployeeWorkArea extends javax.swing.JPanel {
             }
         });
 
+        btnLogout.setText("Logout");
+        btnLogout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogoutActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -99,19 +146,23 @@ public class RestaurantEmployeeWorkArea extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(130, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(refreshJButton)
-                        .addGap(179, 179, 179))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 471, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(112, 112, 112))))
+                    .addComponent(refreshJButton)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 471, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(112, 112, 112))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(btnLogout)
+                            .addGap(67, 67, 67)))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(101, 101, 101)
+                .addGap(24, 24, 24)
+                .addComponent(btnLogout)
+                .addGap(61, 61, 61)
                 .addComponent(refreshJButton)
-                .addGap(39, 39, 39)
+                .addGap(26, 26, 26)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(41, 41, 41)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -124,24 +175,65 @@ public class RestaurantEmployeeWorkArea extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void assignJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assignJButtonActionPerformed
+        
+        int selectedRow = workRequestJTable.getSelectedRow();
+    if (selectedRow < 0) {
+        javax.swing.JOptionPane.showMessageDialog(null, "Please select an order to assign to yourself");
+        return;
+    }
+    OrderRequest selectedOrder = (OrderRequest) workRequestJTable.getValueAt(selectedRow, 0);
 
+    if (!selectedOrder.getStatus().equalsIgnoreCase("Assigned to Employee")) {
+        javax.swing.JOptionPane.showMessageDialog(null, "Order is not ready to be assigned");
+        return;
+    }
+
+    selectedOrder.setStatus("In Progress");
+    selectedOrder.setAssignedTo(ea); // Assuming setAssignedTo(UserAccount) is available
+    javax.swing.JOptionPane.showMessageDialog(null, "Order assigned to you successfully");
+    populateTable();
 
     }//GEN-LAST:event_assignJButtonActionPerformed
 
     private void btnFinishOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinishOrderActionPerformed
-//        ProcessWorkRequestJPanel processWorkRequestJPanel = new ProcessWorkRequestJPanel();
-//        userProcessContainer.add("processWorkRequestJPanel", processWorkRequestJPanel);
-//        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-//        layout.next(userProcessContainer);
+        int selectedRow = workRequestJTable.getSelectedRow();
+    if (selectedRow < 0) {
+        javax.swing.JOptionPane.showMessageDialog(null, "Please select an order to finish");
+        return;
+    }
+    OrderRequest selectedOrder = (OrderRequest) workRequestJTable.getValueAt(selectedRow, 0);
+
+    if (!selectedOrder.getStatus().equalsIgnoreCase("In Progress")) {
+        javax.swing.JOptionPane.showMessageDialog(null, "Only in-progress orders can be marked as finished");
+        return;
+    }
+
+    selectedOrder.setStatus("Order Prepared");
+    javax.swing.JOptionPane.showMessageDialog(null, "Order marked as completed");
+    populateTable(); // Refresh the table
     }//GEN-LAST:event_btnFinishOrderActionPerformed
 
     private void refreshJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshJButtonActionPerformed
     }//GEN-LAST:event_refreshJButtonActionPerformed
 
+    private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
+        // TODO add your handling code here:
+        workarea.removeAll();
+
+    LoginJPanel loginPanel = new LoginJPanel(workarea);
+    workarea.add("LoginJPanel", loginPanel);
+
+    CardLayout layout = (CardLayout) workarea.getLayout();
+    layout.next(workarea);
+
+    javax.swing.JOptionPane.showMessageDialog(null, "Logged out successfully.");
+    }//GEN-LAST:event_btnLogoutActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton assignJButton;
     private javax.swing.JButton btnFinishOrder;
+    private javax.swing.JButton btnLogout;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton refreshJButton;
     private javax.swing.JTable workRequestJTable;

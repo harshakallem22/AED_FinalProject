@@ -4,6 +4,7 @@
  */
 package business.WorkQueue;
 
+import business.Enterprise.Enterprise;
 import business.UserAccount.UserAccount;
 import java.util.Date;
 
@@ -16,13 +17,33 @@ public abstract class WorkRequest {
     private String message;
     private UserAccount sender;
     private UserAccount receiver;
-    private String status;
-    private Date requestDate;
-    private Date resolveDate;
+    private String status="Processing";
+    private Enterprise enterprise;
     
-    public WorkRequest(){
-        requestDate = new Date();
-    }
+//    public enum StatusEnum {
+//
+//        Processing("Processing"),
+//        Ready("Ready for pickup"),
+//        WaitForPickup("Waiting for pickup"),
+//        OnTheWay("On the way"),
+//        Cancelled("Cancelled"),
+//        Completed("Completed");
+//
+//        private String value;
+//
+//        private StatusEnum(String value) {
+//            this.value = value;
+//        }
+//
+//        public String getValue() {
+//            return value;
+//        }
+//
+//        @Override
+//        public String toString() {
+//            return value;
+//        }
+//    }
 
     public String getMessage() {
         return message;
@@ -56,19 +77,9 @@ public abstract class WorkRequest {
         this.status = status;
     }
 
-    public Date getRequestDate() {
-        return requestDate;
+    public Enterprise getEnterprise() {
+        return enterprise;
     }
-
-    public void setRequestDate(Date requestDate) {
-        this.requestDate = requestDate;
-    }
-
-    public Date getResolveDate() {
-        return resolveDate;
-    }
-
-    public void setResolveDate(Date resolveDate) {
-        this.resolveDate = resolveDate;
-    }
+    
+    
 }

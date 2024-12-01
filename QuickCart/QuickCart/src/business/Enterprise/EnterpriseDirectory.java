@@ -61,6 +61,7 @@ public class EnterpriseDirectory {
     
     public RestaurantEnterprise createRestaurant(String name, String phone, String address, String email){
         RestaurantEnterprise enterprise = restaurantDir.newRestaurant(name, phone, address, email);
+        enterpriseList.add(enterprise);
         return enterprise;
     }
     

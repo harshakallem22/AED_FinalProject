@@ -43,4 +43,15 @@ public class OrganizationDirectory {
         }
         return organization;
     }
+    
+    public Organization getTypicalOrganization(Type type) {
+    for (Organization or : this.organizationList) {
+        // Check if the organization's name matches the type value (case-insensitive)
+        if (or.getName().equalsIgnoreCase(type.getValue())) {
+            return or;
+        }
+    }
+    // Return null if no matching organization is found
+    return null;
+}
 }

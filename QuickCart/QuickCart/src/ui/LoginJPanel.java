@@ -6,9 +6,12 @@ package ui;
 
 import business.EcoSystem.ConfigureASystem;
 import business.EcoSystem.EcoSystem;
+import business.Employee.Employee;
 import business.Enterprise.Enterprise;
 import business.Network.Network;
 import business.Organization.Organization;
+import business.UserAccount.CustomerAccount;
+import business.UserAccount.EmployeeAccount;
 import business.UserAccount.UserAccount;
 import java.awt.CardLayout;
 import javax.swing.JOptionPane;
@@ -100,8 +103,28 @@ public class LoginJPanel extends javax.swing.JPanel {
         String userName = txtUsername.getText();
         // Get Password
         String password = txtPassword.getText();
-
+        Enterprise e=null;
         //Step1: Check in the system admin user account directory if you have the user
+        if((system.getUserAccountDirectory().authenticateUser(userName, password)) instanceof CustomerAccount){
+            CustomerAccount cusa = (CustomerAccount) system.getUserAccountDirectory().authenticateUser(userName, password);
+        }
+
+        else{
+            EmployeeAccount ea =  (EmployeeAccount) system.getUserAccountDirectory().authenticateUser(userName, password);
+            System.out.println("Hiiiiii");
+            System.out.println(ea.getEmployee().getName());
+            
+            for(Network network : system.getNetworkList()){
+                for(Enterprise enterprise : network.getEnterpriseDirectory().getEnterpriseList()){
+                    for(Employee emp : enterprise.getEmployeeDirectory().getEmployeeList()){
+                        if(emp.equals(ea.getEmployee())){
+                            e = enterprise;
+                            System.out.println("Success in for loop");
+                        }
+                    }
+                }
+            }
+        }
         UserAccount userAccount=system.getUserAccountDirectory().authenticateUser(userName, password);
 
         Enterprise inEnterprise=null;
@@ -114,10 +137,25 @@ public class LoginJPanel extends javax.swing.JPanel {
                 //Step 2.a: check against each enterprise
                 for(Enterprise enterprise:network.getEnterpriseDirectory().getEnterpriseList()){
                     userAccount=enterprise.getUserAccountDirectory().authenticateUser(userName, password);
+                    System.out.println(userAccount +"is userAccount");
+                    for(UserAccount usera : enterprise.getUserAccountDirectory().getUserAccountList()){
+                        if(usera.getUsername().equals(userName) && usera.getPassword().equals(password)){
+                            userAccount = usera;
+                            System.out.println("Success inside user");
+                        }
+                    }
+                    if (userAccount != null) {
+                        System.out.println("118"+inEnterprise.getName());
+                        inEnterprise = enterprise;
+                        net = network;
+                        break;
+                    }
                     if(userAccount==null){
                         //Step 3:check against each organization for each enterprise
                         for(Organization organization:enterprise.getOrganizationDirectory().getOrganizationList()){
                             userAccount=organization.getUserAccountDirectory().authenticateUser(userName, password);
+                            System.out.println("Line number 134");
+                            System.out.println(userAccount);
                             if(userAccount!=null){
                                 inEnterprise=enterprise;
                                 inOrganization=organization;
@@ -133,6 +171,7 @@ public class LoginJPanel extends javax.swing.JPanel {
                         break;
                     }
                     if(inOrganization!=null){
+                        inEnterprise=enterprise;
                         net = network;
                         break;
                     }
@@ -153,8 +192,8 @@ public class LoginJPanel extends javax.swing.JPanel {
             
             CardLayout layout=(CardLayout)workArea.getLayout();
             system = ConfigureASystem.configure();
-            System.out.println(this.system);
-            workArea.add("workArea",userAccount.getRole().createWorkArea(workArea, userAccount, inOrganization, inEnterprise, system, net));
+            System.out.println(inEnterprise);
+            workArea.add("workArea",userAccount.getRole().createWorkArea(workArea, userAccount, inOrganization, e, system, net));
             layout.next(workArea);
         }
     }//GEN-LAST:event_btnLoginActionPerformed

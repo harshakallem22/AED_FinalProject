@@ -10,6 +10,7 @@ import business.Network.Network;
 import business.Organization.Organization;
 import business.UserAccount.UserAccount;
 import javax.swing.JPanel;
+import ui.Restaurant.RestaurantEmployees.RestaurantEmployeeWorkArea;
 
 /**
  *
@@ -19,7 +20,7 @@ public class RestaurantCookRole extends Role {
 
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business, Network network) {
-        //return new RestaurantCookWorkAreaJPanel(userProcessContainer, account, organization, business);
-        return null;
+        return new RestaurantEmployeeWorkArea(userProcessContainer, account, organization, business, enterprise);
+        //return null;
     }
 }
