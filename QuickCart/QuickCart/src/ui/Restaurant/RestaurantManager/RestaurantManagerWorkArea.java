@@ -4,7 +4,11 @@
  */
 package ui.Restaurant.RestaurantManager;
 
+import business.EcoSystem.EcoSystem;
+import business.Organization.Organization;
+import business.UserAccount.UserAccount;
 import java.awt.CardLayout;
+import javax.swing.JPanel;
 
 /**
  *
@@ -15,8 +19,16 @@ public class RestaurantManagerWorkArea extends javax.swing.JPanel {
     /**
      * Creates new form RestaurantManagerWorkArea
      */
-    public RestaurantManagerWorkArea() {
+    JPanel workArea;
+    UserAccount account;
+    Organization organization;
+    EcoSystem ecosystem;
+    public RestaurantManagerWorkArea(JPanel workArea, UserAccount account, Organization organization, EcoSystem ecosystem) {
         initComponents();
+        this.workArea = workArea;
+        this.account = account;
+        this.organization = organization;
+        this.ecosystem = ecosystem;
     }
 
     /**
@@ -34,7 +46,7 @@ public class RestaurantManagerWorkArea extends javax.swing.JPanel {
         btnEmployees = new javax.swing.JButton();
         btnProfile = new javax.swing.JButton();
         btnLogout = new javax.swing.JButton();
-        workArea = new javax.swing.JPanel();
+        upc = new javax.swing.JPanel();
 
         jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
 
@@ -85,8 +97,8 @@ public class RestaurantManagerWorkArea extends javax.swing.JPanel {
 
         jSplitPane1.setTopComponent(jPanel1);
 
-        workArea.setLayout(new java.awt.CardLayout());
-        jSplitPane1.setRightComponent(workArea);
+        upc.setLayout(new java.awt.CardLayout());
+        jSplitPane1.setRightComponent(upc);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -124,6 +136,6 @@ public class RestaurantManagerWorkArea extends javax.swing.JPanel {
     private javax.swing.JButton btnProfile;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSplitPane jSplitPane1;
-    private javax.swing.JPanel workArea;
+    private javax.swing.JPanel upc;
     // End of variables declaration//GEN-END:variables
 }

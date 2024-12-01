@@ -4,6 +4,7 @@
  */
 package business.Enterprise;
 
+import business.Enterprise.Enterprise.EnterpriseType;
 import java.util.ArrayList;
 
 /**
@@ -27,20 +28,27 @@ public class EnterpriseDirectory {
     }
     
     //Create enterprise
-    public Enterprise createAndAddEnterprise(String name,Enterprise.EnterpriseType type){
+    public Enterprise createAndAddEnterprise(String name, EnterpriseType type){
         Enterprise enterprise=null;
-        if (type == Enterprise.EnterpriseType.Restaurant) {
-            enterprise = new RestaurantEnterprise(name);
-            enterpriseList.add(enterprise);
-        } else if (type == Enterprise.EnterpriseType.Grocery) {
-            enterprise = new GroceryEnterprise(name);
-            enterpriseList.add(enterprise);
-        } else if (type == Enterprise.EnterpriseType.Delivery) {
-            enterprise = new DeliveryEnterprise(name);
-            enterpriseList.add(enterprise);
-        } else if (type == Enterprise.EnterpriseType.Analytics) {
-            enterprise = new AnalyticsEnterprise(name);
-            enterpriseList.add(enterprise);
+        if (null != type) switch (type) {
+            case Restaurant:
+                enterprise = new RestaurantEnterprise(name);
+                enterpriseList.add(enterprise);
+                break;
+            case Grocery:
+                enterprise = new GroceryEnterprise(name);
+                enterpriseList.add(enterprise);
+                break;
+            case Delivery:
+                enterprise = new DeliveryEnterprise(name);
+                enterpriseList.add(enterprise);
+                break;
+            case Analytics:
+                enterprise = new AnalyticsEnterprise(name);
+                enterpriseList.add(enterprise);
+                break;
+            default:
+                break;
         }
         return enterprise;
     }

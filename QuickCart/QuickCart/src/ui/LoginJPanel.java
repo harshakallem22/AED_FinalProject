@@ -1,22 +1,34 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package ui;
 
-import ui.Customer.CustomerWorkAreaJPanel;
+import business.EcoSystem.ConfigureASystem;
+import business.EcoSystem.EcoSystem;
+import business.Enterprise.Enterprise;
+import business.Network.Network;
+import business.Organization.Organization;
+import business.UserAccount.UserAccount;
+import java.awt.CardLayout;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 /**
  *
  * @author SAI SRIDHAR
  */
-public class LoginJPanel extends javax.swing.JFrame {
+public class LoginJPanel extends javax.swing.JPanel {
 
     /**
      * Creates new form LoginJPanel
      */
-    public LoginJPanel() {
+    private EcoSystem system;
+    private JPanel workArea;
+    public LoginJPanel(JPanel workArea) {
         initComponents();
+        this.workArea = workArea;
+        system = ConfigureASystem.configure();
     }
 
     /**
@@ -34,8 +46,6 @@ public class LoginJPanel extends javax.swing.JFrame {
         txtPassword = new javax.swing.JTextField();
         btnLogin = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
         lblUsername.setText("Username");
 
         lblPassword.setText("Password ");
@@ -47,8 +57,8 @@ public class LoginJPanel extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
@@ -65,7 +75,7 @@ public class LoginJPanel extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(236, 236, 236)
                         .addComponent(btnLogin)))
-                .addContainerGap(204, Short.MAX_VALUE))
+                .addContainerGap(230, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -80,51 +90,68 @@ public class LoginJPanel extends javax.swing.JFrame {
                     .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(68, 68, 68)
                 .addComponent(btnLogin)
-                .addContainerGap(186, Short.MAX_VALUE))
+                .addContainerGap(246, Short.MAX_VALUE))
         );
-
-        pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         // TODO add your handling code here:
-        
-    }//GEN-LAST:event_btnLoginActionPerformed
+        // Get user name
+        String userName = txtUsername.getText();
+        // Get Password
+        String password = txtPassword.getText();
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+        //Step1: Check in the system admin user account directory if you have the user
+        UserAccount userAccount=system.getUserAccountDirectory().authenticateUser(userName, password);
+
+        Enterprise inEnterprise=null;
+        Organization inOrganization=null;
+
+        if(userAccount==null){
+            //Step 2: Go inside each network and check each enterprise
+            for(Network network:system.getNetworkList()){
+                //Step 2.a: check against each enterprise
+                for(Enterprise enterprise:network.getEnterpriseDirectory().getEnterpriseList()){
+                    userAccount=enterprise.getUserAccountDirectory().authenticateUser(userName, password);
+                    if(userAccount==null){
+                        //Step 3:check against each organization for each enterprise
+                        for(Organization organization:enterprise.getOrganizationDirectory().getOrganizationList()){
+                            userAccount=organization.getUserAccountDirectory().authenticateUser(userName, password);
+                            if(userAccount!=null){
+                                inEnterprise=enterprise;
+                                inOrganization=organization;
+                                break;
+                            }
+                        }
+
+                    }
+                    else{
+                        inEnterprise=enterprise;
+                        break;
+                    }
+                    if(inOrganization!=null){
+                        break;
+                    }
+                }
+                if(inEnterprise!=null){
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(LoginJPanel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(LoginJPanel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(LoginJPanel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(LoginJPanel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new LoginJPanel().setVisible(true);
-            }
-        });
-    }
+        if(userAccount==null){
+            JOptionPane.showMessageDialog(null, "Invalid credentials");
+            return;
+        }
+        
+        else{
+            System.out.println(userAccount.getRole());
+            CardLayout layout=(CardLayout)workArea.getLayout();
+            workArea.add("workArea",userAccount.getRole().createWorkArea(workArea, userAccount, inOrganization, inEnterprise, system));
+            layout.next(workArea);
+        }
+    }//GEN-LAST:event_btnLoginActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLogin;

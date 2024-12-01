@@ -4,7 +4,11 @@
  */
 package ui.Customer;
 
+import business.EcoSystem.EcoSystem;
+import business.Organization.Organization;
+import business.UserAccount.UserAccount;
 import java.awt.CardLayout;
+import javax.swing.JPanel;
 
 /**
  *
@@ -15,8 +19,16 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
     /**
      * Creates new form CustomerWorkAreaJPanel
      */
-    public CustomerWorkAreaJPanel() {
+    JPanel workArea;
+    UserAccount account;
+    Organization organization;
+    EcoSystem ecosystem;
+    public CustomerWorkAreaJPanel(JPanel workArea, UserAccount account, Organization organization, EcoSystem ecosystem) {
         initComponents();
+        this.workArea = workArea;
+        this.account = account;
+        this.organization = organization;
+        this.ecosystem = ecosystem;
     }
 
     /**
@@ -56,7 +68,7 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(309, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnOrder)
                 .addGap(35, 35, 35)
                 .addComponent(btnProfile)
@@ -69,7 +81,7 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(38, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnOrder)
                     .addComponent(btnProfile)
@@ -79,6 +91,7 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
         );
 
         jSplitPane1.setTopComponent(jPanel1);
+        jPanel1.getAccessibleContext().setAccessibleParent(upc);
 
         upc.setLayout(new java.awt.CardLayout());
         jSplitPane1.setRightComponent(upc);
@@ -89,12 +102,12 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jSplitPane1)
+                .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 686, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSplitPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(jSplitPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 567, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
