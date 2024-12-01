@@ -2,8 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.Role to edit this template
  */
-package Role;
+package business.Role;
 
+import business.EcoSystem.EcoSystem;
 import business.Organization.Organization;
 import business.UserAccount.UserAccount;
 import javax.swing.JPanel;
@@ -12,11 +13,16 @@ import javax.swing.JPanel;
  *
  * @author SAI SRIDHAR
  */
-public class Role {
+public abstract class Role {
     public enum RoleType{
-        Admin("Admin"),
-        Doctor("Doctor"),
-        LabAssistant("Lab Assistant");
+        Customer("Customer"),
+        RestaurantManager("Restaurant Manager"),
+        RestaurantCook("Restaurant Cook"),
+        StoreManager("Store Manager"),
+        InventoryManager("Inventory Manager"),
+        DeliveryManager("Delivery Manager"),
+        DeliveryPerson("Delivery Person"),
+        AnalyticsMember("Analytics Member");
         
         private String value;
         private RoleType(String value){

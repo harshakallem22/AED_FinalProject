@@ -4,6 +4,7 @@
  */
 package business.UserAccount;
 
+import business.Role.Role;
 import business.Employee.Employee;
 import business.Role.Role;
 import business.WorkQueue.WorkQueue;

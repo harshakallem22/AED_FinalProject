@@ -5,6 +5,7 @@
 package business.Organization;
 
 import business.Employee.EmployeeDirectory;
+import business.Role.Role;
 import business.UserAccount.UserAccountDirectory;
 import business.WorkQueue.WorkQueue;
 import java.util.ArrayList;
@@ -83,4 +84,6 @@ public abstract class Organization {
     public String toString() {
         return name;
     }
+    
+}
     
