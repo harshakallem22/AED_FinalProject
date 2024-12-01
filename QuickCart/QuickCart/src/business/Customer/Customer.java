@@ -9,5 +9,12 @@ package business.Customer;
  * @author SAI SRIDHAR
  */
 public class Customer {
+    private int id;
+    private String email;
+    private String name;
+    private String phone;
+    private String address;
+    private static int counter = 1;
+    
     
 }
