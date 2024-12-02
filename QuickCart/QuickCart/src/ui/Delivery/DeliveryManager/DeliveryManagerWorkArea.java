@@ -4,9 +4,17 @@
  */
 package ui.Delivery.DeliveryManager;
 
+import business.EcoSystem.EcoSystem;
+import business.Enterprise.DeliveryEnterprise;
+import business.Enterprise.Enterprise;
+import business.Organization.Organization;
+import business.UserAccount.EmployeeAccount;
+import business.UserAccount.UserAccount;
 import ui.Grocery.GroceryManager.*;
 import ui.Restaurant.RestaurantManager.*;
 import java.awt.CardLayout;
+import javax.swing.JPanel;
+import ui.LoginJPanel;
 
 /**
  *
@@ -17,8 +25,18 @@ public class DeliveryManagerWorkArea extends javax.swing.JPanel {
     /**
      * Creates new form RestaurantManagerWorkArea
      */
-    public DeliveryManagerWorkArea() {
+    JPanel upc;
+    EmployeeAccount ea;
+    Organization org;
+    DeliveryEnterprise enterprise;
+    EcoSystem ecosystem;
+    public DeliveryManagerWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business) {
         initComponents();
+        this.upc = userProcessContainer;
+        this.ea = (EmployeeAccount) account;
+        this.org = organization;
+        this.enterprise = (DeliveryEnterprise) enterprise;
+        this.ecosystem = business;
     }
 
     /**
@@ -40,7 +58,7 @@ public class DeliveryManagerWorkArea extends javax.swing.JPanel {
 
         jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
 
-        btnDeliveries.setText("Manage Deliveries");
+        btnDeliveries.setText("Manage Orders");
         btnDeliveries.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDeliveriesActionPerformed(evt);
@@ -57,6 +75,11 @@ public class DeliveryManagerWorkArea extends javax.swing.JPanel {
         btnProfile.setText("Profile");
 
         btnLogout.setText("Logout");
+        btnLogout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogoutActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -104,13 +127,27 @@ public class DeliveryManagerWorkArea extends javax.swing.JPanel {
 
     private void btnDeliveriesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeliveriesActionPerformed
         // TODO add your handling code here:
-       
+       ManageOrderJPanel mojp = new ManageOrderJPanel(workArea, ea, ecosystem, enterprise);
+        workArea.add("ManageOrderJPanel", mojp);
+        CardLayout layout = (CardLayout) workArea.getLayout();
+        layout.show(workArea, "ManageOrderJPanel");
     }//GEN-LAST:event_btnDeliveriesActionPerformed
 
     private void btnEmployeesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmployeesActionPerformed
         // TODO add your handling code here:
         
     }//GEN-LAST:event_btnEmployeesActionPerformed
+
+    private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
+        // TODO add your handling code here:
+        upc.removeAll();
+
+        LoginJPanel loginPanel = new LoginJPanel(upc);
+        upc.add("LoginJPanel", loginPanel);
+
+        CardLayout layout = (CardLayout) upc.getLayout();
+        layout.next(upc);
+    }//GEN-LAST:event_btnLogoutActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

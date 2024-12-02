@@ -14,6 +14,7 @@ import java.util.ArrayList;
 public class EnterpriseDirectory {
     private ArrayList<Enterprise> enterpriseList;
     private RestaurantDirectory restaurantDir;
+    private DeliveryDirectory deliveryDir;
    
 
     public ArrayList<Enterprise> getEnterpriseList() {
@@ -27,6 +28,7 @@ public class EnterpriseDirectory {
     public EnterpriseDirectory(){
         enterpriseList=new ArrayList<Enterprise>();
         restaurantDir = new RestaurantDirectory();
+        deliveryDir = new DeliveryDirectory();
     }
     
     //Create enterprise
@@ -59,10 +61,20 @@ public class EnterpriseDirectory {
         return restaurantDir;
     }
     
+    public DeliveryDirectory getDelivery(){
+        return deliveryDir;
+    }
+    
     public RestaurantEnterprise createRestaurant(String name, String phone, String address, String email){
         RestaurantEnterprise enterprise = restaurantDir.newRestaurant(name, phone, address, email);
         enterpriseList.add(enterprise);
         return enterprise;
     }
+    
+   public DeliveryEnterprise createDelivery(String name, String phone, String address, String email){
+       DeliveryEnterprise enterprise = deliveryDir.newDelivery(name, phone, address, email);
+       enterpriseList.add(enterprise);
+       return enterprise;
+   }
     
 }

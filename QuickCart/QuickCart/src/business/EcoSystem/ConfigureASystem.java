@@ -6,6 +6,7 @@ package business.EcoSystem;
 
 import business.Customer.Customer;
 import business.Employee.Employee;
+import business.Enterprise.DeliveryEnterprise;
 import business.Enterprise.Enterprise;
 import business.Enterprise.Enterprise.EnterpriseType;
 import static business.Enterprise.Enterprise.EnterpriseType.Restaurant;
@@ -14,6 +15,8 @@ import business.Network.Network;
 import business.Organization.Organization;
 import business.Organization.RestaurantManagerOrganization;
 import business.Role.CustomerRole;
+import business.Role.DeliveryManagerRole;
+import business.Role.DeliveryPersonRole;
 import business.Role.RestaurantCookRole;
 import business.Role.RestaurantManagerRole;
 import business.UserAccount.CustomerAccount;
@@ -61,7 +64,16 @@ public class ConfigureASystem {
         Employee uopcook = res2.getEmployeeDirectory().createEmployee("cook");
         EmployeeAccount uopEa = system.getUserAccountDirectory().createUserAccount("cook", "cook", new RestaurantCookRole());
         uopEa.setEmployee(uopcook);
-
+        
+        DeliveryEnterprise del1 = network.getEnterpriseDirectory().createDelivery("del1", "", "", "");
+        Employee delemp1 = del1.getEmployeeDirectory().createEmployee("delman");
+        EmployeeAccount delea1 = system.getUserAccountDirectory().createUserAccount("delman1", "delman1", new DeliveryManagerRole());
+        delea1.setEmployee(delemp1);
+        
+        Employee delper = del1.getEmployeeDirectory().createEmployee("delper");
+        EmployeeAccount delperEa = system.getUserAccountDirectory().createUserAccount("delper", "delper", new DeliveryPersonRole());
+        delperEa.setEmployee(delper);
+        
         return system;
     }
 }

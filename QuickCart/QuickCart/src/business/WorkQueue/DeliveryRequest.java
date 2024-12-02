@@ -23,6 +23,7 @@ public class DeliveryRequest extends WorkRequest {
     private String deliveryAddress;
     private String deliveryPhone;
     private double deliveryCharge;
+    private OrderRequest orderRequest;
     private DeliveryEnterprise deliveryCompany;
     private UserAccount assignedTo;
     private String orderId; // Associated Order ID (from OrderRequest)
@@ -123,12 +124,8 @@ public class DeliveryRequest extends WorkRequest {
         return this.status;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
-    }
 
-    public void assignDeliveryPartner(String partnerName) {
-        this.deliveryPartnerName = partnerName;
+    public void assignDeliveryPartner() {
         this.status = DeliveryStatus.DELIVERY_PERSON_ASSIGNED.value;
     }
 
@@ -142,6 +139,19 @@ public class DeliveryRequest extends WorkRequest {
     
     public void orderDelivered(){
         this.status = DeliveryStatus.ORDER_DELIVERED.value;
+    }
+
+    public OrderRequest getOrderRequest() {
+        return orderRequest;
+    }
+    
+    public void setOrderRequest(OrderRequest or){
+        orderRequest = or;
+    }
+    
+    @Override
+    public String toString(){
+        return this.id;
     }
     
 }

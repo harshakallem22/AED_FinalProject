@@ -5,11 +5,18 @@
 package ui.Restaurant.RestaurantManager;
 
 import business.EcoSystem.EcoSystem;
+import business.Enterprise.DeliveryEnterprise;
 import business.Enterprise.RestaurantEnterprise;
+import business.Network.Network;
 import business.Organization.Organization;
 import business.UserAccount.UserAccount;
+import business.WorkQueue.DeliveryRequest;
 import business.WorkQueue.OrderRequest;
 import business.WorkQueue.WorkRequest;
+import java.awt.List;
+import java.util.ArrayList;
+import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
@@ -26,6 +33,7 @@ public class ManageOrderJPanel extends javax.swing.JPanel {
     UserAccount account;
     EcoSystem ecosystem;
     RestaurantEnterprise restaurant;
+    Network network;
     public ManageOrderJPanel(JPanel workArea, UserAccount account, EcoSystem ecosystem, RestaurantEnterprise enterprise) {
         initComponents();
         this.workArea = workArea;
@@ -33,6 +41,7 @@ public class ManageOrderJPanel extends javax.swing.JPanel {
         this.ecosystem = ecosystem;
         this.restaurant = enterprise;
         System.out.println(restaurant.getName());
+        network = ecosystem.getNetworkList().get(0);
         populateTable();
     }
 
@@ -159,7 +168,49 @@ public class ManageOrderJPanel extends javax.swing.JPanel {
             javax.swing.JOptionPane.showMessageDialog(null, "Only orders with 'Order Prepared' status can be assigned to a delivery partner.");
             return;
         }
+        
+        selectedOrder.setStatus("Assigning to Delivery Partner");
+        //JOptionPane.showMessageDialog(null, "Delivery partner assigned to the order.");
+        ArrayList<DeliveryEnterprise> deliveryCompanies = network.getEnterpriseDirectory().getDelivery().getDeliveryList();  // Assuming you have a list of delivery companies in the ecosystem
+    
+        JComboBox<DeliveryEnterprise> deliveryCompanyComboBox = new JComboBox<>();
+        for (DeliveryEnterprise company : deliveryCompanies) {
+            deliveryCompanyComboBox.addItem(company);
+        }
 
+        int option = JOptionPane.showConfirmDialog(
+            null,
+            deliveryCompanyComboBox,
+            "Select Delivery Company",
+            JOptionPane.OK_CANCEL_OPTION,
+            JOptionPane.PLAIN_MESSAGE
+        );
+
+        if (option == JOptionPane.OK_OPTION) {
+            // Step 4: Get the selected delivery company
+            DeliveryEnterprise selectedDeliveryCompany = (DeliveryEnterprise) deliveryCompanyComboBox.getSelectedItem();
+
+            // Step 5: Create a new DeliveryRequest
+            DeliveryRequest deliveryRequest = new DeliveryRequest(
+                selectedDeliveryCompany, 
+                selectedOrder.getSender(), 
+                selectedOrder.getOrderId()
+            );
+
+
+            deliveryRequest.setDeliveryAddress(selectedOrder.getDeliveryAddress());
+            deliveryRequest.setDeliveryPhone(selectedOrder.getDeliveryPhone());
+            deliveryRequest.setDeliveryCharge(10.0); // Set a default or calculated charge
+            //selectedDeliveryCompany.getWorkQueue().getWorkRequestList().add(selectedOrder);
+
+            selectedDeliveryCompany.getWorkQueue().getWorkRequestList().add(deliveryRequest);
+
+            selectedOrder.setStatus("Assigning to Delivery Partner");
+
+            javax.swing.JOptionPane.showMessageDialog(null, "Delivery partner assigning to the order.");
+
+            populateTable();
+    }
     }//GEN-LAST:event_jButton3ActionPerformed
 
 

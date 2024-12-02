@@ -4,6 +4,18 @@
  */
 package ui.Delivery.DeliveryManager;
 
+import business.EcoSystem.EcoSystem;
+import business.Enterprise.DeliveryEnterprise;
+import business.Enterprise.Enterprise;
+import business.Network.Network;
+import business.Organization.Organization;
+import business.UserAccount.EmployeeAccount;
+import business.WorkQueue.DeliveryRequest;
+import business.WorkQueue.OrderRequest;
+import business.WorkQueue.WorkRequest;
+import java.util.ArrayList;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 import ui.Grocery.GroceryManager.*;
 import ui.Restaurant.RestaurantManager.*;
 
@@ -16,8 +28,20 @@ public class ManageOrderJPanel extends javax.swing.JPanel {
     /**
      * Creates new form ManageOrderJPanel
      */
-    public ManageOrderJPanel() {
+    JPanel upc;
+    EmployeeAccount ea;
+    Organization org;
+    DeliveryEnterprise enterprise;
+    EcoSystem ecosystem;
+    Network network;
+    public ManageOrderJPanel(JPanel upc, EmployeeAccount ea, EcoSystem ecosystem, DeliveryEnterprise enterprise) {
         initComponents();
+        this.upc = upc;
+        this.ea =  ea;
+        this.enterprise =  enterprise;
+        this.ecosystem = ecosystem;
+        this.network = ecosystem.getNetworkList().get(0);
+        populateTable();
     }
 
     /**
@@ -55,6 +79,11 @@ public class ManageOrderJPanel extends javax.swing.JPanel {
         jScrollPane1.setViewportView(jTable1);
 
         jButton2.setText("Assign Task");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -81,10 +110,40 @@ public class ManageOrderJPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        int selectedRow = jTable1.getSelectedRow();
+        if (selectedRow < 0) {
+            javax.swing.JOptionPane.showMessageDialog(null, "Please select an order to assign");
+            return;
+        }
+        DeliveryRequest selectedOrder = (DeliveryRequest) jTable1.getValueAt(selectedRow, 1);
+        selectedOrder.assignDeliveryPartner();
+        javax.swing.JOptionPane.showMessageDialog(null, "Order assigned to the delivery employee");
+        populateTable();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
+
+    private void populateTable() {
+         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0);  // Clear existing rows
+        for (WorkRequest workRequest : enterprise.getWorkQueue().getWorkRequestList()) {
+            if (workRequest instanceof DeliveryRequest) {
+                DeliveryRequest deliveryRequest = (DeliveryRequest) workRequest;
+
+                    Object[] row = new Object[4];
+                    row[0] = deliveryRequest.getOrderId();         // Order ID
+                    row[1] = deliveryRequest;  // Customer Name
+                    row[2] = deliveryRequest.getDeliveryAddress(); // Customer Address
+                    row[3] = deliveryRequest.getStatus();         
+                    model.addRow(row);  // Add the row to the table
+            }
+        }
+    }
 }

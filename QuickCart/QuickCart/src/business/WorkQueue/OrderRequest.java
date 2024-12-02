@@ -37,6 +37,10 @@ public class OrderRequest extends WorkRequest {
 //        this.review = null;
     }
 
+    public String getOrderId() {
+        return id;
+    }
+
     public enum ReviewStatus {
 
         NA("N/A"),
@@ -112,7 +116,7 @@ public class OrderRequest extends WorkRequest {
     public void setCompany(DeliveryEnterprise company) {
         this.company = company;
     }
-
+    
 //    public boolean isReviewed() {
 //        if (this.review == null) {
 //            return false;

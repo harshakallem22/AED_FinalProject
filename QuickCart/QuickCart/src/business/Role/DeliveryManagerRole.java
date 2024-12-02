@@ -10,6 +10,7 @@ import business.Network.Network;
 import business.Organization.Organization;
 import business.UserAccount.UserAccount;
 import javax.swing.JPanel;
+import ui.Delivery.DeliveryManager.DeliveryManagerWorkArea;
 
 /**
  *
@@ -19,7 +20,6 @@ public class DeliveryManagerRole extends Role {
 
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business, Network network) {
-        //return new DeliveryManagerWorkAreaJPanel(userProcessContainer, account, organization, business);
-        return null;
+        return new DeliveryManagerWorkArea(userProcessContainer, account, organization, enterprise, business);
     }
 }
