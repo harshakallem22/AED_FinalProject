@@ -54,6 +54,8 @@ public class GroceryManagerWorkArea extends javax.swing.JPanel {
         btnEmployees = new javax.swing.JButton();
         btnProfile = new javax.swing.JButton();
         btnLogout = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         workArea = new javax.swing.JPanel();
 
         jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
@@ -81,20 +83,38 @@ public class GroceryManagerWorkArea extends javax.swing.JPanel {
             }
         });
 
+        jButton1.setText("Requests");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Request Inventory");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(299, 299, 299)
+                .addContainerGap(112, Short.MAX_VALUE)
                 .addComponent(btnOrders)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnEmployees)
-                .addGap(12, 12, 12)
-                .addComponent(btnProfile)
                 .addGap(18, 18, 18)
+                .addComponent(jButton1)
+                .addGap(18, 18, 18)
+                .addComponent(jButton2)
+                .addGap(18, 18, 18)
+                .addComponent(btnEmployees)
+                .addGap(18, 18, 18)
+                .addComponent(btnProfile)
+                .addGap(27, 27, 27)
                 .addComponent(btnLogout)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(71, 71, 71))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -104,7 +124,9 @@ public class GroceryManagerWorkArea extends javax.swing.JPanel {
                     .addComponent(btnOrders)
                     .addComponent(btnEmployees)
                     .addComponent(btnProfile)
-                    .addComponent(btnLogout))
+                    .addComponent(btnLogout)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2))
                 .addGap(31, 31, 31))
         );
 
@@ -121,7 +143,7 @@ public class GroceryManagerWorkArea extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSplitPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(jSplitPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 762, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -152,12 +174,31 @@ public class GroceryManagerWorkArea extends javax.swing.JPanel {
     layout.next(this.upc);
     }//GEN-LAST:event_btnLogoutActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        RequestsJPanel rjp = new RequestsJPanel(upc, account, organization, ecosystem, enterprise);
+        workArea.add(rjp);
+        CardLayout layout = (CardLayout) workArea.getLayout();
+        layout.next(workArea);
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        RequestInventoryJPanel rjp = new RequestInventoryJPanel(upc, account, organization, ecosystem, enterprise);
+        workArea.add(rjp);
+        CardLayout layout = (CardLayout) workArea.getLayout();
+        layout.next(workArea);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEmployees;
     private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnOrders;
     private javax.swing.JButton btnProfile;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JPanel workArea;

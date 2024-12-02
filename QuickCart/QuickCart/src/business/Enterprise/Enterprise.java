@@ -28,7 +28,8 @@ public abstract class Enterprise extends Organization{
         Restaurant("Restaurant"),
         Grocery("Grocery"),
         Delivery("Delivery"),
-        Analytics("Analytics");
+        Analytics("Analytics"),
+        Inventory("Inventory");
         
         private String value;
         
@@ -60,5 +61,22 @@ public abstract class Enterprise extends Organization{
         this.email=email;
         this.enterpriseType=type;
         organizationDirectory=new OrganizationDirectory();
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+    
+    @Override 
+    public String toString(){
+        return name;
     }
 }

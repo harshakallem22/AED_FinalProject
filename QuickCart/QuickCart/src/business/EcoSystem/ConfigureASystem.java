@@ -9,11 +9,13 @@ import business.DAO.CustomerDAO;
 import business.Employee.Employee;
 import business.Enterprise.DeliveryEnterprise;
 import business.Enterprise.GroceryEnterprise;
+import business.Enterprise.InventoryEnterprise;
 import business.Enterprise.RestaurantEnterprise;
 import business.Network.Network;
 import business.Role.CustomerRole;
 import business.Role.DeliveryManagerRole;
 import business.Role.DeliveryPersonRole;
+import business.Role.InventoryManagerRole;
 import business.Role.RestaurantCookRole;
 import business.Role.RestaurantManagerRole;
 import business.Role.StoreManagerRole;
@@ -39,10 +41,10 @@ public class ConfigureASystem {
 //        CustomerDAO.addCustomer("sridhar@gmail.com", "Sridhar", "0987654321", "Boston");
         //Employee employee = system.getEmployeeDirectory().createEmployee("sysadmin");
         
-        for (Customer dbCustomer : CustomerDAO.getAllCustomers()) {
-            system.getCustomerDirectory().addCustomer(dbCustomer);
-        }
-        
+//        for (Customer dbCustomer : CustomerDAO.getAllCustomers()) {
+//            system.getCustomerDirectory().addCustomer(dbCustomer);
+//        }
+//        
         CustomerAccount ua1 = system.getUserAccountDirectory().createCustomerAccount("sridhar", "1234", new CustomerRole());
         System.out.println(system.getUserAccountDirectory().getUserAccountList().size());
         //UserAccount ua = system.getUserAccountDirectory().createUserAccount("sysadmin", "sysadmin", employee, new SystemAdminRole());
@@ -80,8 +82,13 @@ public class ConfigureASystem {
         Employee geemp1 = ge1.getEmployeeDirectory().createEmployee("geemp");
         EmployeeAccount geea = system.getUserAccountDirectory().createUserAccount("geman", "geman", new StoreManagerRole());
         geea.setEmployee(geemp1);
-        ge1.getGroceryCatalog().createGroceryItem("Soap", 4, 10);
+        ge1.getGroceryCatalog().createGroceryItem("Soap", 4, 100);
+        ge1.getGroceryCatalog().createGroceryItem("Brush", 5, 4);
         
+        InventoryEnterprise inv1 = network.getEnterpriseDirectory().createInventory("inv1", "kjsdb", "abcd", "bcd@gmail.com");
+        Employee invemp1 = inv1.getEmployeeDirectory().createEmployee("invman");
+        EmployeeAccount invea1 = system.getUserAccountDirectory().createUserAccount("invman1", "invman1", new InventoryManagerRole());
+        invea1.setEmployee(invemp1);
         
         return system;
     }

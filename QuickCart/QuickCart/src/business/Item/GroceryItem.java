@@ -11,7 +11,7 @@ package business.Item;
 public class GroceryItem extends Item{
     private int id;
     private static int counter = 1;
-    private static int availability;
+    private int availability;
     
     public GroceryItem(String name, double price, int availability){
         super(name, price);
@@ -19,4 +19,22 @@ public class GroceryItem extends Item{
         this.availability = availability;
         counter++;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public int getCounter() {
+        return counter;
+    }
+
+    public int getAvailability() {
+        return availability;
+    }
+
+    public void setAvailability(int availability) {
+        this.availability = availability;
+    }
+    
+    
 }

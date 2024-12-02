@@ -112,12 +112,15 @@ public class LoginJPanel extends javax.swing.JPanel {
         else{
             EmployeeAccount ea =  (EmployeeAccount) system.getUserAccountDirectory().authenticateUser(userName, password);
             System.out.println("Hiiiiii");
-            System.out.println(ea.getEmployee().getName());
+//            System.out.println(ea.getEmployee().getName());
             
             for(Network network : system.getNetworkList()){
                 for(Enterprise enterprise : network.getEnterpriseDirectory().getEnterpriseList()){
+                    System.out.println("Check 1");
                     for(Employee emp : enterprise.getEmployeeDirectory().getEmployeeList()){
+                        System.out.println("Check 2");
                         if(emp.equals(ea.getEmployee())){
+                            System.out.println("Check 3");
                             e = enterprise;
                             System.out.println("Success in for loop");
                         }

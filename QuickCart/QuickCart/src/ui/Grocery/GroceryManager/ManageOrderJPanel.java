@@ -184,13 +184,15 @@ public class ManageOrderJPanel extends javax.swing.JPanel {
         DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
         dtm.setRowCount(0);
         for (WorkRequest wr : grocery.getWorkQueue().getWorkRequestList()) {
-            OrderRequest or = (OrderRequest) wr;
-            Object row[] = new Object[4];
-            row[0] = or;
-            row[1] = or.getDeliveryName();
-            row[2] = or.getDeliveryPhone();
-            row[3] = or.getStatus();
-            dtm.addRow(row);
+             if (wr instanceof OrderRequest){
+                 OrderRequest or = (OrderRequest) wr;
+                    Object row[] = new Object[4];
+                    row[0] = or;
+                    row[1] = or.getDeliveryName();
+                    row[2] = or.getDeliveryPhone();
+                    row[3] = or.getStatus();
+                    dtm.addRow(row);
+             }
         }
     }
     
