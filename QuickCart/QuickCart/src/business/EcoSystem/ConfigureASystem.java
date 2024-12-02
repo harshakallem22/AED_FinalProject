@@ -5,23 +5,20 @@
 package business.EcoSystem;
 
 import business.Customer.Customer;
+import business.DAO.CustomerDAO;
 import business.Employee.Employee;
 import business.Enterprise.DeliveryEnterprise;
-import business.Enterprise.Enterprise;
-import business.Enterprise.Enterprise.EnterpriseType;
-import static business.Enterprise.Enterprise.EnterpriseType.Restaurant;
+import business.Enterprise.GroceryEnterprise;
 import business.Enterprise.RestaurantEnterprise;
 import business.Network.Network;
-import business.Organization.Organization;
-import business.Organization.RestaurantManagerOrganization;
 import business.Role.CustomerRole;
 import business.Role.DeliveryManagerRole;
 import business.Role.DeliveryPersonRole;
 import business.Role.RestaurantCookRole;
 import business.Role.RestaurantManagerRole;
+import business.Role.StoreManagerRole;
 import business.UserAccount.CustomerAccount;
 import business.UserAccount.EmployeeAccount;
-import business.UserAccount.UserAccount;
 
 /**
  *
@@ -38,8 +35,13 @@ public class ConfigureASystem {
         //have some employees 
         //create user account
         
-        Customer cus1 = system.getCustomerDirectory().createCustomer("Sridhar", "sridhar@gmail.com", "0987654321", "Boston");
+//        Customer cus1 = system.getCustomerDirectory().createCustomer("Sridhar", "sridhar@gmail.com", "0987654321", "Boston");
+//        CustomerDAO.addCustomer("sridhar@gmail.com", "Sridhar", "0987654321", "Boston");
         //Employee employee = system.getEmployeeDirectory().createEmployee("sysadmin");
+        
+        for (Customer dbCustomer : CustomerDAO.getAllCustomers()) {
+            system.getCustomerDirectory().addCustomer(dbCustomer);
+        }
         
         CustomerAccount ua1 = system.getUserAccountDirectory().createCustomerAccount("sridhar", "1234", new CustomerRole());
         System.out.println(system.getUserAccountDirectory().getUserAccountList().size());
@@ -73,6 +75,13 @@ public class ConfigureASystem {
         Employee delper = del1.getEmployeeDirectory().createEmployee("delper");
         EmployeeAccount delperEa = system.getUserAccountDirectory().createUserAccount("delper", "delper", new DeliveryPersonRole());
         delperEa.setEmployee(delper);
+        
+        GroceryEnterprise ge1 = network.getEnterpriseDirectory().createStore("ge1", "", "", "");
+        Employee geemp1 = ge1.getEmployeeDirectory().createEmployee("geemp");
+        EmployeeAccount geea = system.getUserAccountDirectory().createUserAccount("geman", "geman", new StoreManagerRole());
+        geea.setEmployee(geemp1);
+        ge1.getGroceryCatalog().createGroceryItem("Soap", 4, 10);
+        
         
         return system;
     }

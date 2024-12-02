@@ -4,8 +4,16 @@
  */
 package ui.Grocery.GroceryManager;
 
+import business.EcoSystem.EcoSystem;
+import business.Enterprise.Enterprise;
+import business.Enterprise.GroceryEnterprise;
+import business.Enterprise.RestaurantEnterprise;
+import business.Organization.Organization;
+import business.UserAccount.UserAccount;
 import ui.Restaurant.RestaurantManager.*;
 import java.awt.CardLayout;
+import javax.swing.JPanel;
+import ui.LoginJPanel;
 
 /**
  *
@@ -16,8 +24,19 @@ public class GroceryManagerWorkArea extends javax.swing.JPanel {
     /**
      * Creates new form RestaurantManagerWorkArea
      */
-    public GroceryManagerWorkArea() {
+    JPanel upc;
+    UserAccount account;
+    Organization organization;
+    EcoSystem ecosystem;
+    GroceryEnterprise enterprise;
+    
+    public GroceryManagerWorkArea(JPanel workArea, UserAccount account, Organization organization, EcoSystem ecosystem, Enterprise enterprise) {
         initComponents();
+        this.upc = workArea;
+        this.account = account;
+        this.organization = organization;
+        this.ecosystem = ecosystem;
+        this.enterprise = (GroceryEnterprise) enterprise;
     }
 
     /**
@@ -56,6 +75,11 @@ public class GroceryManagerWorkArea extends javax.swing.JPanel {
         btnProfile.setText("Profile");
 
         btnLogout.setText("Logout");
+        btnLogout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogoutActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -103,10 +127,10 @@ public class GroceryManagerWorkArea extends javax.swing.JPanel {
 
     private void btnOrdersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrdersActionPerformed
         // TODO add your handling code here:
-        ManageOrderJPanel mojp = new ManageOrderJPanel();
-        workArea.add(mojp);
-        CardLayout layout = (CardLayout) mojp.getLayout();
-        layout.next(workArea);
+        ManageOrderJPanel mojp = new ManageOrderJPanel(workArea, account, ecosystem, enterprise);
+        workArea.add("ManageOrderJPanel", mojp);
+        CardLayout layout = (CardLayout) workArea.getLayout();
+        layout.show(workArea, "ManageOrderJPanel");
     }//GEN-LAST:event_btnOrdersActionPerformed
 
     private void btnEmployeesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmployeesActionPerformed
@@ -116,6 +140,17 @@ public class GroceryManagerWorkArea extends javax.swing.JPanel {
         CardLayout layout = (CardLayout) mejp.getLayout();
         layout.next(workArea);
     }//GEN-LAST:event_btnEmployeesActionPerformed
+
+    private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
+        // TODO add your handling code here:
+           this.upc.removeAll();
+    
+    LoginJPanel loginPanel = new LoginJPanel(this.upc);
+    this.upc.add("LoginJPanel", loginPanel);
+    
+    CardLayout layout = (CardLayout) this.upc.getLayout();
+    layout.next(this.upc);
+    }//GEN-LAST:event_btnLogoutActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

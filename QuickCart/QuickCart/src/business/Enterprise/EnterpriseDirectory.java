@@ -15,6 +15,7 @@ public class EnterpriseDirectory {
     private ArrayList<Enterprise> enterpriseList;
     private RestaurantDirectory restaurantDir;
     private DeliveryDirectory deliveryDir;
+    private GroceryDirectory groceryDir;
    
 
     public ArrayList<Enterprise> getEnterpriseList() {
@@ -29,6 +30,7 @@ public class EnterpriseDirectory {
         enterpriseList=new ArrayList<Enterprise>();
         restaurantDir = new RestaurantDirectory();
         deliveryDir = new DeliveryDirectory();
+        groceryDir = new GroceryDirectory();
     }
     
     //Create enterprise
@@ -65,6 +67,10 @@ public class EnterpriseDirectory {
         return deliveryDir;
     }
     
+    public GroceryDirectory getGrocery(){
+        return groceryDir;
+    }
+    
     public RestaurantEnterprise createRestaurant(String name, String phone, String address, String email){
         RestaurantEnterprise enterprise = restaurantDir.newRestaurant(name, phone, address, email);
         enterpriseList.add(enterprise);
@@ -73,6 +79,12 @@ public class EnterpriseDirectory {
     
    public DeliveryEnterprise createDelivery(String name, String phone, String address, String email){
        DeliveryEnterprise enterprise = deliveryDir.newDelivery(name, phone, address, email);
+       enterpriseList.add(enterprise);
+       return enterprise;
+   }
+   
+   public GroceryEnterprise createStore(String name, String phone, String address, String email){
+       GroceryEnterprise enterprise = groceryDir.newGrocery(name, phone, address, email);
        enterpriseList.add(enterprise);
        return enterprise;
    }

@@ -10,6 +10,7 @@ import business.Network.Network;
 import business.Organization.Organization;
 import business.UserAccount.UserAccount;
 import javax.swing.JPanel;
+import ui.Grocery.GroceryManager.GroceryManagerWorkArea;
 
 /**
  *
@@ -19,7 +20,6 @@ public class StoreManagerRole extends Role {
 
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business, Network network) {
-        //return new StoreManagerWorkAreaJPanel(userProcessContainer, account, organization, business);
-        return null;
+        return new GroceryManagerWorkArea(userProcessContainer, account, organization, business, enterprise);
     }
 }

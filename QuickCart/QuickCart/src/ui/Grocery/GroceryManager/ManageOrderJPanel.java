@@ -4,7 +4,20 @@
  */
 package ui.Grocery.GroceryManager;
 
-import ui.Restaurant.RestaurantManager.*;
+import business.EcoSystem.EcoSystem;
+import business.Enterprise.DeliveryEnterprise;
+import business.Enterprise.GroceryEnterprise;
+import business.Enterprise.RestaurantEnterprise;
+import business.Network.Network;
+import business.UserAccount.UserAccount;
+import business.WorkQueue.DeliveryRequest;
+import business.WorkQueue.OrderRequest;
+import business.WorkQueue.WorkRequest;
+import java.util.ArrayList;
+import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -15,8 +28,19 @@ public class ManageOrderJPanel extends javax.swing.JPanel {
     /**
      * Creates new form ManageOrderJPanel
      */
-    public ManageOrderJPanel() {
+    JPanel workArea;
+    UserAccount account;
+    EcoSystem ecosystem;
+    GroceryEnterprise grocery;
+    Network network;
+    public ManageOrderJPanel(JPanel workArea, UserAccount account, EcoSystem ecosystem, GroceryEnterprise enterprise) {
         initComponents();
+        this.workArea = workArea;
+        this.account = account;
+        this.ecosystem = ecosystem;
+        this.grocery = enterprise;
+        network = ecosystem.getNetworkList().get(0);
+        populateTable();
     }
 
     /**
@@ -31,22 +55,21 @@ public class ManageOrderJPanel extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Order Id", "Customer Name", "Customer Address", "Price", "Status"
+                "Order Id", "Customer Name", "Customer Address", "Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -62,9 +85,12 @@ public class ManageOrderJPanel extends javax.swing.JPanel {
             }
         });
 
-        jButton2.setText("Assign Task");
-
         jButton3.setText("Assign Delivery Partner");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -76,9 +102,6 @@ public class ManageOrderJPanel extends javax.swing.JPanel {
                 .addGap(46, 46, 46)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton1)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addComponent(jButton2))
                     .addComponent(jButton3))
                 .addContainerGap(50, Short.MAX_VALUE))
         );
@@ -89,9 +112,7 @@ public class ManageOrderJPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(130, 130, 130)
                         .addComponent(jButton1)
-                        .addGap(48, 48, 48)
-                        .addComponent(jButton2)
-                        .addGap(39, 39, 39)
+                        .addGap(86, 86, 86)
                         .addComponent(jButton3))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(70, 70, 70)
@@ -104,10 +125,77 @@ public class ManageOrderJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        int selectedRow = jTable1.getSelectedRow();
+        if (selectedRow < 0) {
+            javax.swing.JOptionPane.showMessageDialog(null, "Please select an order to assign a delivery partner");
+            return;
+        }
+        
+        OrderRequest selectedOrder = (OrderRequest) jTable1.getValueAt(selectedRow, 0);
+        
+        selectedOrder.setStatus("Assigning to Delivery Partner");
 
+        ArrayList<DeliveryEnterprise> deliveryCompanies = network.getEnterpriseDirectory().getDelivery().getDeliveryList();  
+    
+        JComboBox<DeliveryEnterprise> deliveryCompanyComboBox = new JComboBox<>();
+        for (DeliveryEnterprise company : deliveryCompanies) {
+            deliveryCompanyComboBox.addItem(company);
+        }
+
+        int option = JOptionPane.showConfirmDialog(
+            null,
+            deliveryCompanyComboBox,
+            "Select Delivery Company",
+            JOptionPane.OK_CANCEL_OPTION,
+            JOptionPane.PLAIN_MESSAGE
+        );
+
+        if (option == JOptionPane.OK_OPTION) {
+            // Step 4: Get the selected delivery company
+            DeliveryEnterprise selectedDeliveryCompany = (DeliveryEnterprise) deliveryCompanyComboBox.getSelectedItem();
+
+            // Step 5: Create a new DeliveryRequest
+            DeliveryRequest deliveryRequest = new DeliveryRequest(
+                selectedDeliveryCompany, 
+                selectedOrder.getSender(), 
+                selectedOrder.getOrderId()
+            );
+
+
+            deliveryRequest.setDeliveryAddress(selectedOrder.getDeliveryAddress());
+            deliveryRequest.setDeliveryPhone(selectedOrder.getDeliveryPhone());
+            deliveryRequest.setDeliveryCharge(10.0); // Set a default or calculated charge
+            //selectedDeliveryCompany.getWorkQueue().getWorkRequestList().add(selectedOrder);
+
+            selectedDeliveryCompany.getWorkQueue().getWorkRequestList().add(deliveryRequest);
+
+            selectedOrder.setStatus("Assigning to Delivery Partner");
+
+            javax.swing.JOptionPane.showMessageDialog(null, "Delivery partner assigning to the order.");
+
+            populateTable();
+    }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    
+    private void populateTable() {
+        DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
+        dtm.setRowCount(0);
+        for (WorkRequest wr : grocery.getWorkQueue().getWorkRequestList()) {
+            OrderRequest or = (OrderRequest) wr;
+            Object row[] = new Object[4];
+            row[0] = or;
+            row[1] = or.getDeliveryName();
+            row[2] = or.getDeliveryPhone();
+            row[3] = or.getStatus();
+            dtm.addRow(row);
+        }
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;

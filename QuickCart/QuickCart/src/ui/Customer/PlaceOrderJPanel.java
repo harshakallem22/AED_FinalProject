@@ -8,6 +8,7 @@ package ui.Customer;
 
 import business.Customer.ItemOrder;
 import business.EcoSystem.EcoSystem;
+import business.Enterprise.Enterprise;
 import business.Enterprise.RestaurantEnterprise;
 import business.Network.Network;
 import business.UserAccount.CustomerAccount;
@@ -29,19 +30,19 @@ public class PlaceOrderJPanel extends javax.swing.JPanel {
     private EcoSystem system;
     private CustomerAccount customerAccount;
     private JPanel container;
-    private RestaurantEnterprise shop;
+    private Enterprise shop;
     private Network net;
 
     /**
      * Creates new form PlaceOrderJPanel
      */
     public PlaceOrderJPanel(EcoSystem system, JPanel container, CustomerAccount customerAccount,
-            RestaurantEnterprise shop, Network net) {
+            Enterprise shop, Network net) {
         initComponents();
         this.system = system;
         this.container = container;
         this.customerAccount = customerAccount;
-        this.shop = shop;
+        this.shop =  shop;
         this.net = net;
 
         populateTable();

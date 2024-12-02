@@ -21,7 +21,6 @@ public class DatabaseConnection {
     public static Connection getConnection() throws SQLException {
         if (connection == null) {
             try {
-                // Load the PostgreSQL JDBC driver
                 Class.forName("org.postgresql.Driver");
                 connection = DriverManager.getConnection(URL, USER, PASSWORD);
                 System.out.println("Connected to the database!");

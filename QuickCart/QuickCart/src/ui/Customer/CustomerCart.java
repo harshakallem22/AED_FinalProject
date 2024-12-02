@@ -130,7 +130,7 @@ public class CustomerCart extends javax.swing.JPanel {
         DefaultTableModel dtm = (DefaultTableModel) tblCart.getModel();
         dtm.setRowCount(0);
         for (ItemOrder order : account.getCart().getItemList()) {
-            System.out.println(order.getShopModel().getName());
+//            System.out.println(order.getShopModel().getName());
             Object row[] = new Object[3];
             row[0] = order;
             row[1] = order.getQuantity();

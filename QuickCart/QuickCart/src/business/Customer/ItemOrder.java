@@ -6,6 +6,7 @@
 package business.Customer;
 
 
+import business.Enterprise.Enterprise;
 import business.Enterprise.RestaurantEnterprise;
 import business.Item.Item;
 import java.math.BigDecimal;
@@ -18,9 +19,9 @@ public abstract class ItemOrder {
     private Item item;
     private int quantity;
     private double totalPrice;
-    private RestaurantEnterprise shopmodel;
+    private Enterprise shopmodel;
     
-    public ItemOrder(RestaurantEnterprise shopmodel, Item item, int quantity) {
+    public ItemOrder(Enterprise shopmodel, Item item, int quantity) {
         this.shopmodel = shopmodel;
         this.item = item;
         this.quantity = quantity;
@@ -34,9 +35,9 @@ public abstract class ItemOrder {
         this.item = item;
     }
 
-    public abstract RestaurantEnterprise getShopModel();
+    public abstract Enterprise getShopModel();
 
-    public void setRestaurant(RestaurantEnterprise shopmodel) {
+    public void setOutler(Enterprise shopmodel) {
         this.shopmodel = shopmodel;
     }
 

@@ -13,6 +13,7 @@ import business.UserAccount.UserAccount;
 import business.WorkQueue.DeliveryRequest;
 import business.WorkQueue.WorkRequest;
 import java.awt.CardLayout;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import ui.LoginJPanel;
@@ -39,6 +40,9 @@ public class DeliveryEmployeeWorkArea extends javax.swing.JPanel {
         this.ecosystem = ecosystem;
         this.enterprise = (DeliveryEnterprise) enterprise;
         populateTable();
+        btnOnTheWay.setEnabled(false);  
+        btnPickUp.setEnabled(false);  
+        btnOrderDelivered.setEnabled(false); 
     }
 
     /**
@@ -193,29 +197,30 @@ public class DeliveryEmployeeWorkArea extends javax.swing.JPanel {
 
     private void assignJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assignJButtonActionPerformed
         int selectedRow = workRequestJTable.getSelectedRow();
-    if (selectedRow < 0) {
-        javax.swing.JOptionPane.showMessageDialog(null, "Please select an order to assign.");
-        return;
-    }
-   
-
-    // Get the selected DeliveryRequest from the table
-     selectedDeliveryRequest = (DeliveryRequest) workRequestJTable.getValueAt(selectedRow, 0);
+        if (selectedRow < 0) {
+            javax.swing.JOptionPane.showMessageDialog(null, "Please select an order to assign.");
+            return;
+        }
+        selectedDeliveryRequest = (DeliveryRequest) workRequestJTable.getValueAt(selectedRow, 0);
     
-    // Assign the delivery request to the logged-in delivery employee
-    selectedDeliveryRequest.setAssignedTo(ea);
-    selectedDeliveryRequest.assignDeliveryPartner();
+     if(selectedDeliveryRequest.getStatus().equals("Delivery Person Assigned")){
+            selectedDeliveryRequest.setAssignedTo(ea);
+            selectedDeliveryRequest.assignDeliveryPartner();
 
-    // Disable "Assign to me" button after assignment
-    assignJButton.setEnabled(false);
+            assignJButton.setEnabled(false);
 
-    // Enable "Order Picked Up" button
-    btnPickUp.setEnabled(true);
+            btnPickUp.setEnabled(true);
+            populateTable();
 
-    // Update table to reflect the changes
-    populateTable();
+            javax.swing.JOptionPane.showMessageDialog(null, "Order assigned to you.");
+            btnOnTheWay.setEnabled(false);  
+            btnPickUp.setEnabled(true);  
+                btnOrderDelivered.setEnabled(false); 
+            }
 
-    javax.swing.JOptionPane.showMessageDialog(null, "Order assigned to you.");
+            else{
+                JOptionPane.showMessageDialog(this, "Check order status!");
+            }
         
     }//GEN-LAST:event_assignJButtonActionPerformed
 
@@ -223,8 +228,10 @@ public class DeliveryEmployeeWorkArea extends javax.swing.JPanel {
         // TODO add your handling code here:
         if (selectedDeliveryRequest != null) {
             selectedDeliveryRequest.orderPickedUp();
-            btnOnTheWay.setEnabled(true);  // Enable "Order on the Way" button
-            btnPickUp.setEnabled(false);  // Disable "Order Picked Up" button after it's clicked
+            assignJButton.setEnabled(false);
+            btnOnTheWay.setEnabled(true);  
+            btnPickUp.setEnabled(false);  
+            btnOrderDelivered.setEnabled(false);
         }
         populateTable();
     }//GEN-LAST:event_btnPickUpActionPerformed
@@ -233,8 +240,10 @@ public class DeliveryEmployeeWorkArea extends javax.swing.JPanel {
         // TODO add your handling code here:
         if (selectedDeliveryRequest != null) {
             selectedDeliveryRequest.orderOnTheWay();
-            btnOrderDelivered.setEnabled(true); // Enable "Order Delivered" button
-            btnOnTheWay.setEnabled(false); // Disable "Order On The Way" button after it's clicked
+            assignJButton.setEnabled(false);
+            btnOnTheWay.setEnabled(false);  
+            btnPickUp.setEnabled(false);  
+            btnOrderDelivered.setEnabled(true);
         }
         populateTable();
     }//GEN-LAST:event_btnOnTheWayActionPerformed
@@ -243,7 +252,10 @@ public class DeliveryEmployeeWorkArea extends javax.swing.JPanel {
         // TODO add your handling code here:
         if (selectedDeliveryRequest != null) {
             selectedDeliveryRequest.orderDelivered();
-            btnOrderDelivered.setEnabled(false);  // Disable "Order Delivered" button after it's clicked
+            assignJButton.setEnabled(true);
+            btnOnTheWay.setEnabled(false);  
+            btnPickUp.setEnabled(false);  
+            btnOrderDelivered.setEnabled(false); 
         }
         populateTable();
     }//GEN-LAST:event_btnOrderDeliveredActionPerformed

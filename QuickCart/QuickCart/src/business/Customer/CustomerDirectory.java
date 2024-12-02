@@ -24,4 +24,8 @@ public class CustomerDirectory {
         return customer;
     }
     
+    public void addCustomer(Customer customer) {
+        customerList.add(customer);
+    }
+    
 }

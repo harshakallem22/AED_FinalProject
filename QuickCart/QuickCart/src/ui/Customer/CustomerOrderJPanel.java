@@ -5,10 +5,13 @@
 package ui.Customer;
 
 import business.Customer.FoodItemOrder;
+import business.Customer.GroceryItemOrder;
 import business.Customer.ItemOrder;
 import business.Enterprise.Enterprise.EnterpriseType;
+import business.Enterprise.GroceryEnterprise;
 import business.Enterprise.RestaurantEnterprise;
 import business.Item.FoodItem;
+import business.Item.GroceryItem;
 import business.Network.Network;
 import business.UserAccount.CustomerAccount;
 import business.UserAccount.UserAccount;
@@ -29,6 +32,7 @@ public class CustomerOrderJPanel extends javax.swing.JPanel {
     CustomerAccount account;
     EnterpriseType type;
     RestaurantEnterprise restaurant;
+    GroceryEnterprise grocery;
     public CustomerOrderJPanel(Network network, CustomerAccount account) {
         initComponents();
         this.network = network;
@@ -170,6 +174,20 @@ public class CustomerOrderJPanel extends javax.swing.JPanel {
 
     private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
         // TODO add your handling code here:
+        if(jRadioButton2.isSelected()){
+            type = EnterpriseType.Grocery;
+            DefaultTableModel dtm = (DefaultTableModel) tblStores.getModel();
+            dtm.setRowCount(0);
+            System.out.println(network);
+            System.out.println(network.getEnterpriseDirectory().getGrocery().getGroceryList());
+            
+            for (GroceryEnterprise res : network.getEnterpriseDirectory().getGrocery().getGroceryList()) {
+                Object row[] = new Object[2];
+                row[0] = res;
+                row[1] = res;
+                dtm.addRow(row);
+            }
+        }
     }//GEN-LAST:event_jRadioButton2ActionPerformed
 
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
@@ -195,62 +213,115 @@ public class CustomerOrderJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         int index = tblStores.getSelectedRow();
         TableModel model = tblStores.getModel();
+
+    DefaultTableModel dtm = (DefaultTableModel) tblMenu.getModel();
+    dtm.setRowCount(0); // Clear menu table
+
+    if (type == EnterpriseType.Restaurant) {
+        // Get the selected restaurant
         restaurant = (RestaurantEnterprise) model.getValueAt(index, 0);
+
+        // Populate menu table with restaurant items
+        for (FoodItem item : restaurant.getMenu().getMenu()) {
+            Object row[] = new Object[2];
+            row[0] = item; // Food item name
+            row[1] = item.getPrice(); // Food item price
+            dtm.addRow(row);
+        }
+    } else if (type == EnterpriseType.Grocery) {
+        // Get the selected grocery store
+        grocery = (GroceryEnterprise) model.getValueAt(index, 0);
+
+        // Populate menu table with grocery items
+        for (GroceryItem item : grocery.getGroceryCatalog().getGroceryCatalog()) {
+            Object row[] = new Object[2];
+            row[0] = item; // Grocery item name
+            row[1] = item.getPrice(); // Grocery item price
+            dtm.addRow(row);
+        }
+    }
         
-        DefaultTableModel dtm = (DefaultTableModel) tblMenu.getModel();
-        dtm.setRowCount(0);
-      
-            for (FoodItem f : restaurant.getMenu().getMenu()) {
-                Object row[] = new Object[2];
-                row[0] = f;
-                row[1] = f.getPrice();
-                dtm.addRow(row);
-            }
         
         
     }//GEN-LAST:event_tblStoresMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        int selectedRow = tblMenu.getSelectedRow();
+       int selectedRow = tblMenu.getSelectedRow();
 
         if (selectedRow >= 0) {
-            FoodItem item = (FoodItem) tblMenu.getValueAt(selectedRow, 0);
             int quantity = (int) quantitySpinner.getValue();
-
             ItemOrder line = null;
+
+            // Check whether the selected item is from Restaurant or Grocery
             if (this.type.equals(EnterpriseType.Restaurant)) {
+                FoodItem item = (FoodItem) tblMenu.getValueAt(selectedRow, 0);
+
                 line = new FoodItemOrder(this.restaurant, item, quantity);
-            }
-//            if (this.type.equals(ShopType.Store)) {
-//                line = new ProductOrder(this.shop, item, quantity);
-//            }
-            if (!this.account.getCart().isCartEmpty()) {
-                for (ItemOrder or : this.account.getCart().getItemList()) {
-                    if (!or.getShopModel().equals(this.restaurant)) {
-                        int choice = JOptionPane.showConfirmDialog(null, "You alreay have dashes from other restaurant in shopping cart. \n"
-                                + "Adding this dash will remove all previous dashes in shopping cart.\n" + "Do you want to continue?",
-                                "Restaurant Conflicts", JOptionPane.YES_NO_OPTION);
-                        if (choice == JOptionPane.YES_OPTION) {
-                            this.account.getCart().clearCart();
+
+                if (!this.account.getCart().isCartEmpty()) {
+                    for (ItemOrder or : this.account.getCart().getItemList()) {
+                        if (!or.getShopModel().equals(this.restaurant)) {
+                            int choice = JOptionPane.showConfirmDialog(null,
+                                    "You already have items from another restaurant in the shopping cart. \n"
+                                            + "Adding this item will remove all previous items in the shopping cart.\n"
+                                            + "Do you want to continue?",
+                                    "Restaurant Conflict", JOptionPane.YES_NO_OPTION);
+
+                            if (choice == JOptionPane.YES_OPTION) {
+                                this.account.getCart().clearCart();
+                                break;
+                            } else {
+                                return;
+                            }
+                        }
+                        if (or.getShopModel().equals(this.restaurant) && or.getItem().equals(item)) {
+                            line.setQuantity(or.getQuantity() + quantity);
+                            this.account.getCart().getItemList().remove(or);
                             break;
-                        } else {
-                            return;
                         }
                     }
-                    if (or.getShopModel().equals(this.restaurant) && or.getItem().equals(item)) {
-                        line.setQuantity(or.getQuantity() + quantity);
-                        this.account.getCart().getItemList().remove(or);
-                        break;
+                }
+
+            } else if (this.type.equals(EnterpriseType.Grocery)) {
+                GroceryItem item = (GroceryItem) tblMenu.getValueAt(selectedRow, 0);
+
+                line = new GroceryItemOrder(this.grocery, item, quantity);
+
+                if (!this.account.getCart().isCartEmpty()) {
+                    for (ItemOrder or : this.account.getCart().getItemList()) {
+                        if (!or.getShopModel().equals(this.grocery)) {
+                            int choice = JOptionPane.showConfirmDialog(null,
+                                    "You already have items from another grocery store in the shopping cart. \n"
+                                            + "Adding this item will remove all previous items in the shopping cart.\n"
+                                            + "Do you want to continue?",
+                                    "Grocery Conflict", JOptionPane.YES_NO_OPTION);
+
+                            if (choice == JOptionPane.YES_OPTION) {
+                                this.account.getCart().clearCart();
+                                break;
+                            } else {
+                                return;
+                            }
+                        }
+                        if (or.getShopModel().equals(this.grocery) && or.getItem().equals(item)) {
+                            line.setQuantity(or.getQuantity() + quantity);
+                            this.account.getCart().getItemList().remove(or);
+                            break;
+                        }
                     }
                 }
             }
-            this.account.getCart().addToCart(line);
 
-            JOptionPane.showMessageDialog(null, "Dash has been successfully added to Shopping Cart");
+            // Add item to cart
+            if (line != null) {
+                this.account.getCart().addToCart(line);
+                JOptionPane.showMessageDialog(null, "Item has been successfully added to Shopping Cart.");
+            }
         } else {
-            JOptionPane.showMessageDialog(null, "Please select a dash.");
+            JOptionPane.showMessageDialog(null, "Please select an item.");
         }
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
