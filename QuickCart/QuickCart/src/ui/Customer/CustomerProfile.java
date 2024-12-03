@@ -11,6 +11,7 @@ import business.Network.Network;
 import business.UserAccount.CustomerAccount;
 import business.WorkQueue.OrderRequest;
 import business.WorkQueue.WorkRequest;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -52,7 +53,12 @@ public class CustomerProfile extends javax.swing.JPanel {
             row[2] = or;
             row[3] = or.getAmount();
             row[4] = or.getStatus(); 
-            row[5] = or.getStatus();
+            if(or.getReview() == 0){
+                row[5] = "Not Rated";
+            }
+            else{
+                row[5] = or.getReview();
+            }
             dtm.addRow(row);
 
         }
@@ -62,6 +68,7 @@ public class CustomerProfile extends javax.swing.JPanel {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         orderTable = new javax.swing.JTable();
+        btnRate = new javax.swing.JButton();
 
         orderTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -89,21 +96,35 @@ public class CustomerProfile extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(orderTable);
 
+        btnRate.setText("Rate Order");
+        btnRate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRateActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(116, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 558, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(105, 105, 105))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(104, 104, 104)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 558, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(310, 310, 310)
+                        .addComponent(btnRate)))
+                .addContainerGap(117, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(84, 84, 84)
+                .addGap(48, 48, 48)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 473, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(95, Short.MAX_VALUE))
+                .addGap(33, 33, 33)
+                .addComponent(btnRate)
+                .addContainerGap(69, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -111,8 +132,48 @@ public class CustomerProfile extends javax.swing.JPanel {
         
     }//GEN-LAST:event_orderTableMouseClicked
 
+    private void btnRateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRateActionPerformed
+        // TODO add your handling code here:
+            int selectedRow = orderTable.getSelectedRow();
+
+        if (selectedRow < 0) {
+            JOptionPane.showMessageDialog(this, "Please select an order to rate.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        OrderRequest orderRequest = (OrderRequest) orderTable.getValueAt(selectedRow, 0);
+
+        if (!"Order Delivered".equalsIgnoreCase(orderRequest.getStatus())) {
+            JOptionPane.showMessageDialog(this, "Only delivered orders can be rated.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        String input = JOptionPane.showInputDialog(this, "Please rate your order (1-5):", "Rate Order", JOptionPane.QUESTION_MESSAGE);
+
+        if (input == null) {
+            return;
+        }
+
+        try {
+            int rating = Integer.parseInt(input);
+
+            if (rating < 1 || rating > 5) {
+                JOptionPane.showMessageDialog(this, "Rating must be between 1 and 5.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            orderRequest.setReview(rating);
+
+            JOptionPane.showMessageDialog(this, "Thank you for rating the order!", "Success", JOptionPane.INFORMATION_MESSAGE);
+            populateTable();
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Please enter a valid numeric rating.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnRateActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnRate;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable orderTable;
     // End of variables declaration//GEN-END:variables

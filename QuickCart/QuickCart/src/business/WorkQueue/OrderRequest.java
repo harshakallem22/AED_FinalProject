@@ -128,4 +128,8 @@ public class OrderRequest extends WorkRequest {
     public void setReview(int review){
         this.review = review;
     }
+    
+    public int getReview(){
+        return this.review;
+    }
 }
