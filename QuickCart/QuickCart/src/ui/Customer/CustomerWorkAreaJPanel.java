@@ -65,6 +65,11 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
         });
 
         btnProfile.setText("Profile");
+        btnProfile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnProfileActionPerformed(evt);
+            }
+        });
 
         btnCart.setText("Cart");
         btnCart.addActionListener(new java.awt.event.ActionListener() {
@@ -155,6 +160,15 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
     CardLayout layout = (CardLayout) this.workArea.getLayout();
     layout.next(this.workArea);
     }//GEN-LAST:event_btnLogoutActionPerformed
+
+    private void btnProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProfileActionPerformed
+        // TODO add your handling code here:
+        ca = (CustomerAccount) account;
+        CustomerProfile cojp = new CustomerProfile(network, ca);
+        upc.add(cojp);
+        CardLayout layout = (CardLayout) upc.getLayout();
+        layout.next(upc);
+    }//GEN-LAST:event_btnProfileActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -284,10 +284,10 @@ public class DeliveryEmployeeWorkArea extends javax.swing.JPanel {
                                     (deliveryRequest.getStatus().equals("Order Delivered"))){
                         Object[] row = new Object[4];
                         row[0] = deliveryRequest;    
-                        row[1] = deliveryRequest.getDeliveryAddress();   // Customer Name
-                        row[2] = deliveryRequest.getStatus(); // Customer Address
+                        row[1] = deliveryRequest.getDeliveryAddress();  
+                        row[2] = deliveryRequest.getStatus();
                         row[3] = deliveryRequest.getStatus();         
-                        model.addRow(row);  // Add the row to the table
+                        model.addRow(row);  
                     }
                 }
         }

@@ -127,18 +127,22 @@ public class DeliveryRequest extends WorkRequest {
 
     public void assignDeliveryPartner() {
         this.status = DeliveryStatus.DELIVERY_PERSON_ASSIGNED.value;
+        orderRequest.setStatus(this.status);
     }
 
     public void orderPickedUp() {
         this.status = DeliveryStatus.ORDER_PICKED_UP.value;
+        orderRequest.setStatus(this.status);
     }
 
     public void orderOnTheWay() {
         this.status = DeliveryStatus.ORDER_ON_THE_WAY.value;
+        orderRequest.setStatus(this.status);
     }
     
     public void orderDelivered(){
         this.status = DeliveryStatus.ORDER_DELIVERED.value;
+        orderRequest.setStatus(this.status);
     }
 
     public OrderRequest getOrderRequest() {

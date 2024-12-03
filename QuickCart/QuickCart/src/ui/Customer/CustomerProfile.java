@@ -5,6 +5,10 @@
 package ui.Customer;
 
 import business.Enterprise.Enterprise.EnterpriseType;
+import business.Enterprise.GroceryEnterprise;
+import business.Enterprise.RestaurantEnterprise;
+import business.Network.Network;
+import business.UserAccount.CustomerAccount;
 import business.WorkQueue.OrderRequest;
 import business.WorkQueue.WorkRequest;
 import javax.swing.table.DefaultTableModel;
@@ -18,8 +22,16 @@ public class CustomerProfile extends javax.swing.JPanel {
     /**
      * Creates new form CustomerProfile
      */
-    public CustomerProfile() {
+    Network network;
+    CustomerAccount account;
+    EnterpriseType type;
+    RestaurantEnterprise restaurant;
+    GroceryEnterprise grocery;
+    public CustomerProfile(Network network, CustomerAccount ca) {
         initComponents();
+        this.network = network;
+        this.account = ca;
+        populateTable();
     }
 
     /**
@@ -29,19 +41,21 @@ public class CustomerProfile extends javax.swing.JPanel {
      */
     @SuppressWarnings("unchecked")
     public void populateTable() {
-//        DefaultTableModel dtm = (DefaultTableModel) orderTable.getModel();
-//        dtm.setRowCount(0);
-//        for (WorkRequest wr : this.account.getWorkQueue().getWorkRequestList()) {
-//            OrderRequest or = (OrderRequest) wr;
-//            Object row[] = new Object[6];
-//            row[0] = or.getId();
-//            row[1] = or;
-//            row[2] = or.getStatus();
-//            row[3] = (EnterpriseType)or.getEnterprise();
-//            row[4] = or.getAmount();
-//            row[5]= or.getStatus();
-//            dtm.addRow(row);
-//        }
+        DefaultTableModel dtm = (DefaultTableModel) orderTable.getModel();
+        dtm.setRowCount(0);
+        System.out.println("Inside populate Table "+account.getWorkQueue().getWorkRequestList().size());
+        for (WorkRequest wr : this.account.getWorkQueue().getWorkRequestList()) {
+            OrderRequest or = (OrderRequest) wr;
+            Object row[] = new Object[6];
+            row[0] = or;
+            row[1] = or;
+            row[2] = or;
+            row[3] = or.getAmount();
+            row[4] = or.getStatus(); 
+            row[5] = or.getStatus();
+            dtm.addRow(row);
+
+        }
     }
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -57,11 +71,11 @@ public class CustomerProfile extends javax.swing.JPanel {
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "Order #", "Order Date", "Status", "Merchant", "Amount", "Review"
+                "Order #", "Merchant", "Delivery Partner", "Amount", "Status", "Review"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, true
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -79,17 +93,17 @@ public class CustomerProfile extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(127, 127, 127)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 523, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(129, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(116, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 558, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(105, 105, 105))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(99, 99, 99)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 461, Short.MAX_VALUE)
-                .addGap(92, 92, 92))
+                .addGap(84, 84, 84)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 473, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(95, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

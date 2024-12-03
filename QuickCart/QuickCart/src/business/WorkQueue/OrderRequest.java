@@ -27,8 +27,8 @@ public class OrderRequest extends WorkRequest {
     private DeliveryEnterprise company;
     private ArrayList<ItemOrder> dashes;
      private UserAccount assignedTo;
-//    private ReviewRequest review;
-
+     private DeliveryRequest deliveryRequest=null;
+     private int review;
 
     public OrderRequest(Enterprise enterprise, UserAccount account, ArrayList<ItemOrder> dashes) {
         super.setSender(account);
@@ -39,6 +39,14 @@ public class OrderRequest extends WorkRequest {
 
     public String getOrderId() {
         return id;
+    }
+    
+    public DeliveryRequest getDeliveryRequest() {
+        return this.deliveryRequest;
+    }
+    
+    public void setDeliveryRequest(DeliveryRequest deliveryRequest) {
+        this.deliveryRequest = deliveryRequest;
     }
 
     public enum ReviewStatus {
@@ -117,42 +125,7 @@ public class OrderRequest extends WorkRequest {
         this.company = company;
     }
     
-//    public boolean isReviewed() {
-//        if (this.review == null) {
-//            return false;
-//        } else {
-//            if (this.review.getRate() == -1) {
-//                return false;
-//            }
-//        }
-//        return true;
-//    }
-
-//    public void setReview(ReviewRequest review) {
-//        this.review = review;
-//    }
-//
-//    public ReviewRequest getReview() {
-//        return this.review;
-//    }
-//
-//    public boolean eligableToBeReviewed() {
-//        if (this.review != null) {
-//            if (this.review.getRate() == -1) {
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
-//    
-//    public ReviewStatus getReviewStatus() {
-//        if(eligableToBeReviewed()) {
-//            return ReviewStatus.not;
-//        }
-//        if (isReviewed()) {
-//            return ReviewStatus.reviewed;
-//        } else {
-//            return ReviewStatus.NA;
-//        }
-//    }
+    public void setReview(int review){
+        this.review = review;
+    }
 }

@@ -168,6 +168,7 @@ public class ManageOrderJPanel extends javax.swing.JPanel {
             deliveryRequest.setDeliveryPhone(selectedOrder.getDeliveryPhone());
             deliveryRequest.setDeliveryCharge(10.0); // Set a default or calculated charge
             //selectedDeliveryCompany.getWorkQueue().getWorkRequestList().add(selectedOrder);
+            deliveryRequest.setOrderRequest(selectedOrder);
 
             selectedDeliveryCompany.getWorkQueue().getWorkRequestList().add(deliveryRequest);
 

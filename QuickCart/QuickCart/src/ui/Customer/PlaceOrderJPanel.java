@@ -273,6 +273,7 @@ public class PlaceOrderJPanel extends javax.swing.JPanel {
         
         customerAccount.getCart().clearCart();
         customerAccount.getWorkQueue().getWorkRequestList().add(or);
+        System.out.println("ORDER LIST "+customerAccount.getWorkQueue().getWorkRequestList().size());
         shop.getWorkQueue().getWorkRequestList().add(or);
         
         this.container.remove(this);
