@@ -30,6 +30,8 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
     Network network;
     public CustomerWorkAreaJPanel(JPanel workArea, UserAccount account, Organization organization, EcoSystem ecosystem, Network network) {
         initComponents();
+        this.revalidate();
+this.repaint();
         this.workArea = workArea;
         this.account= account;
         this.organization = organization;
@@ -54,6 +56,8 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
         btnCart = new javax.swing.JButton();
         btnLogout = new javax.swing.JButton();
         upc = new javax.swing.JPanel();
+
+        setLayout(new java.awt.BorderLayout());
 
         jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
 
@@ -90,26 +94,26 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(191, 191, 191)
                 .addComponent(btnOrder)
                 .addGap(35, 35, 35)
                 .addComponent(btnProfile)
-                .addGap(33, 33, 33)
+                .addGap(35, 35, 35)
                 .addComponent(btnCart)
-                .addGap(42, 42, 42)
+                .addGap(40, 40, 40)
                 .addComponent(btnLogout)
                 .addGap(25, 25, 25))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(17, 17, 17)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnOrder)
                     .addComponent(btnProfile)
                     .addComponent(btnCart)
                     .addComponent(btnLogout))
-                .addGap(33, 33, 33))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         jSplitPane1.setTopComponent(jPanel1);
@@ -117,20 +121,36 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
         upc.setLayout(new java.awt.CardLayout());
         jSplitPane1.setRightComponent(upc);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 686, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSplitPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 567, Short.MAX_VALUE)
-        );
+        add(jSplitPane1, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
+        // TODO add your handling code here:
+        this.workArea.removeAll(); // Clear the current work area
+
+        LoginJPanel loginPanel = new LoginJPanel(this.workArea);
+        this.workArea.add("LoginJPanel", loginPanel);
+
+        CardLayout layout = (CardLayout) this.workArea.getLayout();
+        layout.next(this.workArea);
+    }//GEN-LAST:event_btnLogoutActionPerformed
+
+    private void btnCartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCartActionPerformed
+        // TODO add your handling code here:
+        CartJFrame frame = new CartJFrame(this.ecosystem, ca, network);
+        frame.setSize(500, 620);
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+    }//GEN-LAST:event_btnCartActionPerformed
+
+    private void btnProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProfileActionPerformed
+        // TODO add your handling code here:
+        ca = (CustomerAccount) account;
+        CustomerProfile cojp = new CustomerProfile(network, ca);
+        upc.add(cojp);
+        CardLayout layout = (CardLayout) upc.getLayout();
+        layout.next(upc);
+    }//GEN-LAST:event_btnProfileActionPerformed
 
     private void btnOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrderActionPerformed
         // TODO add your handling code here:
@@ -141,34 +161,6 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
         CardLayout layout = (CardLayout) upc.getLayout();
         layout.next(upc);
     }//GEN-LAST:event_btnOrderActionPerformed
-
-    private void btnCartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCartActionPerformed
-        // TODO add your handling code here:
-       CartJFrame frame = new CartJFrame(this.ecosystem, ca, network);
-        frame.setSize(500, 620);
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
-    }//GEN-LAST:event_btnCartActionPerformed
-
-    private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
-        // TODO add your handling code here:
-         this.workArea.removeAll(); // Clear the current work area
-    
-    LoginJPanel loginPanel = new LoginJPanel(this.workArea);
-    this.workArea.add("LoginJPanel", loginPanel);
-    
-    CardLayout layout = (CardLayout) this.workArea.getLayout();
-    layout.next(this.workArea);
-    }//GEN-LAST:event_btnLogoutActionPerformed
-
-    private void btnProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProfileActionPerformed
-        // TODO add your handling code here:
-        ca = (CustomerAccount) account;
-        CustomerProfile cojp = new CustomerProfile(network, ca);
-        upc.add(cojp);
-        CardLayout layout = (CardLayout) upc.getLayout();
-        layout.next(upc);
-    }//GEN-LAST:event_btnProfileActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

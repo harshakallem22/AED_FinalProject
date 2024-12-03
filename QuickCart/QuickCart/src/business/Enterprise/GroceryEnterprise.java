@@ -8,6 +8,7 @@ import business.Item.GroceryCatalog;
 import business.Item.GroceryItem;
 import business.Role.Role;
 import business.WorkQueue.ItemRestockRequest;
+import business.WorkQueue.OrderRequest;
 import java.util.ArrayList;
 
 /**
@@ -21,11 +22,14 @@ public class GroceryEnterprise extends Enterprise {
     private GroceryCatalog groceryCatalog;
     private boolean isApproved;
     private ArrayList<InventoryEnterprise> inventoryList;
+    private ArrayList<OrderRequest> groceryOrders;
+    
     public GroceryEnterprise(String name, String address, String phone, String email) {
         super(name, address, phone, email, EnterpriseType.Grocery);
         this.id = counter;
         groceryCatalog = new GroceryCatalog();
         inventoryList = new ArrayList<>();
+        this.groceryOrders = new ArrayList<>();
         counter++;
     }
     
@@ -76,6 +80,14 @@ public class GroceryEnterprise extends Enterprise {
     public void requestRestocking(InventoryEnterprise inventoryEnterprise, ArrayList<GroceryItem> shortageItems) {
         ItemRestockRequest restockRequest = new ItemRestockRequest(this, inventoryEnterprise, shortageItems);
         inventoryEnterprise.addRestockRequest(restockRequest);
+    }
+    
+    public ArrayList<OrderRequest> getGroceryOrders() {
+        return groceryOrders;
+    }
+
+    public void addOrder(OrderRequest order) {
+        this.groceryOrders.add(order);
     }
 
 }

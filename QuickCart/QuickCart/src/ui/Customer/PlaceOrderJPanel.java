@@ -9,6 +9,7 @@ package ui.Customer;
 import business.Customer.ItemOrder;
 import business.EcoSystem.EcoSystem;
 import business.Enterprise.Enterprise;
+import business.Enterprise.GroceryEnterprise;
 import business.Enterprise.RestaurantEnterprise;
 import business.Network.Network;
 import business.UserAccount.CustomerAccount;
@@ -275,7 +276,11 @@ public class PlaceOrderJPanel extends javax.swing.JPanel {
         customerAccount.getWorkQueue().getWorkRequestList().add(or);
         System.out.println("ORDER LIST "+customerAccount.getWorkQueue().getWorkRequestList().size());
         shop.getWorkQueue().getWorkRequestList().add(or);
-        
+        if (shop instanceof RestaurantEnterprise) {
+            ((RestaurantEnterprise) shop).addOrder(or);
+        } else if (shop instanceof GroceryEnterprise) {
+            ((GroceryEnterprise) shop).addOrder(or);
+        }
         this.container.remove(this);
         JOptionPane.showMessageDialog(this, "Order Placed");
 //        OrderConfirmationJPanel panel = new OrderConfirmationJPanel(or);

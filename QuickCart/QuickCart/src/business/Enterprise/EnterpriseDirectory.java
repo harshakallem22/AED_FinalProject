@@ -17,7 +17,7 @@ public class EnterpriseDirectory {
     private DeliveryDirectory deliveryDir;
     private GroceryDirectory groceryDir;
     private InventoryDirectory inventoryDir;
-   
+    private AnalyticsDirectory analyticsDir;
 
     public ArrayList<Enterprise> getEnterpriseList() {
         return enterpriseList;
@@ -33,6 +33,7 @@ public class EnterpriseDirectory {
         deliveryDir = new DeliveryDirectory();
         groceryDir = new GroceryDirectory();
         inventoryDir = new InventoryDirectory();
+        analyticsDir = new AnalyticsDirectory();
     }
     
     //Create enterprise
@@ -94,6 +95,12 @@ public class EnterpriseDirectory {
    public InventoryEnterprise createInventory(String name, String phone, String address, String email){
        InventoryEnterprise enterprise = inventoryDir.newInventory(name, phone, address, email);
        enterpriseList.add(enterprise);
+       return enterprise;
+   }
+   
+   public AnalyticsEnterprise createAnalytics(String name, String phone, String address, String email){
+       AnalyticsEnterprise enterprise = analyticsDir.newAnalytics(name, phone, address, email);
+       analyticsDir.newAnalytics(name, phone, address, email);
        return enterprise;
    }
     

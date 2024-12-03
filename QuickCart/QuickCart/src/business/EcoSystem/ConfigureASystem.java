@@ -7,11 +7,14 @@ package business.EcoSystem;
 import business.Customer.Customer;
 import business.DAO.CustomerDAO;
 import business.Employee.Employee;
+import business.Enterprise.AnalyticsEnterprise;
 import business.Enterprise.DeliveryEnterprise;
 import business.Enterprise.GroceryEnterprise;
 import business.Enterprise.InventoryEnterprise;
 import business.Enterprise.RestaurantEnterprise;
 import business.Network.Network;
+import business.Organization.AnalyticsManagerOrganization;
+import business.Role.AnalyticsMemberRole;
 import business.Role.CustomerRole;
 import business.Role.DeliveryManagerRole;
 import business.Role.DeliveryPersonRole;
@@ -89,6 +92,18 @@ public class ConfigureASystem {
         Employee invemp1 = inv1.getEmployeeDirectory().createEmployee("invman");
         EmployeeAccount invea1 = system.getUserAccountDirectory().createUserAccount("invman1", "invman1", new InventoryManagerRole());
         invea1.setEmployee(invemp1);
+        
+//        AnalyticsEnterprise ana1 = network.getEnterpriseDirectory().createAnalytics("inv1", "kjsdb", "abcd", "bcd@gmail.com");
+////        Employee anaemp1 = ana1.getEmployeeDirectory().createEmployee("anaman");
+//        AnalyticsManagerOrganization amo = new AnalyticsManagerOrganization();
+//        Employee anaemp1 = amo.getEmployeeDirectory().createEmployee("anaman");
+//        EmployeeAccount anaea = amo.getUserAccountDirectory().createUserAccount("anaman", "anaman", new AnalyticsMemberRole());
+//        anaea.setEmployee(anaemp1);
+
+          AnalyticsEnterprise ana1 = network.getEnterpriseDirectory().createAnalytics("inv1", "kjsdb", "abcd", "bcd@gmail.com");
+          Employee anaemp1 = ana1.getEmployeeDirectory().createEmployee("anaman");
+          EmployeeAccount anaea = system.getUserAccountDirectory().createUserAccount("anaman", "anaman", new AnalyticsMemberRole());
+          anaea.setEmployee(anaemp1);
         
         return system;
     }
