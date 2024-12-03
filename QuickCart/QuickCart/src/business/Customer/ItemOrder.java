@@ -57,6 +57,10 @@ public abstract class ItemOrder {
         return this.totalPrice;
     }
 
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+    
     @Override
     public String toString() {
         return this.item.getName();

@@ -4,8 +4,12 @@
  */
 package business.FakerMockData;
 
+import business.Customer.Customer;
+import business.Customer.ItemOrder;
 import business.Enterprise.GroceryEnterprise;
 import business.Enterprise.RestaurantEnterprise;
+import business.Role.CustomerRole;
+import business.UserAccount.CustomerAccount;
 import business.WorkQueue.OrderRequest;
 import com.github.javafaker.Faker;
 import java.math.BigDecimal;
@@ -21,6 +25,7 @@ public class MockOrderGeneration {
 
      public static ArrayList<OrderRequest> generateRestaurantOrders(RestaurantEnterprise restaurant, int numOrders) {
         ArrayList<OrderRequest> restaurantOrders = new ArrayList<>();
+                //ArrayList<OrderRequest> restaurantOrders = restaurant.getRestaurantOrders();
 
         for (int i = 0; i < numOrders; i++) {
             String customerName = faker.name().fullName();
@@ -35,6 +40,7 @@ public class MockOrderGeneration {
             order.setDeliveryPhone(phone);
             order.setMessage(comment);
 //            order.getDeliveryRequest().orderDelivered();
+            order.setReview(faker.number().numberBetween(2, 5));
             order.setAmount(BigDecimal.valueOf(totalPrice).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue());
 
             restaurantOrders.add(order);
@@ -59,6 +65,7 @@ public class MockOrderGeneration {
             order.setDeliveryPhone(phone);
             order.setMessage(comment);
             //order.getDeliveryRequest().orderDelivered();
+            order.setReview(faker.number().numberBetween(2, 5));
             order.setAmount(BigDecimal.valueOf(totalPrice).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue());
 
             groceryOrders.add(order);
@@ -66,5 +73,37 @@ public class MockOrderGeneration {
         }
         return groceryOrders;
     }
+    
+    public static ArrayList<CustomerAccount> generateFakerCustomers(int numCustomers) {
+        ArrayList<CustomerAccount> fakerCustomers = new ArrayList<>();
+
+        for (int i = 0; i < numCustomers; i++) {
+            String name = faker.name().fullName();
+            String email = faker.internet().emailAddress();
+            String phone = faker.phoneNumber().cellPhone();
+            String address = faker.address().fullAddress();
+
+            Customer customer = new Customer(name, email, phone, address);
+            CustomerAccount customerAccount = new CustomerAccount(name, "password", new CustomerRole()); 
+            customerAccount.setCustomer(customer);
+
+            fakerCustomers.add(customerAccount);
+        }
+
+        return fakerCustomers;
+    }
+
+    public static ArrayList<OrderRequest> generateOrdersForCustomer(CustomerAccount selectedCustomer, int numOrders) {
+        ArrayList<OrderRequest> orders = new ArrayList<>();
+
+        for (int i = 0; i < numOrders; i++) {
+            OrderRequest order = new OrderRequest(null, null, null); // Replace with appropriate initialization
+            order.setAmount(faker.number().randomDouble(2, 50, 200)); // Random amount for each order
+            orders.add(order);
+        }
+
+        return orders;
+    }
+    
 
 }

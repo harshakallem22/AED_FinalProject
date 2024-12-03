@@ -48,8 +48,9 @@ public class ConfigureASystem {
 //            system.getCustomerDirectory().addCustomer(dbCustomer);
 //        }
 //        
+        Customer c = system.getCustomerDirectory().createCustomer("Sridhar", "sridhar@gmail.com", "1234", "Boston");
         CustomerAccount ua1 = system.getUserAccountDirectory().createCustomerAccount("sridhar", "1234", new CustomerRole());
-        System.out.println(system.getUserAccountDirectory().getUserAccountList().size());
+        ua1.setCustomer(c);
         //UserAccount ua = system.getUserAccountDirectory().createUserAccount("sysadmin", "sysadmin", employee, new SystemAdminRole());
         //UserAccount labManager = system.getUserAccountDirectory().createUserAccount("labManager", "sysadmin", employee, new LabManagerRole());
         

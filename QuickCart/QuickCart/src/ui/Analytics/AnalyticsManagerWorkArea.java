@@ -63,8 +63,18 @@ public class AnalyticsManagerWorkArea extends javax.swing.JPanel {
         });
 
         jButton2.setText("View Grocery Stores");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("View Customers");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         btnLogout.setText("Logout");
         btnLogout.addActionListener(new java.awt.event.ActionListener() {
@@ -135,6 +145,22 @@ public class AnalyticsManagerWorkArea extends javax.swing.JPanel {
         CardLayout layout = (CardLayout) this.userProcessContainer.getLayout();
         layout.next(this.userProcessContainer);
     }//GEN-LAST:event_btnLogoutActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        ViewGroceriesJPanel vrjp = new ViewGroceriesJPanel(workArea, account, organization, enterprise, business);
+        workArea.add(vrjp);
+        CardLayout layout = (CardLayout) workArea.getLayout();
+        layout.next(workArea);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        ViewCustomersJPanel vrjp = new ViewCustomersJPanel(workArea, account, organization, enterprise, business);
+        workArea.add(vrjp);
+        CardLayout layout = (CardLayout) workArea.getLayout();
+        layout.next(workArea);
+    }//GEN-LAST:event_jButton3ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

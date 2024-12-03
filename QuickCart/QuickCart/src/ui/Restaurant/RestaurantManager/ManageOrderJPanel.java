@@ -153,6 +153,7 @@ public class ManageOrderJPanel extends javax.swing.JPanel {
     selectedOrder.setStatus("Assigned to Employee");
     javax.swing.JOptionPane.showMessageDialog(null, "Order assigned to the restaurant employee");
     populateTable(); // Refresh the table to show updated status
+    restaurant.addOrder(selectedOrder);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed

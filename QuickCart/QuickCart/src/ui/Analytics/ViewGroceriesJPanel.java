@@ -6,6 +6,7 @@ package ui.Analytics;
 
 import business.EcoSystem.EcoSystem;
 import business.Enterprise.Enterprise;
+import business.Enterprise.GroceryEnterprise;
 import business.Enterprise.RestaurantEnterprise;
 import business.FakerMockData.MockOrderGeneration;
 import business.Network.Network;
@@ -16,19 +17,15 @@ import business.WorkQueue.OrderRequest;
 import java.util.ArrayList;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
-import org.jfree.chart.ChartFactory;
-import org.jfree.chart.ChartPanel;
-import org.jfree.chart.JFreeChart;
-import org.jfree.data.category.DefaultCategoryDataset;
 
 /**
  *
  * @author SAI SRIDHAR
  */
-public class ViewRestaurantsJPanel extends javax.swing.JPanel {
+public class ViewGroceriesJPanel extends javax.swing.JPanel {
 
     /**
-     * Creates new form ViewRestaurantsJPanel
+     * Creates new form ViewGroceriesJPanel
      */
     Network network;
     JPanel workArea;
@@ -36,14 +33,14 @@ public class ViewRestaurantsJPanel extends javax.swing.JPanel {
     Organization organization;
     Enterprise enterprise;
     EcoSystem business;
-    public ViewRestaurantsJPanel(JPanel workArea, EmployeeAccount account, Organization organization, Enterprise enterprise, EcoSystem business) {
-        initComponents();
+    public ViewGroceriesJPanel(JPanel workArea, EmployeeAccount account, Organization organization, Enterprise enterprise, EcoSystem business) {
         network = business.getNetworkList().get(0);
         this.workArea = workArea;
         this.account = account;
         this.organization = organization;
         this.enterprise = enterprise;
         this.business = business;
+        initComponents();
         populateTable();
     }
 
@@ -56,6 +53,8 @@ public class ViewRestaurantsJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel4 = new javax.swing.JLabel();
+        jTextField3 = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
@@ -64,8 +63,8 @@ public class ViewRestaurantsJPanel extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+
+        jLabel4.setText("Rating");
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -89,7 +88,7 @@ public class ViewRestaurantsJPanel extends javax.swing.JPanel {
         jScrollPane1.setViewportView(jTable1);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel1.setText("RESTAURANTS");
+        jLabel1.setText("GROCERY STORES");
 
         btnView.setText("View");
         btnView.addActionListener(new java.awt.event.ActionListener() {
@@ -102,51 +101,48 @@ public class ViewRestaurantsJPanel extends javax.swing.JPanel {
 
         jLabel3.setText("Revenue");
 
-        jLabel4.setText("Rating");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(405, 405, 405)
+                .addComponent(btnView)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addGap(388, 388, 388))
+                .addGap(318, 318, 318))
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(15, 15, 15)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(141, 141, 141)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(405, 405, 405)
-                        .addComponent(btnView))
+                        .addComponent(jLabel2)
+                        .addGap(18, 18, 18)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(140, 140, 140)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(18, 18, 18)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(121, Short.MAX_VALUE))
+                        .addComponent(jLabel3)
+                        .addGap(51, 51, 51)
+                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addGap(64, 64, 64)
+                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(37, 37, 37))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(39, 39, 39)
+                .addGap(35, 35, 35)
                 .addComponent(jLabel1)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
+                        .addGap(34, 34, 34)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(101, 101, 101)
+                        .addGap(123, 123, 123)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2))
@@ -160,55 +156,52 @@ public class ViewRestaurantsJPanel extends javax.swing.JPanel {
                             .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(47, 47, 47)
                 .addComponent(btnView)
-                .addContainerGap(76, Short.MAX_VALUE))
+                .addContainerGap(77, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewActionPerformed
         // TODO add your handling code here:
-         int selectedRow = jTable1.getSelectedRow();
+        int selectedRow = jTable1.getSelectedRow();
         if (selectedRow < 0) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Please select a restaurant.");
+            javax.swing.JOptionPane.showMessageDialog(this, "Please select a store.");
             return;
         }
-        RestaurantEnterprise restaurant = (RestaurantEnterprise) jTable1.getValueAt(selectedRow, 0);
-        ArrayList<OrderRequest> orders = MockOrderGeneration.generateRestaurantOrders(restaurant, 20);
+        GroceryEnterprise grocery = (GroceryEnterprise) jTable1.getValueAt(selectedRow, 0);
+        ArrayList<OrderRequest> orders = MockOrderGeneration.generateGroceryOrders(grocery, 20);
         double totalRevenue = 0;
-    int totalOrders = orders.size();
-    int totalRating = 0;
-    int ratedOrdersCount = 0;
+        int totalOrders = orders.size();
+        int totalRating = 0;
+        int ratedOrdersCount = 0;
 
-    for (OrderRequest order : orders) {
-        totalRevenue += order.getAmount(); // Accumulate revenue
-        if (order.getReview() > 0) { // If the order has a valid review
-            totalRating += order.getReview();
-            ratedOrdersCount++;
+        for (OrderRequest order : orders) {
+            totalRevenue += order.getAmount(); // Accumulate revenue
+            if (order.getReview() > 0) { // If the order has a valid review
+                totalRating += order.getReview();
+                ratedOrdersCount++;
+            }
         }
-    }
-    
-    double averageRating = ratedOrdersCount > 0 ? (double) totalRating / ratedOrdersCount : 0.0;
 
-    // Display the results in the text fields
-    jTextField1.setText(String.valueOf(totalOrders)); // Set number of orders
-    jTextField2.setText(String.format("%.2f", totalRevenue));
-    jTextField3.setText(String.format("%.1f", averageRating));
+        double averageRating = ratedOrdersCount > 0 ? (double) totalRating / ratedOrdersCount : 0.0;
+
+        // Display the results in the text fields
+        jTextField1.setText(String.valueOf(totalOrders)); // Set number of orders
+        jTextField2.setText(String.format("%.2f", totalRevenue));
+        jTextField3.setText(String.format("%.1f", averageRating));
     }//GEN-LAST:event_btnViewActionPerformed
-    
-   
 
-    
     private void populateTable() {
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
 
         model.setRowCount(0);
 
-        ArrayList<RestaurantEnterprise> restaurants = network.getEnterpriseDirectory().getRestaurants().getRestaurantList();
-        System.out.println(restaurants.size());
-        for (RestaurantEnterprise restaurant : restaurants) {
+        ArrayList<GroceryEnterprise> groceries = network.getEnterpriseDirectory().getGrocery().getGroceryList();
+        System.out.println(groceries.size());
+        for (GroceryEnterprise grocery : groceries) {
             Object[] row = new Object[4];
-            row[0] = restaurant;    
-            row[1] = restaurant.getAddress();  
-            row[2] = restaurant.getEmail();
+            row[0] = grocery;    
+            row[1] = grocery.getAddress();  
+            row[2] = grocery.getEmail();
 
             model.addRow(row); 
         }

@@ -57,4 +57,14 @@ public void clearCart() {
     }
 }
 
+    public void applyDiscountForNextOrders(int numOrders, int discountPercentage) {
+    int count = 0;
+    for (ItemOrder item : this.getItemList()) {
+        if (count >= numOrders) break;
+        double originalPrice = item.getTotalPrice();
+        item.setTotalPrice(originalPrice * (1 - discountPercentage / 100.0)); 
+        count++;
+    }
+}
+
 }
