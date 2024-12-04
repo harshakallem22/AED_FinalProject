@@ -7,6 +7,7 @@ package ui.Delivery.DeliveryManager;
 import business.EcoSystem.EcoSystem;
 import business.Enterprise.DeliveryEnterprise;
 import business.Enterprise.Enterprise;
+import business.Network.Network;
 import business.Organization.Organization;
 import business.UserAccount.EmployeeAccount;
 import business.UserAccount.UserAccount;
@@ -30,6 +31,7 @@ public class DeliveryManagerWorkArea extends javax.swing.JPanel {
     Organization org;
     DeliveryEnterprise enterprise;
     EcoSystem ecosystem;
+    Network network;
     public DeliveryManagerWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business) {
         initComponents();
         this.upc = userProcessContainer;
@@ -37,6 +39,7 @@ public class DeliveryManagerWorkArea extends javax.swing.JPanel {
         this.org = organization;
         this.enterprise = (DeliveryEnterprise) enterprise;
         this.ecosystem = business;
+        this.network = ecosystem.getNetworkList().get(0);
     }
 
     /**
@@ -73,6 +76,11 @@ public class DeliveryManagerWorkArea extends javax.swing.JPanel {
         });
 
         btnProfile.setText("Profile");
+        btnProfile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnProfileActionPerformed(evt);
+            }
+        });
 
         btnLogout.setText("Logout");
         btnLogout.addActionListener(new java.awt.event.ActionListener() {
@@ -135,6 +143,10 @@ public class DeliveryManagerWorkArea extends javax.swing.JPanel {
 
     private void btnEmployeesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmployeesActionPerformed
         // TODO add your handling code here:
+        ManageEmployeesJPanel mejp = new ManageEmployeesJPanel(workArea, ea, ecosystem, enterprise);
+        workArea.add(mejp);
+        CardLayout layout = (CardLayout) workArea.getLayout();
+        layout.show(workArea, "ManageEmployeesJPanel");
         
     }//GEN-LAST:event_btnEmployeesActionPerformed
 
@@ -148,6 +160,14 @@ public class DeliveryManagerWorkArea extends javax.swing.JPanel {
         CardLayout layout = (CardLayout) upc.getLayout();
         layout.next(upc);
     }//GEN-LAST:event_btnLogoutActionPerformed
+
+    private void btnProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProfileActionPerformed
+        // TODO add your handling code here:
+        ProfileJPanel cojp = new ProfileJPanel(this.ecosystem, ea, network);
+        workArea.add(cojp);
+        CardLayout layout = (CardLayout) workArea.getLayout();
+        layout.next(workArea);
+    }//GEN-LAST:event_btnProfileActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

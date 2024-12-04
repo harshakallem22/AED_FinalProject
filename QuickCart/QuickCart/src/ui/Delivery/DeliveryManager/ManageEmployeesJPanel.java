@@ -2,15 +2,20 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package ui.Restaurant.RestaurantManager;
+package ui.Delivery.DeliveryManager;
 
+import ui.Grocery.GroceryManager.*;
+import ui.Restaurant.RestaurantManager.*;
 import business.EcoSystem.EcoSystem;
+import business.Enterprise.DeliveryEnterprise;
+import business.Enterprise.GroceryEnterprise;
 import business.Enterprise.RestaurantEnterprise;
 import business.Network.Network;
 import business.UserAccount.EmployeeAccount;
 import business.UserAccount.UserAccount;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
+
 /**
  *
  * @author SAI SRIDHAR
@@ -23,15 +28,14 @@ public class ManageEmployeesJPanel extends javax.swing.JPanel {
     JPanel workArea;
     UserAccount account;
     EcoSystem ecosystem;
-    RestaurantEnterprise restaurant;
+    DeliveryEnterprise delivery;
     Network network;
-    public ManageEmployeesJPanel(JPanel upc, EmployeeAccount account, EcoSystem ecosystem, RestaurantEnterprise enterprise) {
+    public ManageEmployeesJPanel(JPanel upc, EmployeeAccount account, EcoSystem ecosystem, DeliveryEnterprise enterprise) {
         initComponents();
         this.workArea = upc;
         this.account = (EmployeeAccount)account;
         this.ecosystem = ecosystem;
-        this.restaurant = enterprise;
-        System.out.println(restaurant.getName());
+        this.delivery = enterprise;
         network = ecosystem.getNetworkList().get(0);
     }
 
@@ -80,7 +84,7 @@ public class ManageEmployeesJPanel extends javax.swing.JPanel {
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
-        AddEmployee mejp = new AddEmployee(workArea, account, ecosystem, restaurant);
+        AddEmployee mejp = new AddEmployee(workArea, account, ecosystem, delivery);
         workArea.add(mejp);
         CardLayout layout = (CardLayout) workArea.getLayout();
         layout.show(workArea, "Add Employee");

@@ -51,7 +51,17 @@ public class Network {
     }
     return storeList;
 }
-
+    
+    
+    public ArrayList<RestaurantEnterprise> getRestaurantEnterprises() {
+    ArrayList<RestaurantEnterprise> storeList = new ArrayList<>();
+    for (Enterprise e : enterpriseDirectory.getEnterpriseList()) {
+        if (e.getEnterpriseType().equals(Enterprise.EnterpriseType.Restaurant)) {
+            storeList.add((RestaurantEnterprise)e);
+        }
+    }
+    return storeList;
+}
     
     @Override
     public String toString(){

@@ -261,13 +261,20 @@ public class PlaceOrderJPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Phone Number can't be empty!");
             return;
         }
+        RestaurantEnterprise re = null;
+        for(RestaurantEnterprise r : net.getRestaurantEnterprises()){
+            if(r.equals(shop)){
+                re = r;
+            }
+        }
         System.out.println(customerAccount.getCart());
-        OrderRequest or = new OrderRequest(shop, customerAccount,customerAccount.getCart().getItemList());
+        OrderRequest or = new OrderRequest(re, customerAccount,customerAccount.getCart().getItemList());
         or.setDeliveryAddress(this.addressTextField.getText());
         or.setDeliveryName(this.nameTextField.getText());
         or.setDeliveryPhone(this.phoneTextField.getText());
         or.setMessage(this.commentTextArea.getText());
         or.setStatus("Processing");
+        
         BigDecimal bd = new BigDecimal(this.customerAccount.getCart().getTotalPrice());
         or.setAmount(bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue());
         

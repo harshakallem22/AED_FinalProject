@@ -8,7 +8,9 @@ import business.EcoSystem.EcoSystem;
 import business.Enterprise.Enterprise;
 import business.Enterprise.GroceryEnterprise;
 import business.Enterprise.RestaurantEnterprise;
+import business.Network.Network;
 import business.Organization.Organization;
+import business.UserAccount.EmployeeAccount;
 import business.UserAccount.UserAccount;
 import ui.Restaurant.RestaurantManager.*;
 import java.awt.CardLayout;
@@ -25,18 +27,20 @@ public class GroceryManagerWorkArea extends javax.swing.JPanel {
      * Creates new form RestaurantManagerWorkArea
      */
     JPanel upc;
-    UserAccount account;
+    EmployeeAccount account;
     Organization organization;
     EcoSystem ecosystem;
     GroceryEnterprise enterprise;
+    Network network;
     
     public GroceryManagerWorkArea(JPanel workArea, UserAccount account, Organization organization, EcoSystem ecosystem, Enterprise enterprise) {
         initComponents();
         this.upc = workArea;
-        this.account = account;
+        this.account = (EmployeeAccount) account;
         this.organization = organization;
         this.ecosystem = ecosystem;
         this.enterprise = (GroceryEnterprise) enterprise;
+        this.network = ecosystem.getNetworkList().get(0);
     }
 
     /**
@@ -51,7 +55,6 @@ public class GroceryManagerWorkArea extends javax.swing.JPanel {
         jSplitPane1 = new javax.swing.JSplitPane();
         jPanel1 = new javax.swing.JPanel();
         btnOrders = new javax.swing.JButton();
-        btnEmployees = new javax.swing.JButton();
         btnProfile = new javax.swing.JButton();
         btnLogout = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
@@ -67,14 +70,12 @@ public class GroceryManagerWorkArea extends javax.swing.JPanel {
             }
         });
 
-        btnEmployees.setText("Manage Employees");
-        btnEmployees.addActionListener(new java.awt.event.ActionListener() {
+        btnProfile.setText("Profile");
+        btnProfile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEmployeesActionPerformed(evt);
+                btnProfileActionPerformed(evt);
             }
         });
-
-        btnProfile.setText("Profile");
 
         btnLogout.setText("Logout");
         btnLogout.addActionListener(new java.awt.event.ActionListener() {
@@ -102,15 +103,13 @@ public class GroceryManagerWorkArea extends javax.swing.JPanel {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(112, Short.MAX_VALUE)
+                .addContainerGap(226, Short.MAX_VALUE)
                 .addComponent(btnOrders)
-                .addGap(18, 18, 18)
+                .addGap(42, 42, 42)
                 .addComponent(jButton1)
-                .addGap(18, 18, 18)
+                .addGap(41, 41, 41)
                 .addComponent(jButton2)
-                .addGap(18, 18, 18)
-                .addComponent(btnEmployees)
-                .addGap(18, 18, 18)
+                .addGap(43, 43, 43)
                 .addComponent(btnProfile)
                 .addGap(27, 27, 27)
                 .addComponent(btnLogout)
@@ -122,7 +121,6 @@ public class GroceryManagerWorkArea extends javax.swing.JPanel {
                 .addContainerGap(40, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnOrders)
-                    .addComponent(btnEmployees)
                     .addComponent(btnProfile)
                     .addComponent(btnLogout)
                     .addComponent(jButton1)
@@ -155,14 +153,6 @@ public class GroceryManagerWorkArea extends javax.swing.JPanel {
         layout.show(workArea, "ManageOrderJPanel");
     }//GEN-LAST:event_btnOrdersActionPerformed
 
-    private void btnEmployeesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmployeesActionPerformed
-        // TODO add your handling code here:
-        ManageEmployeesJPanel mejp = new ManageEmployeesJPanel();
-        workArea.add(mejp);
-        CardLayout layout = (CardLayout) mejp.getLayout();
-        layout.next(workArea);
-    }//GEN-LAST:event_btnEmployeesActionPerformed
-
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
         // TODO add your handling code here:
            this.upc.removeAll();
@@ -191,9 +181,17 @@ public class GroceryManagerWorkArea extends javax.swing.JPanel {
         layout.next(workArea);
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void btnProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProfileActionPerformed
+        // TODO add your handling code here:
+        EmployeeAccount ea = (EmployeeAccount) account;
+        ProfileJPanel cojp = new ProfileJPanel(this.ecosystem, ea, network);
+        workArea.add(cojp);
+        CardLayout layout = (CardLayout) workArea.getLayout();
+        layout.next(workArea);
+    }//GEN-LAST:event_btnProfileActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnEmployees;
     private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnOrders;
     private javax.swing.JButton btnProfile;

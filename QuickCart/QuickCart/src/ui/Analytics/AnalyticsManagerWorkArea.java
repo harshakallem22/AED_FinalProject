@@ -6,6 +6,7 @@ package ui.Analytics;
 
 import business.EcoSystem.EcoSystem;
 import business.Enterprise.Enterprise;
+import business.Network.Network;
 import business.Organization.Organization;
 import business.UserAccount.EmployeeAccount;
 import business.UserAccount.UserAccount;
@@ -27,6 +28,7 @@ public class AnalyticsManagerWorkArea extends javax.swing.JPanel {
     Organization organization;
     Enterprise enterprise;
     EcoSystem business;
+    Network network;
     public AnalyticsManagerWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
@@ -34,6 +36,7 @@ public class AnalyticsManagerWorkArea extends javax.swing.JPanel {
         this.organization = organization;
         this.enterprise = enterprise;
         this.business = business;
+        network = business.getNetworkList().get(0);
     }
 
     /**
@@ -51,6 +54,7 @@ public class AnalyticsManagerWorkArea extends javax.swing.JPanel {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         btnLogout = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
         workArea = new javax.swing.JPanel();
 
         jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
@@ -83,18 +87,27 @@ public class AnalyticsManagerWorkArea extends javax.swing.JPanel {
             }
         });
 
+        jButton4.setText("Profile");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(104, 104, 104)
+                .addGap(41, 41, 41)
                 .addComponent(jButton1)
-                .addGap(56, 56, 56)
+                .addGap(18, 18, 18)
                 .addComponent(jButton2)
-                .addGap(49, 49, 49)
+                .addGap(35, 35, 35)
                 .addComponent(jButton3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                .addComponent(jButton4)
+                .addGap(36, 36, 36)
                 .addComponent(btnLogout)
                 .addGap(16, 16, 16))
         );
@@ -106,7 +119,8 @@ public class AnalyticsManagerWorkArea extends javax.swing.JPanel {
                     .addComponent(jButton1)
                     .addComponent(jButton2)
                     .addComponent(jButton3)
-                    .addComponent(btnLogout))
+                    .addComponent(btnLogout)
+                    .addComponent(jButton4))
                 .addGap(31, 31, 31))
         );
 
@@ -162,12 +176,21 @@ public class AnalyticsManagerWorkArea extends javax.swing.JPanel {
         layout.next(workArea);
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        ProfileJPanel cojp = new ProfileJPanel(this.business, account, network);
+        workArea.add(cojp);
+        CardLayout layout = (CardLayout) workArea.getLayout();
+        layout.next(workArea);
+    }//GEN-LAST:event_jButton4ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLogout;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JPanel workArea;

@@ -24,7 +24,7 @@ public class OrderRequest extends WorkRequest {
     private String deliveryAddress;
     private String deliveryPhone;
     private double amount;
-    private DeliveryEnterprise company;
+    private Enterprise company;
     private ArrayList<ItemOrder> dashes;
      private UserAccount assignedTo;
      private DeliveryRequest deliveryRequest=null;
@@ -34,6 +34,7 @@ public class OrderRequest extends WorkRequest {
         super.setSender(account);
         this.dashes = dashes;
         this.id = UUID.randomUUID().toString();
+        this.company = enterprise;
 //        this.review = null;
     }
 
@@ -112,10 +113,6 @@ public class OrderRequest extends WorkRequest {
     public double getAmount() {
         return this.amount;
     }
-
-    public DeliveryEnterprise getCompany() {
-        return this.company;
-    }
     
     public void setAssignedTo(UserAccount assignedTo) {
         this.assignedTo = assignedTo;
@@ -132,4 +129,10 @@ public class OrderRequest extends WorkRequest {
     public int getReview(){
         return this.review;
     }
+    
+    @Override
+    public String toString(){
+        return this.id;
+    }
+    
 }

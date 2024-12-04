@@ -7,7 +7,9 @@ package ui.Restaurant.RestaurantManager;
 import business.EcoSystem.EcoSystem;
 import business.Enterprise.Enterprise;
 import business.Enterprise.RestaurantEnterprise;
+import business.Network.Network;
 import business.Organization.Organization;
+import business.UserAccount.EmployeeAccount;
 import business.UserAccount.UserAccount;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
@@ -23,17 +25,19 @@ public class ManagerWorkArea extends javax.swing.JPanel {
      * Creates new form ManagerWorkArea
      */
     JPanel workArea;
-    UserAccount account;
+    EmployeeAccount account;
     Organization organization;
     EcoSystem ecosystem;
     RestaurantEnterprise enterprise;
+    Network network;
     public ManagerWorkArea(JPanel workArea, UserAccount account, Organization organization, EcoSystem ecosystem, Enterprise enterprise) {
         initComponents();
         this.workArea = workArea;
-        this.account = account;
+        this.account = (EmployeeAccount) account;
         this.organization = organization;
         this.ecosystem = ecosystem;
         this.enterprise = (RestaurantEnterprise) enterprise;
+        this.network = ecosystem.getNetworkList().get(0);
 //        System.out.println(this.enterprise.getName());
     }
 
@@ -71,6 +75,11 @@ public class ManagerWorkArea extends javax.swing.JPanel {
         });
 
         btnProfile.setText("Profile");
+        btnProfile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnProfileActionPerformed(evt);
+            }
+        });
 
         btnLogout.setText("Logout");
         btnLogout.addActionListener(new java.awt.event.ActionListener() {
@@ -136,9 +145,9 @@ public class ManagerWorkArea extends javax.swing.JPanel {
 
     private void btnEmployeesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmployeesActionPerformed
         // TODO add your handling code here:
-        ManageEmployeesJPanel mejp = new ManageEmployeesJPanel();
+        ManageEmployeesJPanel mejp = new ManageEmployeesJPanel(upc, account, ecosystem, enterprise);
         upc.add(mejp);
-        CardLayout layout = (CardLayout) mejp.getLayout();
+        CardLayout layout = (CardLayout) upc.getLayout();
         layout.show(upc, "ManageEmployeesJPanel");
     }//GEN-LAST:event_btnEmployeesActionPerformed
 
@@ -152,6 +161,14 @@ public class ManagerWorkArea extends javax.swing.JPanel {
     CardLayout layout = (CardLayout) this.workArea.getLayout();
     layout.next(this.workArea);
     }//GEN-LAST:event_btnLogoutActionPerformed
+
+    private void btnProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProfileActionPerformed
+        // TODO add your handling code here:
+        ProfileJPanel cojp = new ProfileJPanel(this.ecosystem, account, network);
+        upc.add(cojp);
+        CardLayout layout = (CardLayout) upc.getLayout();
+        layout.next(upc);
+    }//GEN-LAST:event_btnProfileActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

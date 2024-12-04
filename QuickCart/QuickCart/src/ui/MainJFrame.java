@@ -4,7 +4,7 @@
  */
 package ui;
 
-import business.DBConn.DatabaseConnection;
+//import business.DBConn.DatabaseConnection;
 import java.awt.CardLayout;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -27,7 +27,7 @@ public class MainJFrame extends javax.swing.JFrame {
         upc.add(loginJPanel);
         CardLayout layout = (CardLayout) upc.getLayout();
         layout.next(upc);
-        DatabaseConnection.getConnection();
+        //DatabaseConnection.getConnection();
         this.revalidate();
         this.repaint();
     }
