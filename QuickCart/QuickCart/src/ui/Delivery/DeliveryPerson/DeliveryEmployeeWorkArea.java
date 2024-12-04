@@ -13,6 +13,8 @@ import business.UserAccount.UserAccount;
 import business.WorkQueue.DeliveryRequest;
 import business.WorkQueue.WorkRequest;
 import java.awt.CardLayout;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -43,6 +45,14 @@ public class DeliveryEmployeeWorkArea extends javax.swing.JPanel {
         btnOnTheWay.setEnabled(false);  
         btnPickUp.setEnabled(false);  
         btnOrderDelivered.setEnabled(false); 
+        ImageIcon gifIcon = new ImageIcon(getClass().getResource("/resources/delivery_man_gif.gif"));
+        JLabel gifLabel = new JLabel(gifIcon); 
+
+        deliveryGifJPanel.setLayout(new java.awt.BorderLayout());
+        deliveryGifJPanel.add(gifLabel, java.awt.BorderLayout.CENTER); 
+
+        deliveryGifJPanel.revalidate();
+        deliveryGifJPanel.repaint();
     }
 
     /**
@@ -62,6 +72,7 @@ public class DeliveryEmployeeWorkArea extends javax.swing.JPanel {
         btnPickUp = new javax.swing.JButton();
         btnOnTheWay = new javax.swing.JButton();
         btnOrderDelivered = new javax.swing.JButton();
+        deliveryGifJPanel = new javax.swing.JPanel();
 
         refreshJButton.setText("Refresh");
         refreshJButton.addActionListener(new java.awt.event.ActionListener() {
@@ -133,22 +144,21 @@ public class DeliveryEmployeeWorkArea extends javax.swing.JPanel {
             }
         });
 
+        javax.swing.GroupLayout deliveryGifJPanelLayout = new javax.swing.GroupLayout(deliveryGifJPanel);
+        deliveryGifJPanel.setLayout(deliveryGifJPanelLayout);
+        deliveryGifJPanelLayout.setHorizontalGroup(
+            deliveryGifJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 249, Short.MAX_VALUE)
+        );
+        deliveryGifJPanelLayout.setVerticalGroup(
+            deliveryGifJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 260, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(144, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnLogout)
-                        .addGap(67, 67, 67))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(refreshJButton)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 471, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(assignJButton))
-                        .addGap(129, 129, 129))))
             .addGroup(layout.createSequentialGroup()
                 .addGap(84, 84, 84)
                 .addComponent(btnPickUp)
@@ -157,24 +167,44 @@ public class DeliveryEmployeeWorkArea extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addComponent(btnOrderDelivered)
                 .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(130, 130, 130)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(refreshJButton)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 471, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(assignJButton))
+                        .addGap(80, 80, 80)
+                        .addComponent(deliveryGifJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(62, 62, 62))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnLogout)
+                .addGap(135, 135, 135))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(24, 24, 24)
+                .addGap(23, 23, 23)
                 .addComponent(btnLogout)
                 .addGap(32, 32, 32)
                 .addComponent(refreshJButton)
                 .addGap(26, 26, 26)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(assignJButton)
-                .addGap(61, 61, 61)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnPickUp)
-                    .addComponent(btnOnTheWay)
-                    .addComponent(btnOrderDelivered))
-                .addContainerGap(122, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(assignJButton)
+                        .addGap(62, 62, 62)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnPickUp)
+                            .addComponent(btnOnTheWay)
+                            .addComponent(btnOrderDelivered)))
+                    .addComponent(deliveryGifJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(231, 231, 231))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -267,6 +297,7 @@ public class DeliveryEmployeeWorkArea extends javax.swing.JPanel {
     private javax.swing.JButton btnOnTheWay;
     private javax.swing.JButton btnOrderDelivered;
     private javax.swing.JButton btnPickUp;
+    private javax.swing.JPanel deliveryGifJPanel;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton refreshJButton;
     private javax.swing.JTable workRequestJTable;

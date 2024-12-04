@@ -6,7 +6,9 @@ package ui.InventoryManager;
 
 import business.EcoSystem.EcoSystem;
 import business.Enterprise.Enterprise;
+import business.Network.Network;
 import business.Organization.Organization;
+import business.UserAccount.EmployeeAccount;
 import business.UserAccount.UserAccount;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
@@ -22,16 +24,18 @@ public class InventoryManagerWorkArea extends javax.swing.JPanel {
      * Creates new form InventoryManagerWorkArea
      */
     JPanel userProcessContainer;
-    UserAccount account; Organization organization;
+    EmployeeAccount account; Organization organization;
     EcoSystem business;
     Enterprise enterprise;
+    Network network;
     public InventoryManagerWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization,EcoSystem business, Enterprise enterprise) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
-        this.account = account;
+        this.account = (EmployeeAccount) account;
         this.organization = organization;
         this.business = business;
         this.enterprise = enterprise;
+        this.network = this.business.getNetworkList().get(0);
     }
 
     /**
@@ -68,6 +72,11 @@ public class InventoryManagerWorkArea extends javax.swing.JPanel {
         });
 
         jButton3.setText("Profile");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("Logout");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -151,6 +160,14 @@ public class InventoryManagerWorkArea extends javax.swing.JPanel {
         CardLayout layout = (CardLayout) workArea.getLayout();
         layout.next(workArea);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        ProfileJPanel cojp = new ProfileJPanel(this.business, account, network);
+        workArea.add(cojp);
+        CardLayout layout = (CardLayout) workArea.getLayout();
+        layout.next(workArea);
+    }//GEN-LAST:event_jButton3ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

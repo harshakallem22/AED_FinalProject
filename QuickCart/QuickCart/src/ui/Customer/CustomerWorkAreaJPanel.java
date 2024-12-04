@@ -55,6 +55,7 @@ this.repaint();
         btnProfile = new javax.swing.JButton();
         btnCart = new javax.swing.JButton();
         btnLogout = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         upc = new javax.swing.JPanel();
 
         setLayout(new java.awt.BorderLayout());
@@ -68,7 +69,7 @@ this.repaint();
             }
         });
 
-        btnProfile.setText("Profile");
+        btnProfile.setText("My Orders");
         btnProfile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnProfileActionPerformed(evt);
@@ -89,20 +90,29 @@ this.repaint();
             }
         });
 
+        jButton1.setText("Profile");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(191, 191, 191)
+                .addContainerGap(294, Short.MAX_VALUE)
                 .addComponent(btnOrder)
                 .addGap(35, 35, 35)
                 .addComponent(btnProfile)
                 .addGap(35, 35, 35)
                 .addComponent(btnCart)
-                .addGap(40, 40, 40)
+                .addGap(42, 42, 42)
+                .addComponent(jButton1)
+                .addGap(49, 49, 49)
                 .addComponent(btnLogout)
-                .addGap(25, 25, 25))
+                .addGap(21, 21, 21))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -112,7 +122,8 @@ this.repaint();
                     .addComponent(btnOrder)
                     .addComponent(btnProfile)
                     .addComponent(btnCart)
-                    .addComponent(btnLogout))
+                    .addComponent(btnLogout)
+                    .addComponent(jButton1))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
 
@@ -162,12 +173,22 @@ this.repaint();
         layout.next(upc);
     }//GEN-LAST:event_btnOrderActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        ca = (CustomerAccount) account;
+        ProfileJPanel cojp = new ProfileJPanel(this.ecosystem, ca, network);
+        upc.add(cojp);
+        CardLayout layout = (CardLayout) upc.getLayout();
+        layout.next(upc);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCart;
     private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnOrder;
     private javax.swing.JButton btnProfile;
+    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JPanel upc;

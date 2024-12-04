@@ -13,7 +13,7 @@ import java.awt.CardLayout;
 
 /**
  *
- * @author SAI SRIDHAR PARIMI
+ * @author SAI SRIDHAR
  */
 public class CartJFrame extends javax.swing.JFrame {
 

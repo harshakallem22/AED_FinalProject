@@ -5,7 +5,7 @@
 package business.EcoSystem;
 
 import business.Customer.Customer;
-import business.DAO.CustomerDAO;
+//import business.DAO.CustomerDAO;
 import business.Employee.Employee;
 import business.Enterprise.AnalyticsEnterprise;
 import business.Enterprise.DeliveryEnterprise;
@@ -59,38 +59,38 @@ public class ConfigureASystem {
         
         RestaurantEnterprise res1 = network.getEnterpriseDirectory().createRestaurant("Vaanga", "","","");
         //RestaurantEnterprise res1 = network.getEnterpriseDirectory().createRestaurant("Vaanga", "", "", "");
-        Employee emp1 = res1.getEmployeeDirectory().createEmployee("manager1");
+        Employee emp1 = res1.getEmployeeDirectory().createEmployee("manager1", "check@gmail.com");
         res1.getMenu().createFoodItem("Pannerr", 10.5);
         
         RestaurantEnterprise res2 = network.getEnterpriseDirectory().createRestaurant("uop", "","","");
         //RestaurantEnterprise res1 = network.getEnterpriseDirectory().createRestaurant("Vaanga", "", "", "");
-        Employee emp2 = res2.getEmployeeDirectory().createEmployee("manager1");
+        Employee emp2 = res2.getEmployeeDirectory().createEmployee("manager1", "check@gmail.com");
         res2.getMenu().createFoodItem("abc", 13);
         EmployeeAccount ua = system.getUserAccountDirectory().createUserAccount("man1", "man1", new RestaurantManagerRole());
         ua.setEmployee(emp2);
         
-        Employee uopcook = res2.getEmployeeDirectory().createEmployee("cook");
+        Employee uopcook = res2.getEmployeeDirectory().createEmployee("cook", "check@gmail.com");
         EmployeeAccount uopEa = system.getUserAccountDirectory().createUserAccount("cook", "cook", new RestaurantCookRole());
         uopEa.setEmployee(uopcook);
         
         DeliveryEnterprise del1 = network.getEnterpriseDirectory().createDelivery("del1", "", "", "");
-        Employee delemp1 = del1.getEmployeeDirectory().createEmployee("delman");
+        Employee delemp1 = del1.getEmployeeDirectory().createEmployee("delman", "check@gmail.com");
         EmployeeAccount delea1 = system.getUserAccountDirectory().createUserAccount("delman1", "delman1", new DeliveryManagerRole());
         delea1.setEmployee(delemp1);
         
-        Employee delper = del1.getEmployeeDirectory().createEmployee("delper");
+        Employee delper = del1.getEmployeeDirectory().createEmployee("delper", "check@gmail.com");
         EmployeeAccount delperEa = system.getUserAccountDirectory().createUserAccount("delper", "delper", new DeliveryPersonRole());
         delperEa.setEmployee(delper);
         
         GroceryEnterprise ge1 = network.getEnterpriseDirectory().createStore("ge1", "", "", "");
-        Employee geemp1 = ge1.getEmployeeDirectory().createEmployee("geemp");
+        Employee geemp1 = ge1.getEmployeeDirectory().createEmployee("geemp", "check@gmail.com");
         EmployeeAccount geea = system.getUserAccountDirectory().createUserAccount("geman", "geman", new StoreManagerRole());
         geea.setEmployee(geemp1);
         ge1.getGroceryCatalog().createGroceryItem("Soap", 4, 100);
         ge1.getGroceryCatalog().createGroceryItem("Brush", 5, 4);
         
         InventoryEnterprise inv1 = network.getEnterpriseDirectory().createInventory("inv1", "kjsdb", "abcd", "bcd@gmail.com");
-        Employee invemp1 = inv1.getEmployeeDirectory().createEmployee("invman");
+        Employee invemp1 = inv1.getEmployeeDirectory().createEmployee("invman", "check@gmail.com");
         EmployeeAccount invea1 = system.getUserAccountDirectory().createUserAccount("invman1", "invman1", new InventoryManagerRole());
         invea1.setEmployee(invemp1);
         
@@ -102,7 +102,7 @@ public class ConfigureASystem {
 //        anaea.setEmployee(anaemp1);
 
           AnalyticsEnterprise ana1 = network.getEnterpriseDirectory().createAnalytics("inv1", "kjsdb", "abcd", "bcd@gmail.com");
-          Employee anaemp1 = ana1.getEmployeeDirectory().createEmployee("anaman");
+          Employee anaemp1 = ana1.getEmployeeDirectory().createEmployee("anaman", "check@gmail.com");
           EmployeeAccount anaea = system.getUserAccountDirectory().createUserAccount("anaman", "anaman", new AnalyticsMemberRole());
           anaea.setEmployee(anaemp1);
         

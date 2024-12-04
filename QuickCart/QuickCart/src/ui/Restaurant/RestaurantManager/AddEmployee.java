@@ -4,6 +4,15 @@
  */
 package ui.Restaurant.RestaurantManager;
 
+import business.EcoSystem.EcoSystem;
+import business.Employee.Employee;
+import business.Enterprise.RestaurantEnterprise;
+import business.Network.Network;
+import business.Role.RestaurantCookRole;
+import business.UserAccount.EmployeeAccount;
+import business.UserAccount.UserAccount;
+import javax.swing.JPanel;
+
 /**
  *
  * @author SAI SRIDHAR
@@ -13,8 +22,19 @@ public class AddEmployee extends javax.swing.JPanel {
     /**
      * Creates new form AddEmployee
      */
-    public AddEmployee() {
+    JPanel workArea;
+    UserAccount account;
+    EcoSystem ecosystem;
+    RestaurantEnterprise restaurant;
+    Network network;
+    public AddEmployee(JPanel workArea, UserAccount account, EcoSystem ecosystem, RestaurantEnterprise restaurant) {
         initComponents();
+        this.workArea = workArea;
+        this.account = (EmployeeAccount)account;
+        this.ecosystem = ecosystem;
+        this.restaurant = restaurant;
+        System.out.println(restaurant.getName());
+        network = ecosystem.getNetworkList().get(0);
     }
 
     /**
@@ -45,6 +65,11 @@ public class AddEmployee extends javax.swing.JPanel {
         lblPassword.setText("Password");
 
         btnSubmit.setText("Submit");
+        btnSubmit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSubmitActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -94,6 +119,38 @@ public class AddEmployee extends javax.swing.JPanel {
                 .addContainerGap(181, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
+        // TODO add your handling code here:
+        String name = txtName.getText().trim();
+        String email = txtEmail.getText().trim();
+        String username = txtUsername.getText().trim();
+        String password = btnPassword.getText().trim();
+
+        if (name.isEmpty() || email.isEmpty() || username.isEmpty() || password.isEmpty()) {
+            javax.swing.JOptionPane.showMessageDialog(this, "All fields are required!", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        for (UserAccount ua : ecosystem.getUserAccountDirectory().getUserAccountList()) {
+            if (ua.getUsername().equals(username)) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Username already exists. Please choose another username.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        }
+
+        // Create new employee and account
+        Employee newEmployee = restaurant.getEmployeeDirectory().createEmployee(name, email);
+        EmployeeAccount newAccount = ecosystem.getUserAccountDirectory().createUserAccount(username, password, new RestaurantCookRole());
+        newAccount.setEmployee(newEmployee);
+
+        // Display success message and reset fields
+        javax.swing.JOptionPane.showMessageDialog(this, "Employee account created successfully!", "Success", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        txtName.setText("");
+        txtEmail.setText("");
+        txtUsername.setText("");
+        btnPassword.setText("");
+    }//GEN-LAST:event_btnSubmitActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

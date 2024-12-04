@@ -46,8 +46,8 @@ public class LoginJPanel extends javax.swing.JPanel {
         lblUsername = new javax.swing.JLabel();
         txtUsername = new javax.swing.JTextField();
         lblPassword = new javax.swing.JLabel();
-        txtPassword = new javax.swing.JTextField();
         btnLogin = new javax.swing.JButton();
+        txtPassword = new javax.swing.JPasswordField();
 
         lblUsername.setText("Username");
 
@@ -73,12 +73,12 @@ public class LoginJPanel extends javax.swing.JPanel {
                             .addComponent(lblPassword))
                         .addGap(35, 35, 35)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtUsername)
-                            .addComponent(txtPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)))
+                            .addComponent(txtUsername, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
+                            .addComponent(txtPassword)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(236, 236, 236)
                         .addComponent(btnLogin)))
-                .addGap(230, 230, 230))
+                .addContainerGap(230, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -102,7 +102,7 @@ public class LoginJPanel extends javax.swing.JPanel {
         // Get user name
         String userName = txtUsername.getText();
         // Get Password
-        String password = txtPassword.getText();
+        String password = new String(txtPassword.getPassword());
         Enterprise e=null;
         //Step1: Check in the system admin user account directory if you have the user
         if((system.getUserAccountDirectory().authenticateUser(userName, password)) instanceof CustomerAccount){
@@ -112,6 +112,7 @@ public class LoginJPanel extends javax.swing.JPanel {
         else{
             EmployeeAccount ea =  (EmployeeAccount) system.getUserAccountDirectory().authenticateUser(userName, password);
             System.out.println("Hiiiiii");
+            System.out.println(ea);
 //            System.out.println(ea.getEmployee().getName());
             
             for(Network network : system.getNetworkList()){
@@ -119,6 +120,7 @@ public class LoginJPanel extends javax.swing.JPanel {
                     System.out.println("Check 1");
                     for(Employee emp : enterprise.getEmployeeDirectory().getEmployeeList()){
                         System.out.println("Check 2");
+                        System.out.println(emp);
                         if(emp.equals(ea.getEmployee())){
                             System.out.println("Check 3");
                             e = enterprise;
@@ -206,7 +208,7 @@ public class LoginJPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnLogin;
     private javax.swing.JLabel lblPassword;
     private javax.swing.JLabel lblUsername;
-    private javax.swing.JTextField txtPassword;
+    private javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
 }

@@ -36,7 +36,7 @@ public class CustomerOrderJPanel extends javax.swing.JPanel {
     public CustomerOrderJPanel(Network network, CustomerAccount account) {
         initComponents();
         this.revalidate();
-this.repaint();
+    this.repaint();
         this.network = network;
         this.account = account;
     }
@@ -188,7 +188,7 @@ this.repaint();
             for (GroceryEnterprise res : network.getEnterpriseDirectory().getGrocery().getGroceryList()) {
                 Object row[] = new Object[2];
                 row[0] = res;
-                row[1] = res;
+                row[1] = String.format("%.1f", res.getAverageRating());
                 dtm.addRow(row);
             }
         }
@@ -206,7 +206,7 @@ this.repaint();
             for (RestaurantEnterprise res : network.getEnterpriseDirectory().getRestaurants().getRestaurantList()) {
                 Object row[] = new Object[2];
                 row[0] = res;
-                row[1] = res;
+                row[1] = String.format("%.1f", res.getAverageRating());
                 dtm.addRow(row);
             }
         }
@@ -257,7 +257,6 @@ this.repaint();
             int quantity = (int) quantitySpinner.getValue();
             ItemOrder line = null;
 
-            // Check whether the selected item is from Restaurant or Grocery
             if (this.type.equals(EnterpriseType.Restaurant)) {
                 FoodItem item = (FoodItem) tblMenu.getValueAt(selectedRow, 0);
 
@@ -317,7 +316,6 @@ this.repaint();
                 }
             }
 
-            // Add item to cart
             if (line != null) {
                 this.account.getCart().addToCart(line);
                 JOptionPane.showMessageDialog(null, "Item has been successfully added to Shopping Cart.");

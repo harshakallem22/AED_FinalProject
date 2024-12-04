@@ -47,17 +47,17 @@ public class CustomerProfile extends javax.swing.JPanel {
         System.out.println("Inside populate Table "+account.getWorkQueue().getWorkRequestList().size());
         for (WorkRequest wr : this.account.getWorkQueue().getWorkRequestList()) {
             OrderRequest or = (OrderRequest) wr;
-            Object row[] = new Object[6];
+            Object row[] = new Object[5];
+            System.out.println(or.getEnterprise());
             row[0] = or;
             row[1] = or;
-            row[2] = or;
-            row[3] = or.getAmount();
-            row[4] = or.getStatus(); 
+            row[2] = or.getAmount();
+            row[3] = or.getStatus(); 
             if(or.getReview() == 0){
-                row[5] = "Not Rated";
+                row[4] = "Not Rated";
             }
             else{
-                row[5] = or.getReview();
+                row[4] = or.getReview();
             }
             dtm.addRow(row);
 
@@ -72,17 +72,17 @@ public class CustomerProfile extends javax.swing.JPanel {
 
         orderTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Order #", "Merchant", "Delivery Partner", "Amount", "Status", "Review"
+                "Order #", "Merchant", "Amount", "Status", "Review"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {

@@ -45,5 +45,19 @@ public class RestaurantEnterprise extends Enterprise {
         this.restaurantOrders.add(order);
     }
     
+    public double getAverageRating() {
+        int totalRating = 0;
+        int numberOfReviews = 0;
+
+        for (OrderRequest order : this.restaurantOrders) {
+            if (order.getReview() > 0) { 
+                totalRating += order.getReview();
+                numberOfReviews++;
+            }
+        }
+
+        return numberOfReviews > 0 ? (double) totalRating / numberOfReviews : 0.0;
+}
+    
 }
 
