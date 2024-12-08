@@ -54,6 +54,8 @@ public class RequestsJPanel extends javax.swing.JPanel {
         tblRequests = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(152, 251, 203));
+
         btnSendItems.setText("Send Items");
         btnSendItems.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
