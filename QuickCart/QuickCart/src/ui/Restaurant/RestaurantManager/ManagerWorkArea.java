@@ -60,6 +60,9 @@ public class ManagerWorkArea extends javax.swing.JPanel {
 
         jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
 
+        jPanel1.setBackground(new java.awt.Color(255, 62, 70));
+
+        btnOrders.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
         btnOrders.setText("Manage Orders");
         btnOrders.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -67,6 +70,7 @@ public class ManagerWorkArea extends javax.swing.JPanel {
             }
         });
 
+        btnEmployees.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
         btnEmployees.setText("Manage Employees");
         btnEmployees.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -74,6 +78,7 @@ public class ManagerWorkArea extends javax.swing.JPanel {
             }
         });
 
+        btnProfile.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
         btnProfile.setText("Profile");
         btnProfile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -81,6 +86,7 @@ public class ManagerWorkArea extends javax.swing.JPanel {
             }
         });
 
+        btnLogout.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
         btnLogout.setText("Logout");
         btnLogout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -92,8 +98,8 @@ public class ManagerWorkArea extends javax.swing.JPanel {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(299, 299, 299)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(288, Short.MAX_VALUE)
                 .addComponent(btnOrders)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnEmployees)
@@ -101,18 +107,18 @@ public class ManagerWorkArea extends javax.swing.JPanel {
                 .addComponent(btnProfile)
                 .addGap(18, 18, 18)
                 .addComponent(btnLogout)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(40, Short.MAX_VALUE)
+                .addContainerGap(43, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnOrders)
                     .addComponent(btnEmployees)
                     .addComponent(btnProfile)
                     .addComponent(btnLogout))
-                .addGap(31, 31, 31))
+                .addGap(30, 30, 30))
         );
 
         jSplitPane1.setTopComponent(jPanel1);
