@@ -50,7 +50,11 @@ public class CustomerCart extends javax.swing.JPanel {
         lblTitle = new javax.swing.JLabel();
         btnPlaceOrder = new javax.swing.JButton();
         btnClear = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(255, 255, 102));
+
+        tblCart.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
         tblCart.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
@@ -72,9 +76,10 @@ public class CustomerCart extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tblCart);
 
-        lblTitle.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
+        lblTitle.setFont(new java.awt.Font("Bahnschrift", 1, 32)); // NOI18N
         lblTitle.setText("Shopping Cart");
 
+        btnPlaceOrder.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
         btnPlaceOrder.setText("Checkout");
         btnPlaceOrder.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -82,39 +87,47 @@ public class CustomerCart extends javax.swing.JPanel {
             }
         });
 
+        btnClear.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
         btnClear.setText("Clear Cart");
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/cartimage2updated.png"))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(150, Short.MAX_VALUE)
+                .addGap(108, 108, 108)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnClear)
-                                .addGap(28, 28, 28)
-                                .addComponent(btnPlaceOrder))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 529, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(93, 93, 93))
+                        .addComponent(btnClear)
+                        .addGap(28, 28, 28)
+                        .addComponent(btnPlaceOrder))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 529, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(lblTitle)
-                        .addGap(282, 282, 282))))
+                        .addGap(141, 141, 141)))
+                .addGap(144, 144, 144)
+                .addComponent(jLabel1)
+                .addContainerGap(243, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(28, 28, 28)
+                .addGap(39, 39, 39)
                 .addComponent(lblTitle)
-                .addGap(29, 29, 29)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 459, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 459, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(73, 73, 73)
+                        .addComponent(jLabel1)))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnPlaceOrder)
                     .addComponent(btnClear))
-                .addGap(35, 35, 35))
+                .addContainerGap(418, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -143,6 +156,7 @@ public class CustomerCart extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClear;
     private javax.swing.JButton btnPlaceOrder;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JTable tblCart;
