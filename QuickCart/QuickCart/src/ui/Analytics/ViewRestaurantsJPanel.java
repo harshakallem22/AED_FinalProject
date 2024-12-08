@@ -183,26 +183,27 @@ public class ViewRestaurantsJPanel extends javax.swing.JPanel {
             return;
         }
         RestaurantEnterprise restaurant = (RestaurantEnterprise) jTable1.getValueAt(selectedRow, 0);
-        ArrayList<OrderRequest> orders = MockOrderGeneration.generateRestaurantOrders(restaurant, 20);
+        System.out.println(restaurant.getRestaurantOrders().size());
+        //ArrayList<OrderRequest> orders = MockOrderGeneration.generateRestaurantOrders(restaurant, 20);
         double totalRevenue = 0;
-    int totalOrders = orders.size();
-    int totalRating = 0;
-    int ratedOrdersCount = 0;
+//    int totalOrders = orders.size();
+//    int totalRating = 0;
+//    int ratedOrdersCount = 0;
 
-    for (OrderRequest order : orders) {
-        totalRevenue += order.getAmount(); // Accumulate revenue
-        if (order.getReview() > 0) { // If the order has a valid review
-            totalRating += order.getReview();
-            ratedOrdersCount++;
-        }
-    }
-    
-    double averageRating = ratedOrdersCount > 0 ? (double) totalRating / ratedOrdersCount : 0.0;
-
-    // Display the results in the text fields
-    jTextField1.setText(String.valueOf(totalOrders)); // Set number of orders
-    jTextField2.setText(String.format("%.2f", totalRevenue));
-    jTextField3.setText(String.format("%.1f", averageRating));
+//    for (OrderRequest order : orders) {
+//        totalRevenue += order.getAmount(); // Accumulate revenue
+//        if (order.getReview() > 0) { // If the order has a valid review
+//            totalRating += order.getReview();
+//            ratedOrdersCount++;
+//        }
+//    }
+//    
+//    double averageRating = ratedOrdersCount > 0 ? (double) totalRating / ratedOrdersCount : 0.0;
+//
+//    // Display the results in the text fields
+//    jTextField1.setText(String.valueOf(totalOrders)); // Set number of orders
+//    jTextField2.setText(String.format("%.2f", totalRevenue));
+//    jTextField3.setText(String.format("%.1f", averageRating));
     }//GEN-LAST:event_btnViewActionPerformed
     
    

@@ -4,6 +4,7 @@
  */
 package ui.Grocery.GroceryManager;
 
+import business.Customer.ItemOrder;
 import business.EcoSystem.EcoSystem;
 import business.Enterprise.DeliveryEnterprise;
 import business.Enterprise.GroceryEnterprise;
@@ -15,6 +16,7 @@ import business.WorkQueue.OrderRequest;
 import business.WorkQueue.WorkRequest;
 import java.util.ArrayList;
 import javax.swing.JComboBox;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -131,6 +133,26 @@ public class ManageOrderJPanel extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        int selectedRow = jTable1.getSelectedRow();
+        if (selectedRow < 0) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Please select an order to view details.");
+            return;
+        }
+
+        OrderRequest selectedOrder = (OrderRequest) jTable1.getValueAt(selectedRow, 0);
+        System.out.println(selectedOrder.getAmount());
+        System.out.println(selectedOrder.getItems().size());
+        JFrame viewOrderFrame = new JFrame("Order Details");
+        viewOrderFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        viewOrderFrame.setSize(800, 600);
+        viewOrderFrame.setLocationRelativeTo(null);
+
+        ViewDetailedOrderJPanel detailedOrderPanel = new ViewDetailedOrderJPanel(selectedOrder);
+        viewOrderFrame.add(detailedOrderPanel);
+        System.out.println(selectedOrder.getDashes().size());
+
+        viewOrderFrame.setVisible(true);
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed

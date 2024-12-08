@@ -25,6 +25,7 @@ public class OrderRequest extends WorkRequest {
     private String deliveryPhone;
     private double amount;
     private Enterprise company;
+    private String merchant;
     private ArrayList<ItemOrder> dashes;
      private UserAccount assignedTo;
      private DeliveryRequest deliveryRequest=null;
@@ -129,6 +130,24 @@ public class OrderRequest extends WorkRequest {
     public int getReview(){
         return this.review;
     }
+
+    public String getMerchant() {
+        return merchant;
+    }
+
+    public void setMerchant(String merchant) {
+        this.merchant = merchant;
+    }
+
+    public ArrayList<ItemOrder> getDashes() {
+        return dashes;
+    }
+
+    public void setDashes(ArrayList<ItemOrder> dashes) {
+        this.dashes = dashes;
+    }
+    
+    
     
     @Override
     public String toString(){

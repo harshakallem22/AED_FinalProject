@@ -4,17 +4,17 @@
  */
 package ui.Delivery.DeliveryManager;
 
-import ui.Grocery.GroceryManager.*;
 import ui.Restaurant.RestaurantManager.*;
 import business.EcoSystem.EcoSystem;
+import business.Employee.Employee;
 import business.Enterprise.DeliveryEnterprise;
 import business.Enterprise.GroceryEnterprise;
 import business.Enterprise.RestaurantEnterprise;
 import business.Network.Network;
-import business.UserAccount.EmployeeAccount;
 import business.UserAccount.UserAccount;
-import java.awt.CardLayout;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -23,20 +23,21 @@ import javax.swing.JPanel;
 public class ManageEmployeesJPanel extends javax.swing.JPanel {
 
     /**
-     * Creates new form ManageEmployeesJPanel
+     * Creates new form ViewEmployeeJPanel
      */
     JPanel workArea;
     UserAccount account;
     EcoSystem ecosystem;
-    DeliveryEnterprise delivery;
+    DeliveryEnterprise restaurant;
     Network network;
-    public ManageEmployeesJPanel(JPanel upc, EmployeeAccount account, EcoSystem ecosystem, DeliveryEnterprise enterprise) {
-        initComponents();
-        this.workArea = upc;
-        this.account = (EmployeeAccount)account;
-        this.ecosystem = ecosystem;
-        this.delivery = enterprise;
-        network = ecosystem.getNetworkList().get(0);
+    public ManageEmployeesJPanel(JPanel workArea, UserAccount account, EcoSystem ecosystem, DeliveryEnterprise enterprise) {
+        initComponents(); 
+        this.workArea = workArea;
+        this.account = account; 
+        this.ecosystem = ecosystem; 
+        this.restaurant = enterprise; 
+        this.network = ecosystem.getNetworkList().get(0); 
+        populateTable();
     }
 
     /**
@@ -48,55 +49,197 @@ public class ManageEmployeesJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnAdd = new javax.swing.JButton();
-        btnView = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblEmployees = new javax.swing.JTable();
+        btnDelete = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
-        setBackground(new java.awt.Color(242, 185, 73));
+        tblEmployees.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Name", "Email"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
 
-        btnAdd.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
-        btnAdd.setText("Add Employee");
-        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tblEmployees);
+
+        btnDelete.setText("Delete");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddActionPerformed(evt);
+                btnDeleteActionPerformed(evt);
             }
         });
 
-        btnView.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
-        btnView.setText("View Employees");
+        jButton1.setText("Add");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Edit");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(145, 145, 145)
-                .addComponent(btnAdd)
-                .addGap(92, 92, 92)
-                .addComponent(btnView)
-                .addContainerGap(222, Short.MAX_VALUE))
+                .addGap(86, 86, 86)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(56, 56, 56)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(btnDelete)
+                        .addComponent(jButton1))
+                    .addComponent(jButton2))
+                .addContainerGap(73, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(150, 150, 150)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAdd)
-                    .addComponent(btnView))
-                .addContainerGap(423, Short.MAX_VALUE))
+                .addGap(75, 75, 75)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(126, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(50, 50, 50)
+                .addComponent(jButton2)
+                .addGap(56, 56, 56)
+                .addComponent(btnDelete)
+                .addGap(274, 274, 274))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        AddEmployee mejp = new AddEmployee(workArea, account, ecosystem, delivery);
-        workArea.add(mejp);
-        CardLayout layout = (CardLayout) workArea.getLayout();
-        layout.show(workArea, "Add Employee");
-    }//GEN-LAST:event_btnAddActionPerformed
+        JFrame addEmployeeFrame = new JFrame("Add Employee");
+        addEmployeeFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        addEmployeeFrame.setSize(600, 400);
+        addEmployeeFrame.setLocationRelativeTo(null);
 
+        AddEmployee addEmployeePanel = new AddEmployee(workArea, account, ecosystem, restaurant);
+        addEmployeeFrame.add(addEmployeePanel);
 
+        addEmployeeFrame.setVisible(true);
+        addEmployeeFrame.addWindowListener(new java.awt.event.WindowAdapter() {
+        @Override
+            public void windowClosed(java.awt.event.WindowEvent e) {
+                populateTable();
+            }
+        });
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:int selectedRow = tblEmployees.getSelectedRow();
+        int selectedRow = tblEmployees.getSelectedRow();
+        if (selectedRow < 0) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Please select an employee to edit.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        String employeeName = (String) tblEmployees.getValueAt(selectedRow, 0);
+        String employeeEmail = (String) tblEmployees.getValueAt(selectedRow, 1);
+
+        Employee selectedEmployee = restaurant.getEmployeeDirectory().findEmployeeByEmail(employeeEmail);
+
+        if (selectedEmployee == null) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Employee not found.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        JFrame editEmployeeFrame = new JFrame("Edit Employee");
+        editEmployeeFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        editEmployeeFrame.setSize(600, 400);
+        editEmployeeFrame.setLocationRelativeTo(null);
+
+        EditEmployee editEmployeePanel = new EditEmployee(workArea, account, ecosystem, restaurant, selectedEmployee);
+        editEmployeeFrame.add(editEmployeePanel);
+
+        editEmployeeFrame.setVisible(true);
+        
+        editEmployeeFrame.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosed(java.awt.event.WindowEvent e) {
+                populateTable();
+            }
+        });
+
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        // TODO add your handling code here:
+        int selectedRow = tblEmployees.getSelectedRow();  // Check selected row
+
+        if (selectedRow < 0) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Please select an employee to delete.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        String employeeEmail = (String) tblEmployees.getValueAt(selectedRow, 1);
+        Employee selectedEmployee = restaurant.getEmployeeDirectory().findEmployeeByEmail(employeeEmail);
+
+        if (selectedEmployee == null) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Employee not found.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        int confirm = javax.swing.JOptionPane.showConfirmDialog(this, 
+                "Are you sure you want to delete this employee?", 
+                "Confirm Deletion", 
+                javax.swing.JOptionPane.YES_NO_OPTION, 
+                javax.swing.JOptionPane.WARNING_MESSAGE);
+
+        if (confirm == javax.swing.JOptionPane.YES_OPTION) {
+            restaurant.getEmployeeDirectory().getEmployeeList().remove(selectedEmployee);
+
+            populateTable();
+
+            javax.swing.JOptionPane.showMessageDialog(this, "Employee deleted successfully!", "Success", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        }
+
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
+    
+    private void populateTable() {
+        DefaultTableModel model = (DefaultTableModel) tblEmployees.getModel();
+        model.setRowCount(0);  // Clear existing rows
+
+        // Loop through the restaurant's employee directory
+        for (Employee employee : restaurant.getEmployeeDirectory().getEmployeeList()) {
+            Object[] row = new Object[2];  // Define the row structure
+            row[0] = employee.getName();
+            row[1] = employee.getEmail();
+
+            model.addRow(row);  // Add row to table model
+        }
+}
+
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAdd;
-    private javax.swing.JButton btnView;
+    private javax.swing.JButton btnDelete;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tblEmployees;
     // End of variables declaration//GEN-END:variables
 }

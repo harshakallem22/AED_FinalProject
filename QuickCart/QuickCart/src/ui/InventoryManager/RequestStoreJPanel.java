@@ -12,7 +12,7 @@ import business.Network.Network;
 import business.Organization.Organization;
 import business.UserAccount.UserAccount;
 import business.WorkQueue.SupplyOfferRequest;
-import com.sun.xml.internal.messaging.saaj.packaging.mime.MessagingException;
+//import com.sun.xml.internal.messaging.saaj.packaging.mime.MessagingException;
 import java.net.Authenticator;
 import java.net.PasswordAuthentication;
 import static java.time.Clock.system;
@@ -69,17 +69,17 @@ public class RequestStoreJPanel extends javax.swing.JPanel {
         tblStores.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
         tblStores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Store", "Email", "Address", "Status"
+                "Store", "Email", "Address"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -177,32 +177,32 @@ public class RequestStoreJPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
     
-    private void sendEmail(String to, String subject, String messageText) throws MessagingException {
-        // Set up email properties
-//        Properties properties = new Properties();
-//        properties.put("mail.smtp.host", "smtp.gmail.com");
-//        properties.put("mail.smtp.port", "587");
-//        properties.put("mail.smtp.auth", "true");
-//        properties.put("mail.smtp.starttls.enable", "true");
-//
-//        // Create a session
-//        Session session = Session.getInstance(properties, new Authenticator() {
-//            @Override
-//            protected PasswordAuthentication getPasswordAuthentication() {
-//                return new PasswordAuthentication(fromEmail, "null");
-//            }
-//        });
-//
-//        // Create the email message
-//        Message message = new MimeMessage(session);
-//        message.setFrom(new InternetAddress(fromEmail));
-//        message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
-//        message.setSubject(subject);
-//        message.setText(messageText);
-//
-//        // Send the email
-//        Transport.send(message);
-    }
+//    private void sendEmail(String to, String subject, String messageText) throws MessagingException {
+//        // Set up email properties
+////        Properties properties = new Properties();
+////        properties.put("mail.smtp.host", "smtp.gmail.com");
+////        properties.put("mail.smtp.port", "587");
+////        properties.put("mail.smtp.auth", "true");
+////        properties.put("mail.smtp.starttls.enable", "true");
+////
+////        // Create a session
+////        Session session = Session.getInstance(properties, new Authenticator() {
+////            @Override
+////            protected PasswordAuthentication getPasswordAuthentication() {
+////                return new PasswordAuthentication(fromEmail, "null");
+////            }
+////        });
+////
+////        // Create the email message
+////        Message message = new MimeMessage(session);
+////        message.setFrom(new InternetAddress(fromEmail));
+////        message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
+////        message.setSubject(subject);
+////        message.setText(messageText);
+////
+////        // Send the email
+////        Transport.send(message);
+//    }
     
     private void populateTable() {
         DefaultTableModel model = (DefaultTableModel) tblStores.getModel();
@@ -212,11 +212,11 @@ public class RequestStoreJPanel extends javax.swing.JPanel {
             ArrayList<Enterprise> stores = network.getStoreEnterprises();
             for (Enterprise store : stores) {
                 if (!addedStores.contains(store.getName())) {
-                    Object[] row = new Object[4];
+                    Object[] row = new Object[3];
+                    System.out.println(store.getEmail());
                     row[0] = store;
                     row[1] = store.getEmail();
                     row[2] = store.getAddress();
-                    row[3] = "";
                     model.addRow(row);
                     addedStores.add(store.getName());
                 }

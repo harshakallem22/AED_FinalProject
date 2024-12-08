@@ -4,6 +4,17 @@
  */
 package ui.Delivery.DeliveryManager;
 
+import ui.Restaurant.RestaurantManager.*;
+import business.EcoSystem.EcoSystem;
+import business.Employee.Employee;
+import business.Enterprise.DeliveryEnterprise;
+import business.Enterprise.GroceryEnterprise;
+import business.Enterprise.RestaurantEnterprise;
+import business.Network.Network;
+import business.Role.RestaurantCookRole;
+import business.UserAccount.EmployeeAccount;
+import business.UserAccount.UserAccount;
+import javax.swing.JPanel;
 
 import business.EcoSystem.EcoSystem;
 import business.Employee.Employee;
@@ -28,12 +39,13 @@ public class AddEmployee extends javax.swing.JPanel {
     EcoSystem ecosystem;
     DeliveryEnterprise enterprise;
     Network network;
-    public AddEmployee(JPanel workArea, UserAccount account, EcoSystem ecosystem, DeliveryEnterprise enterprise) {
+    public AddEmployee(JPanel workArea, UserAccount account, EcoSystem ecosystem, DeliveryEnterprise restaurant) {
         initComponents();
         this.workArea = workArea;
         this.account = (EmployeeAccount)account;
         this.ecosystem = ecosystem;
-        this.enterprise = enterprise;
+        this.restaurant = restaurant;
+        System.out.println(restaurant.getName());
         network = ecosystem.getNetworkList().get(0);
     }
 
@@ -135,6 +147,7 @@ public class AddEmployee extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
         // TODO add your handling code here:
         String name = txtName.getText().trim();
@@ -157,6 +170,7 @@ public class AddEmployee extends javax.swing.JPanel {
         // Create new employee and account
         Employee newEmployee = enterprise.getEmployeeDirectory().createEmployee(name, email);
         EmployeeAccount newAccount = ecosystem.getUserAccountDirectory().createUserAccount(username, password, new DeliveryPersonRole());
+
         newAccount.setEmployee(newEmployee);
 
         // Display success message and reset fields
@@ -166,6 +180,7 @@ public class AddEmployee extends javax.swing.JPanel {
         txtUsername.setText("");
         btnPassword.setText("");
     }//GEN-LAST:event_btnSubmitActionPerformed
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

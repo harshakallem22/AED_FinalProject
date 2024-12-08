@@ -28,4 +28,13 @@ public class EmployeeDirectory {
         employeeList.add(employee);
         return employee;
     }
+    
+    public Employee findEmployeeByEmail(String email) {
+        for (Employee e : employeeList) {
+            if (e.getEmail().equalsIgnoreCase(email)) {
+                return e;
+            }
+        }
+        return null;
+    }
 }

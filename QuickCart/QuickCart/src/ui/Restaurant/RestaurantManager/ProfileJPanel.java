@@ -32,7 +32,9 @@ public class ProfileJPanel extends javax.swing.JPanel {
         jTextField1.setText(account.getEmployee().getName());
         jTextField2.setText(account.getEmployee().getEmail());
         jPasswordField1.setText(account.getPassword());
-        
+        jTextField1.setEditable(false);
+        jTextField2.setEditable(false);
+        jPasswordField1.setEditable(false);
     }
 
     /**

@@ -19,6 +19,7 @@ public abstract class Enterprise extends Organization{
     String phone;
     String email;
     String address;
+    int id;
 
     public OrganizationDirectory getOrganizationDirectory() {
         return organizationDirectory;
@@ -73,6 +74,26 @@ public abstract class Enterprise extends Organization{
 
     public String getAddress() {
         return address;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
     
     @Override 

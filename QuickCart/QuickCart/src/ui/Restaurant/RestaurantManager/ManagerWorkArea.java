@@ -56,6 +56,7 @@ public class ManagerWorkArea extends javax.swing.JPanel {
         btnEmployees = new javax.swing.JButton();
         btnProfile = new javax.swing.JButton();
         btnLogout = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
         upc = new javax.swing.JPanel();
 
         jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
@@ -91,6 +92,13 @@ public class ManagerWorkArea extends javax.swing.JPanel {
         btnLogout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLogoutActionPerformed(evt);
+            }
+        });
+
+        jButton3.setText("Manage Items");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
             }
         });
 
@@ -151,10 +159,11 @@ public class ManagerWorkArea extends javax.swing.JPanel {
 
     private void btnEmployeesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmployeesActionPerformed
         // TODO add your handling code here:
-        ManageEmployeesJPanel mejp = new ManageEmployeesJPanel(upc, account, ecosystem, enterprise);
-        upc.add(mejp);
-        CardLayout layout = (CardLayout) upc.getLayout();
-        layout.show(upc, "ManageEmployeesJPanel");
+        
+        ManageEmployeesJPanel mejp = new ManageEmployeesJPanel(upc, account, ecosystem, enterprise); 
+        upc.add("ManageEmployeesJPanel", mejp); 
+        CardLayout layout = (CardLayout) upc.getLayout(); 
+        layout.show(upc, "ManageEmployeesJPanel"); 
     }//GEN-LAST:event_btnEmployeesActionPerformed
 
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
@@ -168,6 +177,7 @@ public class ManagerWorkArea extends javax.swing.JPanel {
     layout.next(this.workArea);
     }//GEN-LAST:event_btnLogoutActionPerformed
 
+
     private void btnProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProfileActionPerformed
         // TODO add your handling code here:
         ProfileJPanel cojp = new ProfileJPanel(this.ecosystem, account, network);
@@ -177,11 +187,22 @@ public class ManagerWorkArea extends javax.swing.JPanel {
     }//GEN-LAST:event_btnProfileActionPerformed
 
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        ManageItemsJPanel mojp = new ManageItemsJPanel(upc, account, ecosystem, enterprise);
+        upc.add("ManageOrderJPanel", mojp);
+        CardLayout layout = (CardLayout) upc.getLayout();
+        layout.show(upc, "ManageOrderJPanel");
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEmployees;
     private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnOrders;
     private javax.swing.JButton btnProfile;
+    private javax.swing.JButton jButton3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JPanel upc;

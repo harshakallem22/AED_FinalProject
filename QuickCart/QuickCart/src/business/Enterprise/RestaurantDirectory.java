@@ -28,6 +28,17 @@ public class RestaurantDirectory {
         return restaurantList;
     }
     
-    
-    
+    public RestaurantEnterprise findRestaurantByName(String name) {
+        for (RestaurantEnterprise res : restaurantList) {
+            if (res.getName().equalsIgnoreCase(name)) {
+                return res;
+            }
+        }
+        return null;
+    }
+
+    public void removeRestaurant(RestaurantEnterprise restaurant) {
+        restaurantList.remove(restaurant);
+    }
+
 }

@@ -47,11 +47,14 @@ public class CustomerProfile extends javax.swing.JPanel {
         System.out.println("Inside populate Table "+account.getWorkQueue().getWorkRequestList().size());
         for (WorkRequest wr : this.account.getWorkQueue().getWorkRequestList()) {
             OrderRequest or = (OrderRequest) wr;
+
             Object row[] = new Object[5];
+            System.out.println(or.getMerchant());
             row[0] = or;
-            row[1] = or.getEnterprise().getName();
+            row[1] = or.getMerchant();
             row[2] = or.getAmount();
             row[3] = or.getStatus(); 
+
             if(or.getReview() == 0){
                 row[4] = "Not Rated";
             }
@@ -97,6 +100,9 @@ public class CustomerProfile extends javax.swing.JPanel {
             }
         });
         jScrollPane1.setViewportView(orderTable);
+        if (orderTable.getColumnModel().getColumnCount() > 0) {
+            orderTable.getColumnModel().getColumn(1).setHeaderValue("Merchant");
+        }
 
         btnRate.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
         btnRate.setText("Rate Order");
@@ -178,9 +184,5 @@ public class CustomerProfile extends javax.swing.JPanel {
     private javax.swing.JTable orderTable;
     // End of variables declaration//GEN-END:variables
 
-    private class account {
-
-        public account() {
-        }
-    }
+    
 }
