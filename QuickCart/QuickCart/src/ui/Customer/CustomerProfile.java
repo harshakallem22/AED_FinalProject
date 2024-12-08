@@ -48,9 +48,8 @@ public class CustomerProfile extends javax.swing.JPanel {
         for (WorkRequest wr : this.account.getWorkQueue().getWorkRequestList()) {
             OrderRequest or = (OrderRequest) wr;
             Object row[] = new Object[5];
-            System.out.println(or.getEnterprise());
             row[0] = or;
-            row[1] = or;
+            row[1] = or.getEnterprise().getName();
             row[2] = or.getAmount();
             row[3] = or.getStatus(); 
             if(or.getReview() == 0){
@@ -70,6 +69,9 @@ public class CustomerProfile extends javax.swing.JPanel {
         orderTable = new javax.swing.JTable();
         btnRate = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(255, 255, 102));
+
+        orderTable.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
         orderTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
@@ -96,6 +98,7 @@ public class CustomerProfile extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(orderTable);
 
+        btnRate.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
         btnRate.setText("Rate Order");
         btnRate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -108,13 +111,10 @@ public class CustomerProfile extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(104, 104, 104)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 558, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(310, 310, 310)
-                        .addComponent(btnRate)))
+                .addGap(104, 104, 104)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnRate)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 558, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(117, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -122,9 +122,9 @@ public class CustomerProfile extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(48, 48, 48)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 473, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
+                .addGap(18, 18, 18)
                 .addComponent(btnRate)
-                .addContainerGap(69, Short.MAX_VALUE))
+                .addContainerGap(86, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
