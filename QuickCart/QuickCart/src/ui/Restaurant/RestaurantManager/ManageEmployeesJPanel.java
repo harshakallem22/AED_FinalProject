@@ -47,6 +47,9 @@ public class ManageEmployeesJPanel extends javax.swing.JPanel {
         btnAdd = new javax.swing.JButton();
         btnView = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(255, 62, 70));
+
+        btnAdd.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
         btnAdd.setText("Add Employee");
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -54,6 +57,7 @@ public class ManageEmployeesJPanel extends javax.swing.JPanel {
             }
         });
 
+        btnView.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
         btnView.setText("View Employees");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -65,7 +69,7 @@ public class ManageEmployeesJPanel extends javax.swing.JPanel {
                 .addComponent(btnAdd)
                 .addGap(92, 92, 92)
                 .addComponent(btnView)
-                .addContainerGap(221, Short.MAX_VALUE))
+                .addContainerGap(222, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -74,7 +78,7 @@ public class ManageEmployeesJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAdd)
                     .addComponent(btnView))
-                .addContainerGap(421, Short.MAX_VALUE))
+                .addContainerGap(423, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
