@@ -59,6 +59,9 @@ public class AnalyticsManagerWorkArea extends javax.swing.JPanel {
 
         jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
 
+        jPanel1.setBackground(new java.awt.Color(162, 243, 111));
+
+        jButton1.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
         jButton1.setText("View Restaurants");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -66,6 +69,7 @@ public class AnalyticsManagerWorkArea extends javax.swing.JPanel {
             }
         });
 
+        jButton2.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
         jButton2.setText("View Grocery Stores");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -73,6 +77,7 @@ public class AnalyticsManagerWorkArea extends javax.swing.JPanel {
             }
         });
 
+        jButton3.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
         jButton3.setText("View Customers");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -80,6 +85,7 @@ public class AnalyticsManagerWorkArea extends javax.swing.JPanel {
             }
         });
 
+        btnLogout.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
         btnLogout.setText("Logout");
         btnLogout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -87,6 +93,7 @@ public class AnalyticsManagerWorkArea extends javax.swing.JPanel {
             }
         });
 
+        jButton4.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
         jButton4.setText("Profile");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -105,7 +112,7 @@ public class AnalyticsManagerWorkArea extends javax.swing.JPanel {
                 .addComponent(jButton2)
                 .addGap(35, 35, 35)
                 .addComponent(jButton3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
                 .addComponent(jButton4)
                 .addGap(36, 36, 36)
                 .addComponent(btnLogout)
@@ -114,7 +121,7 @@ public class AnalyticsManagerWorkArea extends javax.swing.JPanel {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(40, Short.MAX_VALUE)
+                .addContainerGap(42, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2)
