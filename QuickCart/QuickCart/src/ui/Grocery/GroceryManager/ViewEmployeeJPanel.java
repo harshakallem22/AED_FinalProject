@@ -32,6 +32,9 @@ public class ViewEmployeeJPanel extends javax.swing.JPanel {
         tblEmployees = new javax.swing.JTable();
         btnDelete = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(248, 203, 70));
+
+        tblEmployees.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
         tblEmployees.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
@@ -53,6 +56,7 @@ public class ViewEmployeeJPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tblEmployees);
 
+        btnDelete.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
         btnDelete.setText("Delete");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -74,7 +78,7 @@ public class ViewEmployeeJPanel extends javax.swing.JPanel {
                         .addGap(75, 75, 75)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(256, 256, 256)
+                        .addGap(278, 278, 278)
                         .addComponent(btnDelete)))
                 .addContainerGap(126, Short.MAX_VALUE))
         );
