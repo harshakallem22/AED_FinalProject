@@ -56,14 +56,29 @@ public class AddEmployee extends javax.swing.JPanel {
         btnPassword = new javax.swing.JTextField();
         btnSubmit = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(242, 185, 73));
+
+        lblName.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
         lblName.setText("Name");
 
+        txtName.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
+
+        lblEmail.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
         lblEmail.setText("Email Id");
 
+        txtEmail.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
+
+        lblUsername.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
         lblUsername.setText("Username");
 
+        txtUsername.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
+
+        lblPassword.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
         lblPassword.setText("Password");
 
+        btnPassword.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
+
+        btnSubmit.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
         btnSubmit.setText("Submit");
         btnSubmit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -93,7 +108,7 @@ public class AddEmployee extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(267, 267, 267)
                         .addComponent(btnSubmit)))
-                .addContainerGap(237, Short.MAX_VALUE))
+                .addContainerGap(234, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -116,7 +131,7 @@ public class AddEmployee extends javax.swing.JPanel {
                     .addComponent(btnPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(82, 82, 82)
                 .addComponent(btnSubmit)
-                .addContainerGap(181, Short.MAX_VALUE))
+                .addContainerGap(191, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

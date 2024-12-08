@@ -32,6 +32,9 @@ public class ViewEmployeeJPanel extends javax.swing.JPanel {
         tblEmployees = new javax.swing.JTable();
         btnDelete = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(242, 185, 73));
+
+        tblEmployees.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
         tblEmployees.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
@@ -53,6 +56,7 @@ public class ViewEmployeeJPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tblEmployees);
 
+        btnDelete.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
         btnDelete.setText("Delete");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
