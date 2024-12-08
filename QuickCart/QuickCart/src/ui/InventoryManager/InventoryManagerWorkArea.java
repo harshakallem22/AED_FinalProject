@@ -57,6 +57,9 @@ public class InventoryManagerWorkArea extends javax.swing.JPanel {
 
         jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
 
+        jPanel1.setBackground(new java.awt.Color(152, 251, 203));
+
+        btnRequest.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
         btnRequest.setText("Request to Supply");
         btnRequest.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -64,6 +67,7 @@ public class InventoryManagerWorkArea extends javax.swing.JPanel {
             }
         });
 
+        jButton2.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
         jButton2.setText("Requests");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -71,6 +75,7 @@ public class InventoryManagerWorkArea extends javax.swing.JPanel {
             }
         });
 
+        jButton3.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
         jButton3.setText("Profile");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -78,6 +83,7 @@ public class InventoryManagerWorkArea extends javax.swing.JPanel {
             }
         });
 
+        jButton4.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
         jButton4.setText("Logout");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -109,7 +115,7 @@ public class InventoryManagerWorkArea extends javax.swing.JPanel {
                     .addComponent(jButton2)
                     .addComponent(jButton3)
                     .addComponent(jButton4))
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
 
         jSplitPane1.setTopComponent(jPanel1);
