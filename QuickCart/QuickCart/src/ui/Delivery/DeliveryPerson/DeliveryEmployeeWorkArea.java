@@ -74,6 +74,9 @@ public class DeliveryEmployeeWorkArea extends javax.swing.JPanel {
         btnOrderDelivered = new javax.swing.JButton();
         deliveryGifJPanel = new javax.swing.JPanel();
 
+        setBackground(new java.awt.Color(255, 147, 18));
+
+        refreshJButton.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
         refreshJButton.setText("Refresh");
         refreshJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -81,6 +84,7 @@ public class DeliveryEmployeeWorkArea extends javax.swing.JPanel {
             }
         });
 
+        btnLogout.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
         btnLogout.setText("Logout");
         btnLogout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -88,6 +92,7 @@ public class DeliveryEmployeeWorkArea extends javax.swing.JPanel {
             }
         });
 
+        workRequestJTable.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
         workRequestJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
@@ -116,6 +121,7 @@ public class DeliveryEmployeeWorkArea extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(workRequestJTable);
 
+        assignJButton.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
         assignJButton.setText("Assign to me");
         assignJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -123,6 +129,7 @@ public class DeliveryEmployeeWorkArea extends javax.swing.JPanel {
             }
         });
 
+        btnPickUp.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
         btnPickUp.setText("Order Picked Up");
         btnPickUp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -130,6 +137,7 @@ public class DeliveryEmployeeWorkArea extends javax.swing.JPanel {
             }
         });
 
+        btnOnTheWay.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
         btnOnTheWay.setText("Order on the Way");
         btnOnTheWay.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -137,6 +145,7 @@ public class DeliveryEmployeeWorkArea extends javax.swing.JPanel {
             }
         });
 
+        btnOrderDelivered.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
         btnOrderDelivered.setText("Order Delivered");
         btnOrderDelivered.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -148,11 +157,11 @@ public class DeliveryEmployeeWorkArea extends javax.swing.JPanel {
         deliveryGifJPanel.setLayout(deliveryGifJPanelLayout);
         deliveryGifJPanelLayout.setHorizontalGroup(
             deliveryGifJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 249, Short.MAX_VALUE)
+            .addGap(0, 209, Short.MAX_VALUE)
         );
         deliveryGifJPanelLayout.setVerticalGroup(
             deliveryGifJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 260, Short.MAX_VALUE)
+            .addGap(0, 200, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -160,51 +169,44 @@ public class DeliveryEmployeeWorkArea extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(84, 84, 84)
-                .addComponent(btnPickUp)
-                .addGap(26, 26, 26)
-                .addComponent(btnOnTheWay)
-                .addGap(18, 18, 18)
-                .addComponent(btnOrderDelivered)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
                 .addGap(130, 130, 130)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnLogout)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(refreshJButton)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 471, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(assignJButton))
-                        .addGap(80, 80, 80)
-                        .addComponent(deliveryGifJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(62, 62, 62))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnLogout)
-                .addGap(135, 135, 135))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(btnPickUp)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnOnTheWay)
+                                    .addGap(40, 40, 40)
+                                    .addComponent(btnOrderDelivered))
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 533, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(assignJButton))
+                            .addGap(58, 58, 58)
+                            .addComponent(deliveryGifJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(62, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
+                .addGap(37, 37, 37)
                 .addComponent(btnLogout)
-                .addGap(32, 32, 32)
+                .addGap(18, 18, 18)
                 .addComponent(refreshJButton)
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(assignJButton)
-                        .addGap(62, 62, 62)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnPickUp)
-                            .addComponent(btnOnTheWay)
-                            .addComponent(btnOrderDelivered)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(deliveryGifJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(231, 231, 231))
+                .addGap(30, 30, 30)
+                .addComponent(assignJButton)
+                .addGap(56, 56, 56)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnPickUp)
+                    .addComponent(btnOnTheWay)
+                    .addComponent(btnOrderDelivered))
+                .addContainerGap(89, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
