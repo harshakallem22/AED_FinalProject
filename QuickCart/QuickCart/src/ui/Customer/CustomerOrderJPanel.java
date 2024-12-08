@@ -60,6 +60,9 @@ public class CustomerOrderJPanel extends javax.swing.JPanel {
         jButton1 = new javax.swing.JButton();
         quantitySpinner = new javax.swing.JSpinner();
 
+        setBackground(new java.awt.Color(255, 255, 102));
+
+        tblStores.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
         tblStores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
@@ -86,6 +89,7 @@ public class CustomerOrderJPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tblStores);
 
+        tblMenu.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
         tblMenu.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
@@ -108,6 +112,7 @@ public class CustomerOrderJPanel extends javax.swing.JPanel {
         jScrollPane2.setViewportView(tblMenu);
 
         buttonGroup1.add(jRadioButton1);
+        jRadioButton1.setFont(new java.awt.Font("Bahnschrift", 0, 17)); // NOI18N
         jRadioButton1.setText("Restaurants");
         jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -116,6 +121,7 @@ public class CustomerOrderJPanel extends javax.swing.JPanel {
         });
 
         buttonGroup1.add(jRadioButton2);
+        jRadioButton2.setFont(new java.awt.Font("Bahnschrift", 0, 17)); // NOI18N
         jRadioButton2.setText("Grocery Stores");
         jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -123,6 +129,7 @@ public class CustomerOrderJPanel extends javax.swing.JPanel {
             }
         });
 
+        jButton1.setFont(new java.awt.Font("Bahnschrift", 0, 17)); // NOI18N
         jButton1.setText("Add to Cart");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -130,6 +137,7 @@ public class CustomerOrderJPanel extends javax.swing.JPanel {
             }
         });
 
+        quantitySpinner.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
         quantitySpinner.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
