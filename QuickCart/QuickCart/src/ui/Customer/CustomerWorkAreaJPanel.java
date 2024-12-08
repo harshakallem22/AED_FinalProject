@@ -62,6 +62,9 @@ this.repaint();
 
         jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 102));
+
+        btnOrder.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
         btnOrder.setText("Order");
         btnOrder.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -69,6 +72,7 @@ this.repaint();
             }
         });
 
+        btnProfile.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
         btnProfile.setText("My Orders");
         btnProfile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -76,6 +80,7 @@ this.repaint();
             }
         });
 
+        btnCart.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
         btnCart.setText("Cart");
         btnCart.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -83,6 +88,7 @@ this.repaint();
             }
         });
 
+        btnLogout.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
         btnLogout.setText("Logout");
         btnLogout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -90,6 +96,7 @@ this.repaint();
             }
         });
 
+        jButton1.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
         jButton1.setText("Profile");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -102,7 +109,7 @@ this.repaint();
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(294, Short.MAX_VALUE)
+                .addContainerGap(293, Short.MAX_VALUE)
                 .addComponent(btnOrder)
                 .addGap(35, 35, 35)
                 .addComponent(btnProfile)
@@ -124,7 +131,7 @@ this.repaint();
                     .addComponent(btnCart)
                     .addComponent(btnLogout)
                     .addComponent(jButton1))
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         jSplitPane1.setTopComponent(jPanel1);
