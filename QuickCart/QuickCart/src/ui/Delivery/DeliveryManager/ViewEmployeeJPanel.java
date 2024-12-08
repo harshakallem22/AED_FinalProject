@@ -4,6 +4,18 @@
  */
 package ui.Delivery.DeliveryManager;
 
+import business.DAO.EmployeeDAO;
+import business.EcoSystem.EcoSystem;
+import business.Employee.Employee;
+import business.Enterprise.DeliveryEnterprise;
+import business.Network.Network;
+import business.UserAccount.EmployeeAccount;
+import business.UserAccount.UserAccount;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+
 
 
 /**
@@ -15,8 +27,19 @@ public class ViewEmployeeJPanel extends javax.swing.JPanel {
     /**
      * Creates new form ViewEmployeeJPanel
      */
-    public ViewEmployeeJPanel() {
+    JPanel workArea;
+    UserAccount account;
+    EcoSystem ecosystem;
+    DeliveryEnterprise delivery;
+    Network network;
+    public ViewEmployeeJPanel(JPanel upc, UserAccount account, EcoSystem ecosystem, DeliveryEnterprise delivery) {
         initComponents();
+        this.workArea = upc;
+        this.account = (EmployeeAccount)account;
+        this.ecosystem = ecosystem;
+        this.delivery = delivery;
+        network = ecosystem.getNetworkList().get(0);
+        populateTable();
     }
 
     /**
@@ -31,6 +54,7 @@ public class ViewEmployeeJPanel extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblEmployees = new javax.swing.JTable();
         btnDelete = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         tblEmployees.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -54,6 +78,18 @@ public class ViewEmployeeJPanel extends javax.swing.JPanel {
         jScrollPane1.setViewportView(tblEmployees);
 
         btnDelete.setText("Delete");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("Edit");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -62,28 +98,112 @@ public class ViewEmployeeJPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(86, 86, 86)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(57, 57, 57)
-                .addComponent(btnDelete)
-                .addContainerGap(72, Short.MAX_VALUE))
+                .addGap(55, 55, 55)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnDelete)
+                    .addComponent(jButton1))
+                .addContainerGap(74, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(75, 75, 75)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(256, 256, 256)
-                        .addComponent(btnDelete)))
+                .addGap(75, 75, 75)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(126, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(68, 68, 68)
+                .addComponent(btnDelete)
+                .addGap(279, 279, 279))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        // TODO add your handling code here:
+        int selectedRow = tblEmployees.getSelectedRow();
+
+        if (selectedRow >= 0) {
+            String name = (String) tblEmployees.getValueAt(selectedRow, 0);
+            String email = (String) tblEmployees.getValueAt(selectedRow, 1);
+
+            int confirmation = JOptionPane.showConfirmDialog(this, 
+                "Are you sure you want to delete this employee?", 
+                "Confirmation", JOptionPane.YES_NO_OPTION);
+
+            if (confirmation == JOptionPane.YES_OPTION) {
+                boolean success = EmployeeDAO.deleteEmployee(name, email);
+                if (success) {
+                    JOptionPane.showMessageDialog(this, 
+                        "Employee deleted successfully.");
+                    populateTable();
+                } else {
+                    JOptionPane.showMessageDialog(this, 
+                        "Failed to delete employee.", 
+                        "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, 
+                "Please select an employee to delete.", 
+                "Warning", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        int selectedRow = tblEmployees.getSelectedRow();
+
+        if (selectedRow >= 0) {
+            String oldName = (String) tblEmployees.getValueAt(selectedRow, 0);
+            String oldEmail = (String) tblEmployees.getValueAt(selectedRow, 1);
+
+            String newName = JOptionPane.showInputDialog(this, 
+                "Enter new name:", oldName);
+            String newEmail = JOptionPane.showInputDialog(this, 
+                "Enter new email:", oldEmail);
+
+            if (newName != null && !newName.isEmpty() && 
+                newEmail != null && !newEmail.isEmpty()) {
+                boolean success = EmployeeDAO.updateEmployee(oldName, oldEmail, newName, newEmail);
+                if (success) {
+                    JOptionPane.showMessageDialog(this, 
+                        "Employee updated successfully.");
+                    populateTable();
+                } else {
+                    JOptionPane.showMessageDialog(this, 
+                        "Failed to update employee.", 
+                        "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, 
+                    "New details cannot be empty.", 
+                    "Warning", JOptionPane.WARNING_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, 
+                "Please select an employee to edit.", 
+                "Warning", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDelete;
+    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblEmployees;
     // End of variables declaration//GEN-END:variables
+
+    private void populateTable() {
+        DefaultTableModel model = (DefaultTableModel) tblEmployees.getModel();
+        model.setRowCount(0);  // Clear previous rows
+
+        ArrayList<Employee> employees = EmployeeDAO.getAllEmployees();
+
+        for (Employee emp : employees) {
+            Object[] row = new Object[]{emp.getName(), emp.getEmail()};
+            model.addRow(row);
+        }
+    }
 }

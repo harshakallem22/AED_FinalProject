@@ -18,6 +18,11 @@ public class Employee {
         id = count;
         count++;
     }
+    
+    public Employee(String name, String email){
+        this.name = name;
+        this.email = email;
+    }
 
     public int getId() {
         return id;

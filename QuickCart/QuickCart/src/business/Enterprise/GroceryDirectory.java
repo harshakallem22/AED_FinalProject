@@ -27,4 +27,17 @@ public class GroceryDirectory {
         return groceryList;
     }
     
+    public GroceryEnterprise findGroceryByName(String name) {
+        for (GroceryEnterprise res : groceryList) {
+            if (res.getName().equalsIgnoreCase(name)) {
+                return res;
+            }
+        }
+        return null;
+    }
+
+    public void removeGrocery(GroceryEnterprise restaurant) {
+        groceryList.remove(restaurant);
+    }
+    
 }

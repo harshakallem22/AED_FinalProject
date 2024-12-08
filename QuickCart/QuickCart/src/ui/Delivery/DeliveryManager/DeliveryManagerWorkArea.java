@@ -135,6 +135,13 @@ public class DeliveryManagerWorkArea extends javax.swing.JPanel {
 
     private void btnEmployeesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmployeesActionPerformed
         // TODO add your handling code here:
+<<<<<<< Updated upstream
+=======
+        ManageEmployeesJPanel mejp = new ManageEmployeesJPanel(workArea, ea, ecosystem, enterprise); 
+        workArea.add("ManageEmployeesJPanel", mejp); 
+        CardLayout layout = (CardLayout) workArea.getLayout(); 
+        layout.show(workArea, "ManageEmployeesJPanel"); 
+>>>>>>> Stashed changes
         
     }//GEN-LAST:event_btnEmployeesActionPerformed
 

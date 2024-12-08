@@ -2,19 +2,27 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package ui.Restaurant.RestaurantManager;
+package ui.Grocery.GroceryManager;
+
+import business.Customer.ItemOrder;
+import business.WorkQueue.OrderRequest;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author SAI SRIDHAR
  */
-public class ViewEmployeeJPanel extends javax.swing.JPanel {
+public class ViewDetailedOrderJPanel extends javax.swing.JPanel {
 
     /**
-     * Creates new form ViewEmployeeJPanel
+     * Creates new form ViewDetailedOrderJPanel
      */
-    public ViewEmployeeJPanel() {
+    OrderRequest or;
+    public ViewDetailedOrderJPanel(OrderRequest selectedOrder) {
         initComponents();
+        this.or = selectedOrder;
+        System.out.println("Inside vdojp constructor");
+        populateTable();
     }
 
     /**
@@ -27,61 +35,71 @@ public class ViewEmployeeJPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblEmployees = new javax.swing.JTable();
-        btnDelete = new javax.swing.JButton();
+        jTable1 = new javax.swing.JTable();
 
-        tblEmployees.setModel(new javax.swing.table.DefaultTableModel(
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Name", "Email"
+                "Name", "Count", "Price"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false
+                false, true, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(tblEmployees);
-
-        btnDelete.setText("Delete");
+        jScrollPane1.setViewportView(jTable1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(86, 86, 86)
+                .addGap(135, 135, 135)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(57, 57, 57)
-                .addComponent(btnDelete)
-                .addContainerGap(72, Short.MAX_VALUE))
+                .addContainerGap(151, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(75, 75, 75)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(256, 256, 256)
-                        .addComponent(btnDelete)))
-                .addContainerGap(126, Short.MAX_VALUE))
+                .addGap(87, 87, 87)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(116, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-
+    public javax.swing.JTable getOrderDetailsTable() {
+    return jTable1;
+}
+    
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnDelete;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tblEmployees;
+    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
+
+    private void populateTable() {
+        DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
+        dtm.setRowCount(0); 
+
+        for (ItemOrder wr : or.getDashes()) {
+            System.out.println(wr.getItem());
+            Object[] row = new Object[3];
+            row[0] = wr; 
+            row[1] = wr.getQuantity(); 
+            row[2] = wr.getTotalPrice(); 
+
+            dtm.addRow(row);
+        }
+
+    }
 }

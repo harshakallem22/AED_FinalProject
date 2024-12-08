@@ -162,32 +162,32 @@ public class ViewGroceriesJPanel extends javax.swing.JPanel {
 
     private void btnViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewActionPerformed
         // TODO add your handling code here:
-        int selectedRow = jTable1.getSelectedRow();
-        if (selectedRow < 0) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Please select a store.");
-            return;
-        }
-        GroceryEnterprise grocery = (GroceryEnterprise) jTable1.getValueAt(selectedRow, 0);
-        ArrayList<OrderRequest> orders = MockOrderGeneration.generateGroceryOrders(grocery, 20);
-        double totalRevenue = 0;
-        int totalOrders = orders.size();
-        int totalRating = 0;
-        int ratedOrdersCount = 0;
-
-        for (OrderRequest order : orders) {
-            totalRevenue += order.getAmount(); // Accumulate revenue
-            if (order.getReview() > 0) { // If the order has a valid review
-                totalRating += order.getReview();
-                ratedOrdersCount++;
-            }
-        }
-
-        double averageRating = ratedOrdersCount > 0 ? (double) totalRating / ratedOrdersCount : 0.0;
-
-        // Display the results in the text fields
-        jTextField1.setText(String.valueOf(totalOrders)); // Set number of orders
-        jTextField2.setText(String.format("%.2f", totalRevenue));
-        jTextField3.setText(String.format("%.1f", averageRating));
+//        int selectedRow = jTable1.getSelectedRow();
+//        if (selectedRow < 0) {
+//            javax.swing.JOptionPane.showMessageDialog(this, "Please select a store.");
+//            return;
+//        }
+//        GroceryEnterprise grocery = (GroceryEnterprise) jTable1.getValueAt(selectedRow, 0);
+//        ArrayList<OrderRequest> orders = MockOrderGeneration.generateGroceryOrders(grocery, 20);
+//        double totalRevenue = 0;
+//        int totalOrders = orders.size();
+//        int totalRating = 0;
+//        int ratedOrdersCount = 0;
+//
+//        for (OrderRequest order : orders) {
+//            totalRevenue += order.getAmount(); // Accumulate revenue
+//            if (order.getReview() > 0) { // If the order has a valid review
+//                totalRating += order.getReview();
+//                ratedOrdersCount++;
+//            }
+//        }
+//
+//        double averageRating = ratedOrdersCount > 0 ? (double) totalRating / ratedOrdersCount : 0.0;
+//
+//        // Display the results in the text fields
+//        jTextField1.setText(String.valueOf(totalOrders)); // Set number of orders
+//        jTextField2.setText(String.format("%.2f", totalRevenue));
+//        jTextField3.setText(String.format("%.1f", averageRating));
     }//GEN-LAST:event_btnViewActionPerformed
 
     private void populateTable() {

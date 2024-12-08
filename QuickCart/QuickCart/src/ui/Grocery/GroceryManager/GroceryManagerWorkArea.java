@@ -56,6 +56,7 @@ public class GroceryManagerWorkArea extends javax.swing.JPanel {
         btnLogout = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
         workArea = new javax.swing.JPanel();
 
         jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
@@ -97,12 +98,25 @@ public class GroceryManagerWorkArea extends javax.swing.JPanel {
             }
         });
 
+        jButton3.setText("Manage Items");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+<<<<<<< Updated upstream
                 .addContainerGap(112, Short.MAX_VALUE)
+=======
+                .addContainerGap(44, Short.MAX_VALUE)
+                .addComponent(jButton3)
+                .addGap(50, 50, 50)
+>>>>>>> Stashed changes
                 .addComponent(btnOrders)
                 .addGap(18, 18, 18)
                 .addComponent(jButton1)
@@ -126,7 +140,8 @@ public class GroceryManagerWorkArea extends javax.swing.JPanel {
                     .addComponent(btnProfile)
                     .addComponent(btnLogout)
                     .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(jButton2)
+                    .addComponent(jButton3))
                 .addGap(31, 31, 31))
         );
 
@@ -191,6 +206,26 @@ public class GroceryManagerWorkArea extends javax.swing.JPanel {
         layout.next(workArea);
     }//GEN-LAST:event_jButton2ActionPerformed
 
+<<<<<<< Updated upstream
+=======
+    private void btnProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProfileActionPerformed
+        // TODO add your handling code here:
+        EmployeeAccount ea = (EmployeeAccount) account;
+        ProfileJPanel cojp = new ProfileJPanel(this.ecosystem, ea, network);
+        workArea.add(cojp);
+        CardLayout layout = (CardLayout) workArea.getLayout();
+        layout.next(workArea);
+    }//GEN-LAST:event_btnProfileActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        ManageItemsJPanel mojp = new ManageItemsJPanel(workArea, account, ecosystem, enterprise);
+        workArea.add("ManageOrderJPanel", mojp);
+        CardLayout layout = (CardLayout) workArea.getLayout();
+        layout.show(workArea, "ManageOrderJPanel");
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+>>>>>>> Stashed changes
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEmployees;
@@ -199,6 +234,7 @@ public class GroceryManagerWorkArea extends javax.swing.JPanel {
     private javax.swing.JButton btnProfile;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JPanel workArea;

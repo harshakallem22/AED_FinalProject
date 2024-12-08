@@ -268,6 +268,10 @@ public class PlaceOrderJPanel extends javax.swing.JPanel {
         or.setDeliveryPhone(this.phoneTextField.getText());
         or.setMessage(this.commentTextArea.getText());
         or.setStatus("Processing");
+<<<<<<< Updated upstream
+=======
+        or.setMerchant(this.restaurantLabel.getText());
+>>>>>>> Stashed changes
         BigDecimal bd = new BigDecimal(this.customerAccount.getCart().getTotalPrice());
         or.setAmount(bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue());
         

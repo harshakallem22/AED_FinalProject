@@ -33,7 +33,7 @@ public class CustomerCart extends javax.swing.JPanel {
         this.account = account;
         this.net = net;
         
-         populateTable();
+        populateTable();
     }
 
     /**
@@ -83,6 +83,11 @@ public class CustomerCart extends javax.swing.JPanel {
         });
 
         btnClear.setText("Clear Cart");
+        btnClear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClearActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -125,6 +130,15 @@ public class CustomerCart extends javax.swing.JPanel {
         CardLayout layout = (CardLayout) this.container.getLayout();
         layout.next(this.container);
     }//GEN-LAST:event_btnPlaceOrderActionPerformed
+
+    private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
+        // TODO add your handling code here:
+        account.getCart().clearCart(); 
+
+        populateTable(); 
+
+        javax.swing.JOptionPane.showMessageDialog(this, "Cart cleared successfully!");
+    }//GEN-LAST:event_btnClearActionPerformed
     
      public void populateTable() {
         DefaultTableModel dtm = (DefaultTableModel) tblCart.getModel();

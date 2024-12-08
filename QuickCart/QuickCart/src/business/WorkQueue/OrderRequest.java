@@ -24,7 +24,12 @@ public class OrderRequest extends WorkRequest {
     private String deliveryAddress;
     private String deliveryPhone;
     private double amount;
+<<<<<<< Updated upstream
     private DeliveryEnterprise company;
+=======
+    private Enterprise company;
+    private String merchant;
+>>>>>>> Stashed changes
     private ArrayList<ItemOrder> dashes;
      private UserAccount assignedTo;
      private DeliveryRequest deliveryRequest=null;
@@ -132,4 +137,31 @@ public class OrderRequest extends WorkRequest {
     public int getReview(){
         return this.review;
     }
+<<<<<<< Updated upstream
+=======
+
+    public String getMerchant() {
+        return merchant;
+    }
+
+    public void setMerchant(String merchant) {
+        this.merchant = merchant;
+    }
+
+    public ArrayList<ItemOrder> getDashes() {
+        return dashes;
+    }
+
+    public void setDashes(ArrayList<ItemOrder> dashes) {
+        this.dashes = dashes;
+    }
+    
+    
+    
+    @Override
+    public String toString(){
+        return this.id;
+    }
+    
+>>>>>>> Stashed changes
 }

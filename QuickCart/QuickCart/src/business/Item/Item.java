@@ -27,6 +27,22 @@ public class Item {
     public double getPrice() {
         return price;
     }
+<<<<<<< Updated upstream
     
     
+=======
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+  
+    @Override
+    public String toString(){
+        return name;
+    }
+>>>>>>> Stashed changes
 }

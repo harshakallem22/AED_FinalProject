@@ -27,5 +27,10 @@ public class CustomerDirectory {
     public void addCustomer(Customer customer) {
         customerList.add(customer);
     }
+
+    public ArrayList<Customer> getCustomerList() {
+        return customerList;
+    }
+    
     
 }

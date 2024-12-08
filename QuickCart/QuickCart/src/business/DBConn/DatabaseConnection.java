@@ -31,4 +31,18 @@ public class DatabaseConnection {
         }
         return connection;
     }
+<<<<<<< Updated upstream
+=======
+    
+    public static void closeConnection() {
+        try {
+            if (connection != null && !connection.isClosed()) {
+                connection.close();
+                System.out.println("Database connection closed.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+>>>>>>> Stashed changes
 }

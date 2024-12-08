@@ -48,6 +48,11 @@ public class LoginJPanel extends javax.swing.JPanel {
         lblPassword = new javax.swing.JLabel();
         txtPassword = new javax.swing.JTextField();
         btnLogin = new javax.swing.JButton();
+<<<<<<< Updated upstream
+=======
+        txtPassword = new javax.swing.JPasswordField();
+        jButton1 = new javax.swing.JButton();
+>>>>>>> Stashed changes
 
         lblUsername.setText("Username");
 
@@ -57,6 +62,13 @@ public class LoginJPanel extends javax.swing.JPanel {
         btnLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLoginActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("Register");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -76,9 +88,17 @@ public class LoginJPanel extends javax.swing.JPanel {
                             .addComponent(txtUsername)
                             .addComponent(txtPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
+<<<<<<< Updated upstream
                         .addGap(236, 236, 236)
                         .addComponent(btnLogin)))
                 .addGap(230, 230, 230))
+=======
+                        .addGap(234, 234, 234)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jButton1)
+                            .addComponent(btnLogin))))
+                .addContainerGap(230, Short.MAX_VALUE))
+>>>>>>> Stashed changes
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -93,7 +113,9 @@ public class LoginJPanel extends javax.swing.JPanel {
                     .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(68, 68, 68)
                 .addComponent(btnLogin)
-                .addContainerGap(246, Short.MAX_VALUE))
+                .addGap(38, 38, 38)
+                .addComponent(jButton1)
+                .addContainerGap(179, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -201,9 +223,18 @@ public class LoginJPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnLoginActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        CustomerRegisterJPanel crjp = new CustomerRegisterJPanel(workArea, system);
+        workArea.add(crjp);
+        CardLayout layout = (CardLayout) workArea.getLayout();
+        layout.next(workArea);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLogin;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel lblPassword;
     private javax.swing.JLabel lblUsername;
     private javax.swing.JTextField txtPassword;

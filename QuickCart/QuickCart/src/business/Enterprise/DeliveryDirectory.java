@@ -26,4 +26,17 @@ public class DeliveryDirectory {
     public ArrayList<DeliveryEnterprise> getDeliveryList() {
         return deliveryList;
     }
+    
+    public DeliveryEnterprise findDeliveryByName(String name) {
+        for (DeliveryEnterprise res : deliveryList) {
+            if (res.getName().equalsIgnoreCase(name)) {
+                return res;
+            }
+        }
+        return null;
+    }
+
+    public void removeDelivery(DeliveryEnterprise restaurant) {
+        deliveryList.remove(restaurant);
+    }
 }

@@ -4,6 +4,8 @@
  */
 package business.Customer;
 
+import business.UserAccount.EmployeeAccount;
+
 /**
  *
  * @author SAI SRIDHAR
@@ -72,7 +74,5 @@ public class Customer {
     public static void setCounter(int counter) {
         Customer.counter = counter;
     }
-    
-    
-    
+
 }
