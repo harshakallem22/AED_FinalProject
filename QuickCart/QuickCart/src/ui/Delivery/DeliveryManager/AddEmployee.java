@@ -39,12 +39,13 @@ public class AddEmployee extends javax.swing.JPanel {
     EcoSystem ecosystem;
     DeliveryEnterprise enterprise;
     Network network;
+
     public AddEmployee(JPanel workArea, UserAccount account, EcoSystem ecosystem, DeliveryEnterprise restaurant) {
         initComponents();
         this.workArea = workArea;
-        this.account = (EmployeeAccount)account;
+        this.account = (EmployeeAccount) account;
         this.ecosystem = ecosystem;
-        this.restaurant = restaurant;
+        this.enterprise = restaurant;
         System.out.println(restaurant.getName());
         network = ecosystem.getNetworkList().get(0);
     }
@@ -67,6 +68,7 @@ public class AddEmployee extends javax.swing.JPanel {
         lblPassword = new javax.swing.JLabel();
         btnPassword = new javax.swing.JTextField();
         btnSubmit = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(242, 185, 73));
 
@@ -98,34 +100,39 @@ public class AddEmployee extends javax.swing.JPanel {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Bahnschrift", 1, 24)); // NOI18N
+        jLabel1.setText("Add Employee");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(186, 186, 186)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnSubmit)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(181, 181, 181)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblName)
                             .addComponent(lblEmail)
                             .addComponent(lblUsername)
                             .addComponent(lblPassword))
                         .addGap(40, 40, 40)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtName)
-                            .addComponent(txtEmail)
-                            .addComponent(txtUsername)
-                            .addComponent(btnPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(267, 267, 267)
-                        .addComponent(btnSubmit)))
-                .addContainerGap(234, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(txtName)
+                                .addComponent(txtEmail)
+                                .addComponent(txtUsername)
+                                .addComponent(btnPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(229, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(86, 86, 86)
+                .addGap(70, 70, 70)
+                .addComponent(jLabel1)
+                .addGap(55, 55, 55)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblName)
                     .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -141,9 +148,9 @@ public class AddEmployee extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblPassword)
                     .addComponent(btnPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(82, 82, 82)
+                .addGap(38, 38, 38)
                 .addComponent(btnSubmit)
-                .addContainerGap(191, Short.MAX_VALUE))
+                .addContainerGap(167, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -157,6 +164,26 @@ public class AddEmployee extends javax.swing.JPanel {
 
         if (name.isEmpty() || email.isEmpty() || username.isEmpty() || password.isEmpty()) {
             javax.swing.JOptionPane.showMessageDialog(this, "All fields are required!", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        if (name.isEmpty() || !name.matches("^[A-Za-z ]{2,}$")) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Name must contain only letters and spaces, and be at least 2 characters long.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        if (email.isEmpty() || !email.matches("^[\\w._%+-]+@[\\w.-]+\\.[a-zA-Z]{2,}$")) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Invalid email format. Please enter a valid email address.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        if (username.isEmpty() || !username.matches("^[A-Za-z0-9_]{4,20}$")) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Username must be 4-20 characters long and can include letters, numbers, and underscores.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        if (password.isEmpty() || !password.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$")) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Password must be at least 8 characters long, include an uppercase letter, a lowercase letter, a digit, and a special character.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
             return;
         }
 
@@ -182,10 +209,10 @@ public class AddEmployee extends javax.swing.JPanel {
     }//GEN-LAST:event_btnSubmitActionPerformed
 
 
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField btnPassword;
     private javax.swing.JButton btnSubmit;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lblEmail;
     private javax.swing.JLabel lblName;
     private javax.swing.JLabel lblPassword;
