@@ -4,14 +4,15 @@
  */
 package ui.GroceryAdmin;
 
-import ui.DeliveryAdmin.*;
 import ui.RestaurantEnterpriseAdmin.*;
 import business.EcoSystem.EcoSystem;
-import business.Enterprise.DeliveryEnterprise;
+import business.Employee.Employee;
 import business.Enterprise.Enterprise;
+import business.Enterprise.GroceryEnterprise;
 import business.Enterprise.RestaurantEnterprise;
 import business.Network.Network;
 import business.Organization.Organization;
+import business.Role.RestaurantManagerRole;
 import business.UserAccount.EmployeeAccount;
 import business.UserAccount.UserAccount;
 import javax.swing.JOptionPane;
@@ -27,12 +28,13 @@ public class AddEnterpriseJPanel extends javax.swing.JPanel {
      * Creates new form AddEnterpriseJPanel
      */
     JPanel userProcessContainer;
-    EmployeeAccount account; Organization organization;
+    EmployeeAccount account;
+    Organization organization;
     EcoSystem business;
     Enterprise enterprise;
     Network network;
-    
-    public AddEnterpriseJPanel(JPanel userProcessContainer, UserAccount account, Organization organization,EcoSystem business, Enterprise enterprise) {
+
+    public AddEnterpriseJPanel(JPanel userProcessContainer, UserAccount account, Organization organization, EcoSystem business, Enterprise enterprise) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.account = (EmployeeAccount) account;
@@ -60,15 +62,32 @@ public class AddEnterpriseJPanel extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         txtEmail = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        jTextField2 = new javax.swing.JTextField();
+        jTextField3 = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(255, 255, 102));
+
+        jLabel1.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel1.setText("Store Name");
 
+        jLabel2.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel2.setText("Store Address");
 
+        jLabel3.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel3.setText("Store Phone");
 
+        jLabel4.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel4.setText("Store Email");
 
+        jButton1.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
         jButton1.setText("Submit");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -76,34 +95,51 @@ public class AddEnterpriseJPanel extends javax.swing.JPanel {
             }
         });
 
+        jLabel5.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel5.setText("Manager Name");
+
+        jLabel6.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel6.setText("Username");
+
+        jLabel7.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel7.setText("Password");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(245, 245, 245)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton1)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(202, 202, 202)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(41, 41, 41)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtName)
                             .addComponent(txtAddress)
                             .addComponent(txtPhone)
-                            .addComponent(txtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(320, 320, 320)
-                        .addComponent(jButton1)))
-                .addGap(356, 356, 356))
+                            .addComponent(txtEmail)
+                            .addComponent(jTextField1)
+                            .addComponent(jTextField2)
+                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(338, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(122, 122, 122)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(87, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -119,9 +155,21 @@ public class AddEnterpriseJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(80, 80, 80)
+                .addGap(37, 37, 37)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(35, 35, 35)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(39, 39, 39)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7))
+                .addGap(39, 39, 39)
                 .addComponent(jButton1)
-                .addContainerGap(223, Short.MAX_VALUE))
+                .addGap(103, 103, 103))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -131,19 +179,59 @@ public class AddEnterpriseJPanel extends javax.swing.JPanel {
         String address = txtAddress.getText().trim();
         String phone = txtPhone.getText().trim();
         String email = txtEmail.getText().trim();
+        String managerName = jTextField1.getText().trim();
+        String username = jTextField2.getText().trim();
+        String password = jTextField3.getText().trim();
 
-        if (name.isEmpty() || address.isEmpty() || phone.isEmpty() || email.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "All fields are required!", "Error", JOptionPane.ERROR_MESSAGE);
+        if (name.isEmpty() || !name.matches("^[A-Za-z ]{2,}$")) {
+            JOptionPane.showMessageDialog(this, "Store name must be at least 2 characters long and contain only letters and spaces.", "Validation Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
-        DeliveryEnterprise restaurant = network.getEnterpriseDirectory().createDelivery(name, phone, address, email);
-        JOptionPane.showMessageDialog(this, "Grocery Enterprise added successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+        if (address.isEmpty() || !address.matches("^[A-Za-z0-9 ,.]{10,}$")) {
+            JOptionPane.showMessageDialog(this, "Address must be at least 10 characters long and can include letters, numbers, commas, and periods.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        if (phone.isEmpty() || !phone.matches("^\\d{10}$")) {
+            JOptionPane.showMessageDialog(this, "Phone number must be exactly 10 digits.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        if (email.isEmpty() || !email.matches("^[\\w._%+-]+@[\\w.-]+\\.[a-zA-Z]{2,}$")) {
+            JOptionPane.showMessageDialog(this, "Email must be in a valid format (e.g., example@domain.com).", "Validation Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        if (managerName.isEmpty() || !managerName.matches("^[A-Za-z ]{2,}$")) {
+            JOptionPane.showMessageDialog(this, "Manager name must be at least 2 characters long and contain only letters and spaces.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        if (username.isEmpty() || !username.matches("^[A-Za-z0-9_]{4,20}$")) {
+            JOptionPane.showMessageDialog(this, "Username must be 4-20 characters long and can include letters, numbers, and underscores.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        if (password.isEmpty() || !password.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{8,}$")) {
+            JOptionPane.showMessageDialog(this, "Password must be at least 8 characters long, with at least one uppercase letter, one lowercase letter, and one digit.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        GroceryEnterprise groceryStore = network.getEnterpriseDirectory().createStore(name, address, phone, email);
+        Employee emp = groceryStore.getEmployeeDirectory().createEmployee(managerName, email);
+        EmployeeAccount ua = business.getUserAccountDirectory().createUserAccount(username, password, new RestaurantManagerRole());
+        ua.setEmployee(emp);
+
+        JOptionPane.showMessageDialog(this, "Store added successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
 
         txtName.setText("");
         txtAddress.setText("");
         txtPhone.setText("");
         txtEmail.setText("");
+        jTextField1.setText("");
+        jTextField2.setText("");
+        jTextField3.setText("");
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
@@ -153,6 +241,12 @@ public class AddEnterpriseJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField txtAddress;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtName;
