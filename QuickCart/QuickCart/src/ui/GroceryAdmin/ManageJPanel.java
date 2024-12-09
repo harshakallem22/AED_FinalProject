@@ -4,7 +4,6 @@
  */
 package ui.GroceryAdmin;
 
-import ui.DeliveryAdmin.*;
 import ui.RestaurantEnterpriseAdmin.*;
 import business.EcoSystem.EcoSystem;
 import business.Enterprise.Enterprise;
@@ -40,6 +39,7 @@ public class ManageJPanel extends javax.swing.JPanel {
         this.business = business;
         this.enterprise = enterprise;
         this.network = this.business.getNetworkList().get(0);
+        populateTable();
     }
 
     /**
@@ -57,6 +57,9 @@ public class ManageJPanel extends javax.swing.JPanel {
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(255, 255, 102));
+
+        jTable1.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -70,6 +73,7 @@ public class ManageJPanel extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(jTable1);
 
+        jButton3.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
         jButton3.setText("Add");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -77,6 +81,7 @@ public class ManageJPanel extends javax.swing.JPanel {
             }
         });
 
+        jButton4.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
         jButton4.setText("Edit");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -84,6 +89,7 @@ public class ManageJPanel extends javax.swing.JPanel {
             }
         });
 
+        jButton5.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
         jButton5.setText("Delete");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -98,12 +104,12 @@ public class ManageJPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(93, 93, 93)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 585, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(70, 70, 70)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton3)
                     .addComponent(jButton4)
                     .addComponent(jButton5))
-                .addGap(46, 46, 46))
+                .addGap(56, 56, 56))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -113,7 +119,7 @@ public class ManageJPanel extends javax.swing.JPanel {
                         .addGap(59, 59, 59)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 469, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(122, 122, 122)
+                        .addGap(170, 170, 170)
                         .addComponent(jButton3)
                         .addGap(71, 71, 71)
                         .addComponent(jButton4)
@@ -125,9 +131,9 @@ public class ManageJPanel extends javax.swing.JPanel {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        JFrame addEmployeeFrame = new JFrame("Add Enterprise");
+        JFrame addEmployeeFrame = new JFrame("Add Employee");
         addEmployeeFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        addEmployeeFrame.setSize(600, 400);
+        addEmployeeFrame.setSize(900, 900);
         addEmployeeFrame.setLocationRelativeTo(null);
 
         AddEnterpriseJPanel addEmployeePanel = new AddEnterpriseJPanel(userProcessContainer, account, organization, business, enterprise);
@@ -147,22 +153,23 @@ public class ManageJPanel extends javax.swing.JPanel {
         int selectedRow = jTable1.getSelectedRow();
 
     if (selectedRow < 0) {
-        javax.swing.JOptionPane.showMessageDialog(this, "Please select an enterprise to edit.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+        javax.swing.JOptionPane.showMessageDialog(this, "Please select a store to edit.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
         return;
     }
 
-    String restaurantName = (String) jTable1.getValueAt(selectedRow, 0);
+    GroceryEnterprise restaurantName = (GroceryEnterprise) jTable1.getValueAt(selectedRow, 0);
 
-    GroceryEnterprise selectedRestaurant = network.getEnterpriseDirectory().getGrocery().findGroceryByName(restaurantName);
+    // Find the selected restaurant
+    RestaurantEnterprise selectedRestaurant = network.getEnterpriseDirectory().getRestaurants().findRestaurantByName(restaurantName.getName());
 
     if (selectedRestaurant == null) {
-        javax.swing.JOptionPane.showMessageDialog(this, "Enterprise not found.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+        javax.swing.JOptionPane.showMessageDialog(this, "store not found.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
         return;
     }
 
-    JFrame editRestaurantFrame = new JFrame("Edit Grocery Enterprise");
+    JFrame editRestaurantFrame = new JFrame("Edit Store");
     editRestaurantFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-    editRestaurantFrame.setSize(600, 400);
+    editRestaurantFrame.setSize(900, 900);
     editRestaurantFrame.setLocationRelativeTo(null);
 
     EditEnterpriseJPanel editRestaurantPanel = new EditEnterpriseJPanel(userProcessContainer, account, organization, business, selectedRestaurant);
@@ -183,14 +190,13 @@ public class ManageJPanel extends javax.swing.JPanel {
         int selectedRow = jTable1.getSelectedRow();
 
     if (selectedRow < 0) {
-        javax.swing.JOptionPane.showMessageDialog(this, "Please select a grocery enterprise to delete.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+        javax.swing.JOptionPane.showMessageDialog(this, "Please select a store to delete.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
         return;
     }
 
-    String restaurantName = (String) jTable1.getValueAt(selectedRow, 0);
+    GroceryEnterprise restaurantName = (GroceryEnterprise) jTable1.getValueAt(selectedRow, 0);
 
-    // Find the restaurant to delete
-    GroceryEnterprise restaurantToDelete = network.getEnterpriseDirectory().getGrocery().findGroceryByName(restaurantName);
+    RestaurantEnterprise restaurantToDelete = network.getEnterpriseDirectory().getRestaurants().findRestaurantByName(restaurantName.getName());
 
     if (restaurantToDelete == null) {
         javax.swing.JOptionPane.showMessageDialog(this, "Enterprise not found.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
@@ -198,11 +204,11 @@ public class ManageJPanel extends javax.swing.JPanel {
     }
 
     int confirm = javax.swing.JOptionPane.showConfirmDialog(this,
-            "Are you sure you want to delete this enterprise?",
+            "Are you sure you want to delete this store?",
             "Confirm Deletion", javax.swing.JOptionPane.YES_NO_OPTION, javax.swing.JOptionPane.WARNING_MESSAGE);
 
     if (confirm == javax.swing.JOptionPane.YES_OPTION) {
-        network.getEnterpriseDirectory().getGrocery().removeGrocery(restaurantToDelete);
+        network.getEnterpriseDirectory().getRestaurants().removeRestaurant(restaurantToDelete);
         populateTable();
         javax.swing.JOptionPane.showMessageDialog(this, "Enterprise deleted successfully!", "Success", javax.swing.JOptionPane.INFORMATION_MESSAGE);
     }
@@ -212,9 +218,9 @@ public class ManageJPanel extends javax.swing.JPanel {
     
     private void populateTable() {
     DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
-    dtm.setRowCount(0);  // Clear the existing table rows
+    dtm.setRowCount(0);  
 
-    for (GroceryEnterprise res : network.getEnterpriseDirectory().getGrocery().getGroceryList()) {
+    for (RestaurantEnterprise res : network.getEnterpriseDirectory().getRestaurants().getRestaurantList()) {
         Object[] row = new Object[4];
         row[0] = res;
         row[1] = res.getAddress();
