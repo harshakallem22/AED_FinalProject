@@ -6,8 +6,10 @@ package ui.Grocery.GroceryManager;
 
 import business.EcoSystem.EcoSystem;
 import business.Enterprise.GroceryEnterprise;
+import business.Item.GroceryItem;
 import business.Network.Network;
 import business.UserAccount.UserAccount;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -50,10 +52,19 @@ public class AddItemJPanel extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jTextField3 = new javax.swing.JTextField();
 
+        setBackground(new java.awt.Color(248, 203, 70));
+
+        jLabel1.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
         jLabel1.setText("Item Name");
 
+        jTextField1.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
+
+        jLabel2.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
         jLabel2.setText("Item Price");
 
+        jTextField2.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
+
+        jButton1.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
         jButton1.setText("Add");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -61,16 +72,20 @@ public class AddItemJPanel extends javax.swing.JPanel {
             }
         });
 
+        jLabel3.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
         jLabel3.setText("Availability");
+
+        jTextField3.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(195, 195, 195)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton1)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(195, 195, 195)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addComponent(jLabel2)
@@ -79,10 +94,7 @@ public class AddItemJPanel extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jTextField1)
                             .addComponent(jTextField2)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(291, 291, 291)
-                        .addComponent(jButton1)))
+                            .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE))))
                 .addContainerGap(375, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -100,9 +112,9 @@ public class AddItemJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(80, 80, 80)
+                .addGap(48, 48, 48)
                 .addComponent(jButton1)
-                .addContainerGap(234, Short.MAX_VALUE))
+                .addContainerGap(274, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -111,7 +123,14 @@ public class AddItemJPanel extends javax.swing.JPanel {
         String itemName = jTextField1.getText().trim();
     String itemPriceText = jTextField2.getText().trim();
     String availabilityText = jTextField3.getText().trim();
-
+    
+    for(GroceryItem item : grocery.getGroceryCatalog().getGroceryCatalog()){
+            if(item.getName().equals(itemName)){
+                JOptionPane.showMessageDialog(this, "Item name already exists");
+                return;
+            }
+        }
+    
     if (itemName.isEmpty() || itemPriceText.isEmpty() || availabilityText.isEmpty()) {
         javax.swing.JOptionPane.showMessageDialog(this, "All fields are required!", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
         return;
