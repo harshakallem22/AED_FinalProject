@@ -12,9 +12,11 @@ import business.Organization.Organization;
 import business.UserAccount.UserAccount;
 import business.WorkQueue.ItemRestockRequest;
 import java.util.ArrayList;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
+import ui.Restaurant.RestaurantManager.AddItemJPanel;
 
 /**
  *
@@ -56,6 +58,7 @@ public class RequestsJPanel extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(152, 251, 203));
 
+        btnSendItems.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
         btnSendItems.setText("Send Items");
         btnSendItems.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -63,6 +66,7 @@ public class RequestsJPanel extends javax.swing.JPanel {
             }
         });
 
+        refreshJButton.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
         refreshJButton.setText("Refresh");
         refreshJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -70,6 +74,7 @@ public class RequestsJPanel extends javax.swing.JPanel {
             }
         });
 
+        tblRequests.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
         tblRequests.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
@@ -97,24 +102,33 @@ public class RequestsJPanel extends javax.swing.JPanel {
             }
         });
         jScrollPane1.setViewportView(tblRequests);
+        if (tblRequests.getColumnModel().getColumnCount() > 0) {
+            tblRequests.getColumnModel().getColumn(3).setHeaderValue("Item Count");
+        }
 
+        jButton1.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
         jButton1.setText("View Detailed Order");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(205, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(84, 84, 84)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(refreshJButton)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 471, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(jButton1)
-                            .addGap(36, 36, 36)
-                            .addComponent(btnSendItems))
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 471, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(129, 129, 129))
+                            .addGap(52, 52, 52)
+                            .addComponent(btnSendItems))))
+                .addContainerGap(250, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -122,12 +136,12 @@ public class RequestsJPanel extends javax.swing.JPanel {
                 .addGap(85, 85, 85)
                 .addComponent(refreshJButton)
                 .addGap(26, 26, 26)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSendItems)
                     .addComponent(jButton1))
-                .addContainerGap(354, Short.MAX_VALUE))
+                .addContainerGap(276, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -135,17 +149,13 @@ public class RequestsJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         int selectedRow = tblRequests.getSelectedRow();
     if (selectedRow >= 0) {
-        // Get the selected restock request
-        ItemRestockRequest selectedRequest = (ItemRestockRequest) tblRequests.getValueAt(selectedRow, 0); // Assuming the request object is stored in the 3rd column
+        ItemRestockRequest selectedRequest = (ItemRestockRequest) tblRequests.getValueAt(selectedRow, 0); 
         ArrayList<GroceryItem> shortageItems = selectedRequest.getShortageItems();
         
-        // Send items and update the availability in the store
         for (GroceryItem item : shortageItems) {
-            // Increase the availability of the item in the store by 100
             item.setAvailability(item.getAvailability() + 100);
         }
         
-        // Mark the request as completed
         selectedRequest.markAsCompleted();
         populateTable();
     } else {
@@ -155,6 +165,26 @@ public class RequestsJPanel extends javax.swing.JPanel {
 
     private void refreshJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshJButtonActionPerformed
     }//GEN-LAST:event_refreshJButtonActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        int selectedRow = tblRequests.getSelectedRow();
+        if (selectedRow >= 0) {
+            ItemRestockRequest selectedRequest = (ItemRestockRequest) tblRequests.getValueAt(selectedRow, 0); 
+            ArrayList<GroceryItem> shortageItems = selectedRequest.getShortageItems();
+            JFrame addItemFrame = new JFrame("View Detailed Order");
+        addItemFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        addItemFrame.setSize(600, 600);
+        addItemFrame.setLocationRelativeTo(null);
+
+        ViewDetailedOrder addItemPanel = new ViewDetailedOrder(shortageItems);
+        addItemFrame.add(addItemPanel);
+
+        addItemFrame.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this, "Please select a request to send.");
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -170,13 +200,16 @@ public class RequestsJPanel extends javax.swing.JPanel {
     model.setRowCount(0); 
     
     for (ItemRestockRequest request : enterprise.getRestockRequests()) {
-        Object[] row = new Object[5];
-        row[0] = request; 
-        row[1] = request.getTargetStore().getEmail(); 
-        row[2] = request.getTargetStore().getAddress(); 
-        row[3] = request.getShortageItems().size(); 
-        row[4] = request.getStatus();
-        model.addRow(row);
+        if(request.getStatus().equals("Pending")){
+            Object[] row = new Object[5];
+            row[0] = request; 
+            row[1] = request.getTargetStore().getEmail(); 
+            row[2] = request.getTargetStore().getAddress(); 
+            row[3] = request.getShortageItems().size(); 
+            row[4] = request.getStatus();
+            model.addRow(row);
+        }
+        
     }
     }
 }

@@ -12,6 +12,7 @@ import business.Network.Network;
 import business.Organization.Organization;
 import business.UserAccount.UserAccount;
 import business.WorkQueue.SupplyOfferRequest;
+import business.WorkQueue.WorkRequest;
 //import com.sun.xml.internal.messaging.saaj.packaging.mime.MessagingException;
 import java.net.Authenticator;
 import java.net.PasswordAuthentication;
@@ -69,17 +70,17 @@ public class RequestStoreJPanel extends javax.swing.JPanel {
         tblStores.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
         tblStores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Store", "Email", "Address"
+                "Store", "Email", "Address", "Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -128,11 +129,12 @@ public class RequestStoreJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(94, 94, 94)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(76, 76, 76)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(37, 37, 37)
+                        .addComponent(jLabel1)
+                        .addGap(67, 67, 67))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(43, 43, 43)))
                 .addComponent(jButton1)
                 .addContainerGap(72, Short.MAX_VALUE))
         );
@@ -150,6 +152,11 @@ public class RequestStoreJPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Please check the store!");
             return;
         }
+        
+        if(tblStores.getValueAt(selectedRow, 0).equals("Approved")){
+            JOptionPane.showMessageDialog(this, "Request already accepted");
+            return;
+        }
 
         String storeName = tblStores.getValueAt(selectedRow, 0).toString();
         String email = (String) tblStores.getValueAt(selectedRow, 1);
@@ -165,6 +172,7 @@ public class RequestStoreJPanel extends javax.swing.JPanel {
             selectedStore,
             message
             );
+        offerRequest.setStatus("Processing");
         selectedStore.getWorkQueue().getWorkRequestList().add(offerRequest);
         JOptionPane.showMessageDialog(this, "Request sent to " + storeName + " (" + email + ").");
         tblStores.setValueAt(offerRequest.getStatus(), selectedRow, 3);
@@ -212,11 +220,17 @@ public class RequestStoreJPanel extends javax.swing.JPanel {
             ArrayList<Enterprise> stores = network.getStoreEnterprises();
             for (Enterprise store : stores) {
                 if (!addedStores.contains(store.getName())) {
-                    Object[] row = new Object[3];
+                    Object[] row = new Object[4];
                     System.out.println(store.getEmail());
                     row[0] = store;
                     row[1] = store.getEmail();
                     row[2] = store.getAddress();
+                    for (WorkRequest request : store.getWorkQueue().getWorkRequestList()) {
+                        if (request instanceof SupplyOfferRequest) {
+                            SupplyOfferRequest offer = (SupplyOfferRequest) request;
+                            row[3] = offer.getStatus();
+                        }
+                    }
                     model.addRow(row);
                     addedStores.add(store.getName());
                 }
