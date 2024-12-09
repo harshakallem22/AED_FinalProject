@@ -163,7 +163,14 @@ public class ProfileJPanel extends javax.swing.JPanel {
                 javax.swing.JOptionPane.showMessageDialog(null, "New password cannot be empty!", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
                 return;
             }
-
+            
+            if (!newPassword.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$")) {
+            javax.swing.JOptionPane.showMessageDialog(null,
+                "New password must be at least 8 characters long, include an uppercase letter, a lowercase letter, a digit, and a special character.",
+                "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+            
             this.account.setPassword(confirmPassword);
             System.out.println(account.getPassword());
             for (UserAccount ua : system.getUserAccountDirectory().getUserAccountList()) {

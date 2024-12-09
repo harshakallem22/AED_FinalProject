@@ -48,10 +48,10 @@ public class RestaurantEmployeeWorkArea extends javax.swing.JPanel {
     for (WorkRequest wr : enterprise.getWorkQueue().getWorkRequestList()) {
         if(wr.getStatus().equals("Assigned to Employee") || wr.getStatus().equals("In Progress")){
             OrderRequest or = (OrderRequest) wr;
-            Object row[] = new Object[3];
+            Object row[] = new Object[2];
             row[0] = or;
-            row[1] = or.getItems(); 
-            row[2] = or.getStatus();
+         
+            row[1] = or.getStatus();
             dtm.addRow(row);
         }
         
@@ -79,20 +79,20 @@ public class RestaurantEmployeeWorkArea extends javax.swing.JPanel {
         workRequestJTable.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
         workRequestJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
-                "Order Id", "Order Items", "Status"
+                "Order Id", "Status"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.String.class, java.lang.String.class
+                java.lang.Object.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -105,7 +105,7 @@ public class RestaurantEmployeeWorkArea extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(workRequestJTable);
         if (workRequestJTable.getColumnModel().getColumnCount() > 0) {
-            workRequestJTable.getColumnModel().getColumn(2).setResizable(false);
+            workRequestJTable.getColumnModel().getColumn(1).setResizable(false);
         }
 
         assignJButton.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N

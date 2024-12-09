@@ -20,7 +20,7 @@ public class ProfileJPanel extends javax.swing.JPanel {
     /**
      * Creates new form ProfileJPanel
      */
-     private EcoSystem system;
+    private EcoSystem system;
     private EmployeeAccount account;
     private Network net;
 
@@ -35,7 +35,7 @@ public class ProfileJPanel extends javax.swing.JPanel {
         jTextField1.setEditable(false);
         jTextField2.setEditable(false);
         jPasswordField1.setEditable(false);
-        
+
     }
 
     /**
@@ -170,14 +170,21 @@ public class ProfileJPanel extends javax.swing.JPanel {
                 return;
             }
 
+            if (!newPassword.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$")) {
+                javax.swing.JOptionPane.showMessageDialog(null,
+                        "New password must be at least 8 characters long, include an uppercase letter, a lowercase letter, a digit, and a special character.",
+                        "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
             this.account.setPassword(confirmPassword);
             System.out.println(account.getPassword());
             for (UserAccount ua : system.getUserAccountDirectory().getUserAccountList()) {
-            if (ua.getUsername().equals(account.getUsername())) {
-                ua.setPassword(confirmPassword);
-                break;
+                if (ua.getUsername().equals(account.getUsername())) {
+                    ua.setPassword(confirmPassword);
+                    break;
+                }
             }
-        }
             javax.swing.JOptionPane.showMessageDialog(null, "Password updated successfully!", "Success", javax.swing.JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_jButton1ActionPerformed

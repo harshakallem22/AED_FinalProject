@@ -56,7 +56,6 @@ public class ManageOrderJPanel extends javax.swing.JPanel {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(248, 203, 70));
@@ -83,14 +82,6 @@ public class ManageOrderJPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(jTable1);
 
-        jButton1.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
-        jButton1.setText("View Detailed Order");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         jButton3.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
         jButton3.setText("Assign Delivery Partner");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -107,14 +98,9 @@ public class ManageOrderJPanel extends javax.swing.JPanel {
                 .addGap(24, 24, 24)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 663, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1)
-                    .addComponent(jButton3))
+                .addComponent(jButton3)
                 .addContainerGap(53, Short.MAX_VALUE))
         );
-
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButton1, jButton3});
-
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
@@ -123,37 +109,11 @@ public class ManageOrderJPanel extends javax.swing.JPanel {
                         .addGap(83, 83, 83)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 451, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(239, 239, 239)
-                        .addComponent(jButton1)
-                        .addGap(46, 46, 46)
+                        .addGap(292, 292, 292)
                         .addComponent(jButton3)))
                 .addContainerGap(82, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        int selectedRow = jTable1.getSelectedRow();
-        if (selectedRow < 0) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Please select an order to view details.");
-            return;
-        }
-
-        OrderRequest selectedOrder = (OrderRequest) jTable1.getValueAt(selectedRow, 0);
-        System.out.println(selectedOrder.getAmount());
-        System.out.println(selectedOrder.getItems().size());
-        JFrame viewOrderFrame = new JFrame("Order Details");
-        viewOrderFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        viewOrderFrame.setSize(800, 600);
-        viewOrderFrame.setLocationRelativeTo(null);
-
-        ViewDetailedOrderJPanel detailedOrderPanel = new ViewDetailedOrderJPanel(selectedOrder);
-        viewOrderFrame.add(detailedOrderPanel);
-        System.out.println(selectedOrder.getDashes().size());
-
-        viewOrderFrame.setVisible(true);
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
@@ -228,7 +188,6 @@ public class ManageOrderJPanel extends javax.swing.JPanel {
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;

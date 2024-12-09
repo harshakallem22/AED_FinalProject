@@ -49,9 +49,17 @@ public class EditItemJPanel extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
 
+        setBackground(new java.awt.Color(255, 62, 70));
+
+        jLabel1.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
         jLabel1.setText("Item Name");
 
+        jTextField1.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
+
+        jLabel2.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
         jLabel2.setText("Item Price");
+
+        jTextField2.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -59,9 +67,9 @@ public class EditItemJPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(195, 195, 195)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(62, 62, 62)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE)
@@ -79,7 +87,7 @@ public class EditItemJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(422, Short.MAX_VALUE))
+                .addContainerGap(426, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

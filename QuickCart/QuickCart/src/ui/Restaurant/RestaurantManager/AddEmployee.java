@@ -27,10 +27,11 @@ public class AddEmployee extends javax.swing.JPanel {
     EcoSystem ecosystem;
     RestaurantEnterprise restaurant;
     Network network;
+
     public AddEmployee(JPanel workArea, UserAccount account, EcoSystem ecosystem, RestaurantEnterprise restaurant) {
         initComponents();
         this.workArea = workArea;
-        this.account = (EmployeeAccount)account;
+        this.account = (EmployeeAccount) account;
         this.ecosystem = ecosystem;
         this.restaurant = restaurant;
         System.out.println(restaurant.getName());
@@ -141,6 +142,26 @@ public class AddEmployee extends javax.swing.JPanel {
 
         if (name.isEmpty() || email.isEmpty() || username.isEmpty() || password.isEmpty()) {
             javax.swing.JOptionPane.showMessageDialog(this, "All fields are required!", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        if (name.isEmpty() || !name.matches("^[A-Za-z ]{2,}$")) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Name must be at least 2 characters long and contain only letters and spaces.", "Validation Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        if (email.isEmpty() || !email.matches("^[\\w._%+-]+@[\\w.-]+\\.[a-zA-Z]{2,}$")) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Email must be in a valid format (e.g., example@domain.com).", "Validation Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        if (username.isEmpty() || !username.matches("^[A-Za-z0-9_]{4,20}$")) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Username must be 4-20 characters long and can include letters, numbers, and underscores.", "Validation Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        if (password.isEmpty() || !password.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@#$%^&+=]).{8,}$")) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Password must be at least 8 characters long, with one uppercase letter, one lowercase letter, one digit, and one special character.", "Validation Error", javax.swing.JOptionPane.ERROR_MESSAGE);
             return;
         }
 

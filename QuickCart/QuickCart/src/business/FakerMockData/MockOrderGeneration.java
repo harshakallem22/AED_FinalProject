@@ -86,7 +86,7 @@ public class MockOrderGeneration {
             Customer customer = new Customer(name, email, phone, address);
             CustomerAccount customerAccount = new CustomerAccount(name, "password", new CustomerRole()); 
             customerAccount.setCustomer(customer);
-
+            generateOrdersForCustomer(customerAccount, 10);
             fakerCustomers.add(customerAccount);
         }
 
@@ -97,8 +97,9 @@ public class MockOrderGeneration {
         ArrayList<OrderRequest> orders = new ArrayList<>();
 
         for (int i = 0; i < numOrders; i++) {
-            OrderRequest order = new OrderRequest(null, null, null); // Replace with appropriate initialization
-            order.setAmount(faker.number().randomDouble(2, 50, 200)); // Random amount for each order
+            OrderRequest order = new OrderRequest(null, null, null); 
+            order.setAmount(faker.number().randomDouble(2, 50, 200)); 
+            selectedCustomer.getWorkQueue().getWorkRequestList().add(order);
             orders.add(order);
         }
 

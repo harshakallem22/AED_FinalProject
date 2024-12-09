@@ -156,7 +156,7 @@ this.repaint();
     private void btnCartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCartActionPerformed
         // TODO add your handling code here:
         CartJFrame frame = new CartJFrame(this.ecosystem, ca, network);
-        frame.setSize(500, 620);
+        frame.setSize(800, 800);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }//GEN-LAST:event_btnCartActionPerformed

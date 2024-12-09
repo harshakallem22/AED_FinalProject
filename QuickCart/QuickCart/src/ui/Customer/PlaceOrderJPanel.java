@@ -5,7 +5,6 @@
  */
 package ui.Customer;
 
-
 import business.Customer.ItemOrder;
 import business.EcoSystem.EcoSystem;
 import business.Enterprise.Enterprise;
@@ -18,6 +17,15 @@ import business.WorkQueue.WorkRequest;
 import java.awt.CardLayout;
 import java.awt.Component;
 import java.math.BigDecimal;
+import java.util.Properties;
+import javax.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -43,7 +51,7 @@ public class PlaceOrderJPanel extends javax.swing.JPanel {
         this.system = system;
         this.container = container;
         this.customerAccount = customerAccount;
-        this.shop =  shop;
+        this.shop = shop;
         this.net = net;
 
         populateTable();
@@ -61,7 +69,6 @@ public class PlaceOrderJPanel extends javax.swing.JPanel {
 //        }
 //        return null;
 //    }
-
     private void populateTable() {
         DefaultTableModel dtm = (DefaultTableModel) cartTable.getModel();
         dtm.setRowCount(0);
@@ -132,29 +139,29 @@ public class PlaceOrderJPanel extends javax.swing.JPanel {
         priceLabel.setFont(new java.awt.Font("Bahnschrift", 1, 14)); // NOI18N
         priceLabel.setText("0.00");
 
-        jLabel3.setFont(new java.awt.Font("Bahnschrift", 1, 18)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Bahnschrift", 1, 24)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Delivery Information");
 
-        jLabel1.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Bahnschrift", 0, 16)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel1.setText("*Name: ");
 
-        nameTextField.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
+        nameTextField.setFont(new java.awt.Font("Bahnschrift", 0, 16)); // NOI18N
 
-        addressTextField.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
+        addressTextField.setFont(new java.awt.Font("Bahnschrift", 0, 16)); // NOI18N
 
-        jLabel4.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Bahnschrift", 0, 16)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel4.setText("*Address: ");
 
-        jLabel5.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Bahnschrift", 0, 16)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel5.setText("*Phone:");
 
-        phoneTextField.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
+        phoneTextField.setFont(new java.awt.Font("Bahnschrift", 0, 16)); // NOI18N
 
-        jLabel6.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Bahnschrift", 0, 16)); // NOI18N
         jLabel6.setText("Comments:");
 
         commentTextArea.setColumns(20);
@@ -181,7 +188,7 @@ public class PlaceOrderJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 140, Short.MAX_VALUE)
+                        .addGap(0, 254, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(jLabel2)
@@ -206,11 +213,10 @@ public class PlaceOrderJPanel extends javax.swing.JPanel {
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(nameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jLabel6)
-                        .addGap(267, 267, 267))
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(42, 42, 42))
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(64, 64, 64))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -223,9 +229,9 @@ public class PlaceOrderJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(priceLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 105, Short.MAX_VALUE)
                 .addComponent(jLabel3)
-                .addGap(38, 38, 38)
+                .addGap(37, 37, 37)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(nameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -243,12 +249,12 @@ public class PlaceOrderJPanel extends javax.swing.JPanel {
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(placeOrderButton)
-                .addGap(36, 36, 36))
+                .addGap(64, 64, 64))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void cartTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cartTableMouseClicked
-        
+
     }//GEN-LAST:event_cartTableMouseClicked
 
     private void placeOrderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_placeOrderButtonActionPerformed
@@ -264,24 +270,40 @@ public class PlaceOrderJPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Phone Number can't be empty!");
             return;
         }
+        String name = this.nameTextField.getText();
+        if (name.isEmpty() || !name.matches("^[A-Za-z ]{2,}$")) {
+            JOptionPane.showMessageDialog(null, "Name must contain only letters, spaces, and be at least 2 characters long!");
+            return;
+        }
+
+        String address = this.addressTextField.getText();
+        if (address.isEmpty() || !address.matches("^[A-Za-z0-9 ,.]{10,}$")) {
+            JOptionPane.showMessageDialog(null, "Address must be at least 10 characters long and can include letters, numbers, commas, and periods!");
+            return;
+        }
+
+        String phone = this.phoneTextField.getText();
+        if (phone.isEmpty() || !phone.matches("^\\d{10}$")) {
+            JOptionPane.showMessageDialog(null, "Phone number must be exactly 10 digits!");
+            return;
+        }
         System.out.println(customerAccount.getCart());
-        OrderRequest or = new OrderRequest(shop, customerAccount,customerAccount.getCart().getItemList());
+        OrderRequest or = new OrderRequest(shop, customerAccount, customerAccount.getCart().getItemList());
         or.setDeliveryAddress(this.addressTextField.getText());
         or.setDeliveryName(this.nameTextField.getText());
         or.setDeliveryPhone(this.phoneTextField.getText());
         or.setMessage(this.commentTextArea.getText());
         or.setStatus("Processing");
-<<<<<<< Updated upstream
-=======
         or.setMerchant(this.restaurantLabel.getText());
->>>>>>> Stashed changes
+        or.setDashes(customerAccount.getCart().getItemList());
+        System.out.println(or.getDashes().size());
         BigDecimal bd = new BigDecimal(this.customerAccount.getCart().getTotalPrice());
         or.setAmount(bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue());
-        
-        
+        //shop.getWorkQueue().getWorkRequestList().add(or);
+
         customerAccount.getCart().clearCart();
         customerAccount.getWorkQueue().getWorkRequestList().add(or);
-        System.out.println("ORDER LIST "+customerAccount.getWorkQueue().getWorkRequestList().size());
+        System.out.println("ORDER LIST " + customerAccount.getWorkQueue().getWorkRequestList().size());
         shop.getWorkQueue().getWorkRequestList().add(or);
         if (shop instanceof RestaurantEnterprise) {
             ((RestaurantEnterprise) shop).addOrder(or);
@@ -289,14 +311,63 @@ public class PlaceOrderJPanel extends javax.swing.JPanel {
             ((GroceryEnterprise) shop).addOrder(or);
         }
         this.container.remove(this);
+        String emailBody = "Order Receipt:\n\n";
+        for (ItemOrder order : or.getDashes()) {
+            emailBody += "Item: " + order.getItem().getName()
+                    + ", Quantity: " + order.getQuantity()
+                    + ", Price: $" + order.getTotalPrice() + "\n";
+        }
+        emailBody += "\nTotal Amount: $" + or.getAmount();
+        emailBody += "\nDelivery Address: " + or.getDeliveryAddress();
+        emailBody += "\nDelivery Name: " + or.getDeliveryName();
+        emailBody += "\nDelivery Phone: " + or.getDeliveryPhone();
+
+        boolean emailSent = sendEmail(customerAccount.getCustomer().getEmail(), "Order Receipt", emailBody);
+        if (emailSent) {
+            JOptionPane.showMessageDialog(this, "Order Placed! Receipt sent to your email.");
+        } else {
+            JOptionPane.showMessageDialog(this, "Order Placed! Failed to send receipt email.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
+        this.container.remove(this);
         JOptionPane.showMessageDialog(this, "Order Placed");
-//        OrderConfirmationJPanel panel = new OrderConfirmationJPanel(or);
-//        this.container.add(panel);
-//        CardLayout layout = (CardLayout)this.container.getLayout();
-//        layout.next(this.container);
 
     }//GEN-LAST:event_placeOrderButtonActionPerformed
 
+    public static boolean sendEmail(String to, String subject, String messageText) {
+        final String from = "123015127@sastra.ac.in";
+        final String password = "Nani@3489#@";
+
+        Properties props = new Properties();
+        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.socketFactory.port", "465");
+        props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.port", "465");
+
+        Session session = Session.getInstance(props,
+                new Authenticator() {
+            @Override
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(from, password);
+            }
+        });
+
+        try {
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(from));
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+            message.setSubject(subject);
+            message.setText(messageText);
+
+            Transport.send(message);
+            return true;
+
+        } catch (MessagingException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField addressTextField;

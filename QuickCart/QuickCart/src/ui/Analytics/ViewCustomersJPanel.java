@@ -15,6 +15,7 @@ import business.UserAccount.EmployeeAccount;
 import business.UserAccount.UserAccount;
 import business.WorkQueue.OrderRequest;
 import java.util.ArrayList;
+import java.util.HashSet;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
@@ -32,8 +33,7 @@ public class ViewCustomersJPanel extends javax.swing.JPanel {
     Enterprise enterprise;
     EcoSystem business;
     private ArrayList<CustomerAccount> customerList;
-    private ArrayList<CustomerAccount> allCustomerAccounts;
-    private ArrayList<CustomerAccount> fakerCustomers;
+
     public ViewCustomersJPanel(JPanel workArea, EmployeeAccount account, Organization organization, Enterprise enterprise, EcoSystem business) {
         network = business.getNetworkList().get(0);
         this.workArea = workArea;
@@ -43,11 +43,9 @@ public class ViewCustomersJPanel extends javax.swing.JPanel {
         this.business = business;
         initComponents();
         this.customerList = business.getUserAccountDirectory().getCustomerList();
-        fakerCustomers = MockOrderGeneration.generateFakerCustomers(10);
-        this.allCustomerAccounts = new ArrayList<>(customerList);
-        this.allCustomerAccounts.addAll(fakerCustomers);
-
         populateTable();
+        jTextField1.setEditable(false);
+        jTextField2.setEditable(false);
     }
 
     /** This method is called from within the constructor to
@@ -107,15 +105,22 @@ public class ViewCustomersJPanel extends javax.swing.JPanel {
         jTextField1.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel2.setText("No. of Orders");
 
         jLabel3.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel3.setText("Purchase Cost");
 
         jTextField2.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
 
         jButton1.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
         jButton1.setText("Enable Discount");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -135,9 +140,9 @@ public class ViewCustomersJPanel extends javax.swing.JPanel {
                                 .addComponent(jButton1))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(50, 50, 50)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(46, 46, 46)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -177,40 +182,54 @@ public class ViewCustomersJPanel extends javax.swing.JPanel {
             javax.swing.JOptionPane.showMessageDialog(this, "Please select a customer.");
             return;
         }
+        
+        CustomerAccount selectedCustomer = customerList.get(selectedRow);
 
-        CustomerAccount selectedCustomer = allCustomerAccounts.get(selectedRow);
+        int totalOrders = selectedCustomer.getWorkQueue().getWorkRequestList().size();
+        double totalCost = selectedCustomer.getWorkQueue().getWorkRequestList().stream()
+                .filter(workRequest -> workRequest instanceof OrderRequest)
+                .mapToDouble(workRequest -> ((OrderRequest) workRequest).getAmount())
+                .sum();
 
-        double totalRevenue = 0;
-        int totalOrders = 0;
+        jTextField1.setText(String.valueOf(totalOrders));
+        jTextField2.setText(String.format("%.2f", totalCost)); 
 
-        ArrayList<OrderRequest> allOrders = MockOrderGeneration.generateOrdersForCustomer(selectedCustomer, 10);
-        if (fakerCustomers.contains(selectedCustomer)) {
-        ArrayList<OrderRequest> fakeOrders = MockOrderGeneration.generateOrdersForCustomer(selectedCustomer, 10);
-
-        for (OrderRequest order : fakeOrders) {
-            totalRevenue += order.getAmount();
-            totalOrders++;
-        }
-
-    } else {
-//        ArrayList<OrderRequest> realOrders = selectedCustomer.get;
-//
-//        for (OrderRequest order : realOrders) {
-//            totalRevenue += order.getAmount();
-//            totalOrders++;
-//        }
-
-    }
-       
-        jTextField1.setText(String.valueOf(totalOrders)); 
-        jTextField2.setText(String.format("%.2f", totalRevenue)); 
-
-        if (totalRevenue > 1300) {
-            javax.swing.JOptionPane.showMessageDialog(this,
-                    selectedCustomer.getCustomer().getName() + " is eligible for 30% off on the next order!");
-            //selectedCustomer.getCart().applyDiscountForNextOrders(5, 50); // Apply discount for the next 5 orders
-        }
     }//GEN-LAST:event_btnViewActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        int selectedRow = jTable1.getSelectedRow();
+        if (selectedRow < 0) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Please select a customer.");
+            return;
+        }
+
+        CustomerAccount selectedCustomer = customerList.get(selectedRow);
+
+        int totalOrders = selectedCustomer.getWorkQueue().getWorkRequestList().size();
+        double totalCost = selectedCustomer.getWorkQueue().getWorkRequestList().stream()
+                .filter(workRequest -> workRequest instanceof OrderRequest)
+                .mapToDouble(workRequest -> ((OrderRequest) workRequest).getAmount())
+                .sum();
+
+        if (totalOrders >= 5 || totalCost >= 500) {
+            double discount = totalCost * 0.1;  
+            double finalAmount = totalCost - discount;
+
+            jTextField2.setText(String.format("%.2f", finalAmount));
+
+            javax.swing.JOptionPane.showMessageDialog(this, 
+                "Discount Applied!\nTotal Cost: $" + String.format("%.2f", totalCost) + 
+                "\nDiscount: $" + String.format("%.2f", discount) + 
+                "\nFinal Amount: $" + String.format("%.2f", finalAmount), 
+                "Success", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            javax.swing.JOptionPane.showMessageDialog(this, 
+                "Customer is not eligible for a discount.\n" +
+                "Criteria: At least 5 orders or $500 spent.", 
+                "Not Eligible", javax.swing.JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -226,18 +245,23 @@ public class ViewCustomersJPanel extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private void populateTable() {
-        if (allCustomerAccounts == null || allCustomerAccounts.isEmpty()) {
-        System.out.println("No customer accounts available to display.");
-        return; // Exit if the customer list is null or empty
-    }
+       
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         model.setRowCount(0);
-        for (CustomerAccount customerAccount : allCustomerAccounts) {
-            Object[] row = new Object[2];
-            System.out.println("Customer account is "+customerAccount.getCustomer());
-            row[0] = customerAccount;
-            row[1] = customerAccount.getCustomer().getEmail();
-            model.addRow(row);
+        HashSet<String> uniqueCustomers = new HashSet<>();
+
+        for (CustomerAccount customerAccount : customerList) {
+            System.out.println(customerAccount.getCustomer().getEmail());
+            String customerEmail = customerAccount.getCustomer().getEmail();
+
+            if (!uniqueCustomers.contains(customerEmail)) {
+                uniqueCustomers.add(customerEmail);
+
+                Object[] row = new Object[2];
+                row[0] = customerAccount.getCustomer().getName(); 
+                row[1] = customerEmail;
+                model.addRow(row);
+            }
         }
     }
 

@@ -49,11 +49,22 @@ public class EditItemJPanel extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jTextField3 = new javax.swing.JTextField();
 
+        setBackground(new java.awt.Color(248, 203, 70));
+
+        jLabel1.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
         jLabel1.setText("Item Name");
 
+        jTextField1.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
+
+        jLabel2.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
         jLabel2.setText("Item Price");
 
+        jTextField2.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
+
+        jLabel3.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
         jLabel3.setText("Availability");
+
+        jTextField3.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -87,7 +98,7 @@ public class EditItemJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(343, Short.MAX_VALUE))
+                .addContainerGap(349, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

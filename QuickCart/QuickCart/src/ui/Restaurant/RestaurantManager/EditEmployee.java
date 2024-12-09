@@ -29,10 +29,11 @@ public class EditEmployee extends javax.swing.JPanel {
     RestaurantEnterprise restaurant;
     Network network;
     Employee emp;
+
     public EditEmployee(JPanel workArea, UserAccount account, EcoSystem ecosystem, RestaurantEnterprise restaurant, Employee selectedEmployee) {
         initComponents();
         this.workArea = workArea;
-        this.account = (EmployeeAccount)account;
+        this.account = (EmployeeAccount) account;
         this.ecosystem = ecosystem;
         this.restaurant = restaurant;
         this.emp = selectedEmployee;
@@ -56,10 +57,15 @@ public class EditEmployee extends javax.swing.JPanel {
         txtEmail = new javax.swing.JTextField();
         btnSubmit = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(255, 62, 70));
+
+        lblName.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
         lblName.setText("Name");
 
+        lblEmail.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
         lblEmail.setText("Email Id");
 
+        btnSubmit.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
         btnSubmit.setText("Submit");
         btnSubmit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -72,25 +78,23 @@ public class EditEmployee extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(167, 167, 167)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnSubmit)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(181, 181, 181)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblName)
-                            .addComponent(lblEmail))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(lblEmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(52, 52, 52)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtName, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
-                            .addComponent(txtEmail)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(257, 257, 257)
-                        .addComponent(btnSubmit)))
-                .addContainerGap(237, Short.MAX_VALUE))
+                            .addComponent(txtName)
+                            .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(251, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(86, 86, 86)
+                .addGap(176, 176, 176)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblName)
                     .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -98,9 +102,9 @@ public class EditEmployee extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblEmail)
                     .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(65, 65, 65)
+                .addGap(33, 33, 33)
                 .addComponent(btnSubmit)
-                .addContainerGap(347, Short.MAX_VALUE))
+                .addContainerGap(291, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -111,6 +115,16 @@ public class EditEmployee extends javax.swing.JPanel {
 
         if (newName.isEmpty() || newEmail.isEmpty()) {
             javax.swing.JOptionPane.showMessageDialog(this, "All fields are required!", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        if (newName.isEmpty() || !newName.matches("^[A-Za-z ]{2,}$")) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Name must be at least 2 characters long and contain only letters and spaces.", "Validation Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        if (newEmail.isEmpty() || !newEmail.matches("^[\\w._%+-]+@[\\w.-]+\\.[a-zA-Z]{2,}$")) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Email must be in a valid format (e.g., example@domain.com).", "Validation Error", javax.swing.JOptionPane.ERROR_MESSAGE);
             return;
         }
 

@@ -241,6 +241,9 @@ public class AddEnterpriseJPanel extends javax.swing.JPanel {
         txtAddress.setText("");
         txtPhone.setText("");
         txtEmail.setText("");
+        jTextField1.setText("");
+        jTextField2.setText("");
+        jTextField3.setText("");
     }//GEN-LAST:event_jButton1ActionPerformed
 
 

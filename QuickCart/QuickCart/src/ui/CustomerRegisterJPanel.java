@@ -4,7 +4,7 @@
  */
 package ui;
 
-import business.DAO.CustomerDAO;
+//import business.DAO.CustomerDAO;
 import business.EcoSystem.EcoSystem;
 import java.awt.CardLayout;
 import java.util.Properties;
@@ -25,7 +25,7 @@ import javax.swing.JPanel;
  * @author SAI SRIDHAR
  */
 public class CustomerRegisterJPanel extends javax.swing.JPanel {
-    
+
     JPanel workArea;
     EcoSystem ecosystem;
 
@@ -65,27 +65,44 @@ public class CustomerRegisterJPanel extends javax.swing.JPanel {
         jTextArea1 = new javax.swing.JTextArea();
         btnSubmit = new javax.swing.JButton();
 
-        lblTitle.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        setBackground(new java.awt.Color(204, 204, 255));
+
+        lblTitle.setFont(new java.awt.Font("Bahnschrift", 1, 24)); // NOI18N
         lblTitle.setText("Customer Registration");
 
+        lblFirstName.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
+        lblFirstName.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblFirstName.setText("First Name");
 
+        lblLastName.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
+        lblLastName.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblLastName.setText("Last Name");
 
+        lblUsername.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
+        lblUsername.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblUsername.setText("Username");
 
+        lblPassword.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
+        lblPassword.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblPassword.setText("Password");
 
+        lblEmail.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
+        lblEmail.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblEmail.setText("Email Id");
 
+        lblPhone.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
+        lblPhone.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblPhone.setText("Phone");
 
+        jLabel1.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel1.setText("Address");
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
 
+        btnSubmit.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
         btnSubmit.setText("Submit");
         btnSubmit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -98,139 +115,180 @@ public class CustomerRegisterJPanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(331, 331, 331)
-                        .addComponent(lblTitle))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(192, 192, 192)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGap(192, 192, 192)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createSequentialGroup()
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(lblFirstName)
-                                        .addComponent(lblLastName))
-                                    .addGap(56, 56, 56)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(txtLastName)
-                                        .addComponent(txtFirstName)))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(lblEmail)
-                                        .addComponent(lblPhone)
-                                        .addComponent(jLabel1))
-                                    .addGap(73, 73, 73)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jScrollPane1)
-                                        .addComponent(txtPhone)
-                                        .addComponent(txtEmail))))
-                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblEmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(lblPhone, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 66, Short.MAX_VALUE))
+                            .addGap(63, 63, 63)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jScrollPane1)
+                                .addComponent(txtPhone)))
+                        .addComponent(btnSubmit, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(lblFirstName)
+                                .addComponent(lblLastName))
+                            .addGap(56, 56, 56)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(lblTitle)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblPassword)
-                                    .addComponent(lblUsername))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE)
-                                    .addComponent(txtUsername))))))
-                .addContainerGap(312, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(350, 350, 350)
-                .addComponent(btnSubmit)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(txtLastName)
+                                    .addComponent(txtFirstName)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblPassword)
+                            .addComponent(lblUsername))
+                        .addGap(61, 61, 61)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtPassword)
+                            .addComponent(txtUsername)
+                            .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(235, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(34, 34, 34)
                 .addComponent(lblTitle)
-                .addGap(54, 54, 54)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGap(50, 50, 50)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(lblFirstName)
                     .addComponent(txtFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(29, 29, 29)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(lblLastName)
                     .addComponent(txtLastName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(lblUsername)
                     .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(29, 29, 29)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(lblPassword)
                     .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(34, 34, 34)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(lblEmail)
                     .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(29, 29, 29)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(lblPhone)
                     .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(62, 62, 62)
+                    .addComponent(jLabel1)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
                 .addComponent(btnSubmit)
-                .addContainerGap(110, Short.MAX_VALUE))
+                .addContainerGap(142, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
         // TODO add your handling code here:
         btnSubmit.setEnabled(false);
-    String email = txtEmail.getText();
-    String firstName = txtFirstName.getText();
-    String lastName = txtLastName.getText();
-    String password = txtPassword.getText();
-    String phone = txtPhone.getText();
-    String username = txtUsername.getText();
-    String address = jTextArea1.getText();
 
-    if (email.isEmpty() || firstName.isEmpty() || lastName.isEmpty() || password.isEmpty() || phone.isEmpty() || username.isEmpty() || address.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "All fields are required!", "Error", JOptionPane.ERROR_MESSAGE);
-        btnSubmit.setEnabled(true);
-        return;
-    }
+        String email = txtEmail.getText();
+        String firstName = txtFirstName.getText();
+        String lastName = txtLastName.getText();
+        String password = txtPassword.getText();
+        String phone = txtPhone.getText();
+        String username = txtUsername.getText();
+        String address = jTextArea1.getText();
 
-    Random random = new Random();
-    int otp = 100000 + random.nextInt(900000); 
-
-//    if (sendEmail(email, "Your Verification Code for QuickCart", "Your OTP is: " + otp)) {
-//        JOptionPane.showMessageDialog(this, "OTP sent successfully to your email!");
-//
-//        String enteredOtp = JOptionPane.showInputDialog(this, "Enter the OTP sent to your email:");
-//
-//        //if (enteredOtp != null && enteredOtp.equals(String.valueOf(otp))) {
-//            JOptionPane.showMessageDialog(this, "OTP verified successfully!");
-            ecosystem.getCustomerDirectory().createCustomer(firstName + " " + lastName, email, phone, address);
-            ecosystem.getUserAccountDirectory().createCustomerAccount(username, password, new business.Role.CustomerRole());
-//            CustomerDAO.addCustomer(email, username, phone, address, password);
-//            
-//            JOptionPane.showMessageDialog(this, "Customer registered successfully!");
-//            resetForm();
-            try {
-        CustomerDAO.addCustomer(email, username, phone, address, password);
-        JOptionPane.showMessageDialog(this, "Customer registered successfully!");
-        resetForm();
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(this, "Failed to register customer!", "Error", JOptionPane.ERROR_MESSAGE);
-        e.printStackTrace();
-    }
-        /*} else {
-            JOptionPane.showMessageDialog(this, "Invalid OTP! Registration failed.", "Error", JOptionPane.ERROR_MESSAGE);
+        if (email.isEmpty() || firstName.isEmpty() || lastName.isEmpty() || password.isEmpty() || phone.isEmpty() || username.isEmpty() || address.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "All fields are required!", "Error", JOptionPane.ERROR_MESSAGE);
             btnSubmit.setEnabled(true);
-        }*/
-//    } else {
-//        JOptionPane.showMessageDialog(this, "Failed to send OTP. Please try again.", "Error", JOptionPane.ERROR_MESSAGE);
-//        btnSubmit.setEnabled(true);
-//    }
+            return;
+        }
+
+        if (!validateFields(firstName, lastName, username, password, email, phone, address)) {
+            btnSubmit.setEnabled(true);
+            return;
+        }
+
+        Random random = new Random();
+        int otp = 100000 + random.nextInt(900000);
+
+        if (sendEmail(email, "Your Verification Code for QuickCart", "Your OTP is: " + otp)) {
+            JOptionPane.showMessageDialog(this, "OTP sent successfully to your email!");
+
+            String enteredOtp = JOptionPane.showInputDialog(this, "Enter the OTP sent to your email:");
+
+            if (enteredOtp != null && enteredOtp.equals(String.valueOf(otp))) {
+                JOptionPane.showMessageDialog(this, "OTP verified successfully!");
+
+                ecosystem.getCustomerDirectory().createCustomer(firstName + " " + lastName, email, phone, address);
+                ecosystem.getUserAccountDirectory().createCustomerAccount(username, password, new business.Role.CustomerRole());
+
+                JOptionPane.showMessageDialog(this, "Customer registered successfully!");
+                resetForm();
+
+                try {
+                    this.workArea.removeAll();
+                    LoginJPanel loginPanel = new LoginJPanel(this.workArea);
+                    this.workArea.add("LoginJPanel", loginPanel);
+
+                    CardLayout layout = (CardLayout) this.workArea.getLayout();
+                    layout.next(this.workArea);
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(this, "Failed to register customer!", "Error", JOptionPane.ERROR_MESSAGE);
+                    e.printStackTrace();
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Invalid OTP! Registration failed.", "Error", JOptionPane.ERROR_MESSAGE);
+                btnSubmit.setEnabled(true);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Failed to send OTP. Please try again.", "Error", JOptionPane.ERROR_MESSAGE);
+            btnSubmit.setEnabled(true);
+        }
+
     }//GEN-LAST:event_btnSubmitActionPerformed
-    
+
+    private boolean validateFields(String firstName, String lastName, String username, String password, String email, String phone, String address) {
+        if (!firstName.matches("^[A-Za-z]{2,}$")) {
+            JOptionPane.showMessageDialog(this, "First Name must contain only letters and be at least 2 characters long.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
+        if (!lastName.matches("^[A-Za-z]{2,}$")) {
+            JOptionPane.showMessageDialog(this, "Last Name must contain only letters and be at least 2 characters long.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
+        if (!username.matches("^[A-Za-z0-9_]{4,20}$")) {
+            JOptionPane.showMessageDialog(this, "Username must be 4-20 characters long and can include letters, numbers, and underscores.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
+        if (!password.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{8,}$")) {
+            JOptionPane.showMessageDialog(this, "Password must be at least 8 characters long, with at least one uppercase letter, one lowercase letter, and one digit.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
+        if (!email.matches("^[\\w._%+-]+@[\\w.-]+\\.[a-zA-Z]{2,}$")) {
+            JOptionPane.showMessageDialog(this, "Email must be a valid format (e.g., example@domain.com).", "Validation Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
+        if (!phone.matches("^\\d{10}$")) {
+            JOptionPane.showMessageDialog(this, "Phone number must be exactly 10 digits.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
+        if (address.length() < 10) {
+            JOptionPane.showMessageDialog(this, "Address must be at least 10 characters long.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
+        return true;
+    }
+
     private void resetForm() {
         txtFirstName.setText("");
         txtLastName.setText("");
@@ -240,43 +298,45 @@ public class CustomerRegisterJPanel extends javax.swing.JPanel {
         txtPhone.setText("");
         jTextArea1.setText("");
         btnSubmit.setEnabled(true);
-}
-    
-//    public static boolean sendEmail(String to, String subject, String messageText) {
-//        final String from = "quickcartforyou@gmail.com"; 
-//        final String password = "quickcart123"; 
-//
-//        Properties props = new Properties();
-//        props.put("mail.smtp.host", "smtp.gmail.com");
-//        props.put("mail.smtp.socketFactory.port", "465"); 
-//        props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory"); 
-//        props.put("mail.smtp.auth", "true"); 
-//        props.put("mail.smtp.port", "465"); 
-//        
-//
-//        Session session = Session.getInstance(props,
-//            new Authenticator() {
-//                @Override
-//                protected PasswordAuthentication getPasswordAuthentication() {
-//                    return new PasswordAuthentication(from, password);
-//                }
-//            });
-//
-//        try {
-//            Message message = new MimeMessage(session);
-//            message.setFrom(new InternetAddress(from));
-//            message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
-//            message.setSubject(subject);
-//            message.setText(messageText);
-//
-//            Transport.send(message);
-//            return true;
-//
-//        } catch (MessagingException e) {
-//            e.printStackTrace();
-//            return false;
-//        }
-//    }
+    }
+
+    public static boolean sendEmail(String to, String subject, String messageText) {
+        final String from = "123015127@sastra.ac.in"; 
+        final String password = "Nani@3489#@"; 
+
+        Properties props = new Properties();
+        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.socketFactory.port", "465"); 
+        props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+        props.put("mail.smtp.auth", "true"); 
+        props.put("mail.smtp.port", "465"); 
+        
+
+        Session session = Session.getInstance(props,
+            new Authenticator() {
+                @Override
+                protected PasswordAuthentication getPasswordAuthentication() {
+                    return new PasswordAuthentication(from, password);
+                }
+            });
+
+        try {
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(from));
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+            message.setSubject(subject);
+            message.setText(messageText);
+
+            // Send email
+            Transport.send(message);
+            return true;
+
+        } catch (MessagingException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSubmit;

@@ -19,7 +19,7 @@ public class RestaurantDirectory {
     }
     
     public RestaurantEnterprise newRestaurant(String name, String phone, String address, String email){
-        RestaurantEnterprise re = new RestaurantEnterprise(name, phone, address, email);
+        RestaurantEnterprise re = new RestaurantEnterprise(name, address, phone, email);
         restaurantList.add(re);
         return re;
     }

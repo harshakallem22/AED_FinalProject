@@ -8,10 +8,10 @@ import java.util.ArrayList;
 
 /**
  *
- * @author raunak
+ * @author SAI SRIDHAR
  */
 public class WorkQueue {
-    
+
     private ArrayList<WorkRequest> workRequestList;
 
     public WorkQueue() {

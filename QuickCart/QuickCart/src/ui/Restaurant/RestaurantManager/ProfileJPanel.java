@@ -60,13 +60,19 @@ public class ProfileJPanel extends javax.swing.JPanel {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel1.setText("Name");
 
+        jTextField1.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
+
         jLabel2.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel2.setText("Email");
 
+        jTextField2.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
+
         jLabel3.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel3.setText("Password");
+
+        jPasswordField1.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
 
         jButton1.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
         jButton1.setText("Update Password");
@@ -116,7 +122,7 @@ public class ProfileJPanel extends javax.swing.JPanel {
                     .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(40, 40, 40)
                 .addComponent(jButton1)
-                .addContainerGap())
+                .addContainerGap(191, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -162,7 +168,14 @@ public class ProfileJPanel extends javax.swing.JPanel {
                 javax.swing.JOptionPane.showMessageDialog(null, "New password cannot be empty!", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
                 return;
             }
-
+            
+            if (!newPassword.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$")) {
+            javax.swing.JOptionPane.showMessageDialog(null,
+                "New password must be at least 8 characters long, include an uppercase letter, a lowercase letter, a digit, and a special character.",
+                "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+            
             this.account.setPassword(confirmPassword);
             System.out.println(account.getPassword());
             for (UserAccount ua : system.getUserAccountDirectory().getUserAccountList()) {

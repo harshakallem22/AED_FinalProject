@@ -63,14 +63,29 @@ public class EditEnterpriseJPanel extends javax.swing.JPanel {
         txtEmail = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(204, 173, 245));
+
+        jLabel1.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
         jLabel1.setText("Delivery Name");
 
+        txtName.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
+
+        jLabel2.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
         jLabel2.setText("Delivery Address");
 
+        txtAddress.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
+
+        jLabel3.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
         jLabel3.setText("Delivery Phone");
 
+        txtPhone.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
+
+        jLabel4.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
         jLabel4.setText("Delivery Email");
 
+        txtEmail.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
+
+        jButton1.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
         jButton1.setText("Submit");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -83,9 +98,10 @@ public class EditEnterpriseJPanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(202, 202, 202)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton1)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(202, 202, 202)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addComponent(jLabel2)
@@ -96,10 +112,7 @@ public class EditEnterpriseJPanel extends javax.swing.JPanel {
                             .addComponent(txtName)
                             .addComponent(txtAddress)
                             .addComponent(txtPhone)
-                            .addComponent(txtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(320, 320, 320)
-                        .addComponent(jButton1)))
+                            .addComponent(txtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE))))
                 .addGap(356, 356, 356))
         );
         layout.setVerticalGroup(
@@ -121,9 +134,9 @@ public class EditEnterpriseJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(80, 80, 80)
+                .addGap(30, 30, 30)
                 .addComponent(jButton1)
-                .addContainerGap(223, Short.MAX_VALUE))
+                .addContainerGap(283, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -138,7 +151,25 @@ public class EditEnterpriseJPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "All fields are required!", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
+        if (name.isEmpty() || !name.matches("^[A-Za-z ]{2,}$")) {
+            JOptionPane.showMessageDialog(this, "Name must contain only letters, spaces, and be at least 2 characters long.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
 
+        if (address.isEmpty() || !address.matches("^[A-Za-z0-9 ,.]{10,}$")) {
+            JOptionPane.showMessageDialog(this, "Address must be at least 10 characters long and can include letters, numbers, commas, and periods.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        if (phone.isEmpty() || !phone.matches("^\\d{10}$")) {
+            JOptionPane.showMessageDialog(this, "Phone number must be exactly 10 digits.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        if (email.isEmpty() || !email.matches("^[\\w._%+-]+@[\\w.-]+\\.[a-zA-Z]{2,}$")) {
+            JOptionPane.showMessageDialog(this, "Email must be in a valid format (e.g., example@domain.com).", "Validation Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         enterprise.setName(name);
         enterprise.setAddress(address);
         enterprise.setPhone(phone);

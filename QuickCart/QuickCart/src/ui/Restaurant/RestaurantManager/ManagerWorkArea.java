@@ -62,6 +62,7 @@ public class ManagerWorkArea extends javax.swing.JPanel {
         jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
 
         jPanel1.setBackground(new java.awt.Color(255, 62, 70));
+        jPanel1.setPreferredSize(new java.awt.Dimension(994, 50));
 
         btnOrders.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
         btnOrders.setText("Manage Orders");
@@ -95,6 +96,7 @@ public class ManagerWorkArea extends javax.swing.JPanel {
             }
         });
 
+        jButton3.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
         jButton3.setText("Manage Items");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -106,27 +108,29 @@ public class ManagerWorkArea extends javax.swing.JPanel {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(288, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(268, Short.MAX_VALUE)
+                .addComponent(jButton3)
+                .addGap(18, 18, 18)
                 .addComponent(btnOrders)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(btnEmployees)
-                .addGap(12, 12, 12)
+                .addGap(18, 18, 18)
                 .addComponent(btnProfile)
                 .addGap(18, 18, 18)
                 .addComponent(btnLogout)
-                .addGap(18, 18, 18))
+                .addGap(35, 35, 35))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(43, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(5, 5, 5)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnOrders)
-                    .addComponent(btnEmployees)
                     .addComponent(btnProfile)
-                    .addComponent(btnLogout))
-                .addGap(30, 30, 30))
+                    .addComponent(btnLogout)
+                    .addComponent(btnEmployees)
+                    .addComponent(btnOrders)
+                    .addComponent(jButton3)))
         );
 
         jSplitPane1.setTopComponent(jPanel1);
