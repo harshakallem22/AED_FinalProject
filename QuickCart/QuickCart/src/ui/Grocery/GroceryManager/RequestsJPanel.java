@@ -119,10 +119,10 @@ public class RequestsJPanel extends javax.swing.JPanel {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(btnDecline)
-                            .addGap(31, 31, 31)
+                            .addGap(78, 78, 78)
                             .addComponent(btnApprove))
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 471, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(205, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 590, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(150, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -155,6 +155,7 @@ public class RequestsJPanel extends javax.swing.JPanel {
         for (WorkRequest request : enterprise.getWorkQueue().getWorkRequestList()) {
             if (request instanceof SupplyOfferRequest) {
                 SupplyOfferRequest offer = (SupplyOfferRequest) request;
+                System.out.println(offer.getStatus());
                 if (offer.getInventoryName().equals(inventoryName)) {
                     offer.setStatus("Rejected");
                     javax.swing.JOptionPane.showMessageDialog(this, "Request rejected!");
@@ -195,14 +196,15 @@ public class RequestsJPanel extends javax.swing.JPanel {
     for (WorkRequest request : enterprise.getWorkQueue().getWorkRequestList()) {
         if (request instanceof SupplyOfferRequest) {
             SupplyOfferRequest offer = (SupplyOfferRequest) request;
+            if(!(offer.getStatus().equals("Rejected")) || (!(offer.getStatus().equals("Approved")))){
+                 Object[] row = new Object[4];
+                row[0] = offer.getInventoryName();
+                row[1] = offer.getInventoryEmail();
+                row[2] = offer.getInventoryLocation();
+                row[3] = offer.getStatus();
 
-            Object[] row = new Object[4];
-            row[0] = offer.getInventoryName();
-            row[1] = offer.getInventoryEmail();
-            row[2] = offer.getInventoryLocation();
-            row[3] = offer.getStatus();
-
-            model.addRow(row);
+                model.addRow(row);
+            }
         }
     }
 }
