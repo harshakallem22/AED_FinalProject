@@ -56,6 +56,8 @@ public class ManageJPanel extends javax.swing.JPanel {
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(204, 173, 245));
+
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -69,6 +71,7 @@ public class ManageJPanel extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(jTable1);
 
+        jButton3.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
         jButton3.setText("Add");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -76,6 +79,7 @@ public class ManageJPanel extends javax.swing.JPanel {
             }
         });
 
+        jButton4.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
         jButton4.setText("Edit");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -83,6 +87,7 @@ public class ManageJPanel extends javax.swing.JPanel {
             }
         });
 
+        jButton5.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
         jButton5.setText("Delete");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -96,29 +101,27 @@ public class ManageJPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(93, 93, 93)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 585, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(70, 70, 70)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4)
-                    .addComponent(jButton5))
-                .addGap(46, 46, 46))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton4)
+                        .addGap(153, 153, 153)
+                        .addComponent(jButton5))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 585, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(206, 206, 206))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(59, 59, 59)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 469, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(122, 122, 122)
-                        .addComponent(jButton3)
-                        .addGap(71, 71, 71)
-                        .addComponent(jButton4)
-                        .addGap(92, 92, 92)
-                        .addComponent(jButton5)))
-                .addGap(164, 164, 164))
+                .addGap(59, 59, 59)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 469, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton5)
+                    .addComponent(jButton4)
+                    .addComponent(jButton3))
+                .addGap(14, 14, 14))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -126,7 +129,7 @@ public class ManageJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         JFrame addEmployeeFrame = new JFrame("Add Enterprise");
         addEmployeeFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        addEmployeeFrame.setSize(600, 400);
+        addEmployeeFrame.setSize(900, 900);
         addEmployeeFrame.setLocationRelativeTo(null);
 
         AddEnterpriseJPanel addEmployeePanel = new AddEnterpriseJPanel(userProcessContainer, account, organization, business, enterprise);
@@ -150,10 +153,10 @@ public class ManageJPanel extends javax.swing.JPanel {
         return;
     }
 
-    String restaurantName = (String) jTable1.getValueAt(selectedRow, 0);
+    DeliveryEnterprise restaurantName = (DeliveryEnterprise) jTable1.getValueAt(selectedRow, 0);
 
     // Find the selected restaurant
-    DeliveryEnterprise selectedRestaurant = network.getEnterpriseDirectory().getDelivery().findDeliveryByName(restaurantName);
+    DeliveryEnterprise selectedRestaurant = network.getEnterpriseDirectory().getDelivery().findDeliveryByName(restaurantName.getName());
 
     if (selectedRestaurant == null) {
         javax.swing.JOptionPane.showMessageDialog(this, "Enterprise not found.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
@@ -162,7 +165,7 @@ public class ManageJPanel extends javax.swing.JPanel {
 
     JFrame editRestaurantFrame = new JFrame("Edit Delivery Enterprise");
     editRestaurantFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-    editRestaurantFrame.setSize(600, 400);
+    editRestaurantFrame.setSize(900, 900);
     editRestaurantFrame.setLocationRelativeTo(null);
 
     EditEnterpriseJPanel editRestaurantPanel = new EditEnterpriseJPanel(userProcessContainer, account, organization, business, selectedRestaurant);
@@ -187,10 +190,9 @@ public class ManageJPanel extends javax.swing.JPanel {
         return;
     }
 
-    String restaurantName = (String) jTable1.getValueAt(selectedRow, 0);
+    DeliveryEnterprise restaurantName = (DeliveryEnterprise) jTable1.getValueAt(selectedRow, 0);
 
-    // Find the restaurant to delete
-    DeliveryEnterprise restaurantToDelete = network.getEnterpriseDirectory().getDelivery().findDeliveryByName(restaurantName);
+    DeliveryEnterprise restaurantToDelete = network.getEnterpriseDirectory().getDelivery().findDeliveryByName(restaurantName.getName());
 
     if (restaurantToDelete == null) {
         javax.swing.JOptionPane.showMessageDialog(this, "Enterprise not found.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
