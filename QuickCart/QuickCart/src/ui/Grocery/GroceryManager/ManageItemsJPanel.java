@@ -51,6 +51,9 @@ public class ManageItemsJPanel extends javax.swing.JPanel {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(248, 203, 70));
+
+        tblItems.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
         tblItems.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
@@ -72,6 +75,7 @@ public class ManageItemsJPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tblItems);
 
+        btnDelete.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
         btnDelete.setText("Delete");
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -79,6 +83,7 @@ public class ManageItemsJPanel extends javax.swing.JPanel {
             }
         });
 
+        jButton1.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
         jButton1.setText("Edit");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -86,6 +91,7 @@ public class ManageItemsJPanel extends javax.swing.JPanel {
             }
         });
 
+        jButton2.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
         jButton2.setText("Add");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -203,7 +209,7 @@ public class ManageItemsJPanel extends javax.swing.JPanel {
         addItemFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         addItemFrame.setSize(600, 600);
         addItemFrame.setLocationRelativeTo(null);
-
+        
         AddItemJPanel addItemPanel = new AddItemJPanel(workArea, account, ecosystem, grocery);
         addItemFrame.add(addItemPanel);
 
